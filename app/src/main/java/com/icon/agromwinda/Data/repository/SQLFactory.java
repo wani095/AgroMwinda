@@ -131,6 +131,7 @@ public class SQLFactory extends SQLiteOpenHelper implements IDao {
             Commune c = new Commune();
             c.setId(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__ID)));
             c.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
+            c.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
             communes.add(c);
             rs.moveToNext();
         }
