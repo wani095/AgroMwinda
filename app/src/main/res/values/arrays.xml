@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="list_niveau_etude">
+        <item>Aucune</item>
+        <item>Primaire</item>
+        <item>Sécondaire</item>
+        <item>Universitaire</item>
+    </string-array>
+    <string-array name="list_ages">
+        <item>Moins de 18 ans</item>
+        <item>18 à 35 ans</item>
+        <item>35 à 45 ans</item>
+        <item>Plus de 45 ans</item>
+    </string-array>
+</resources>

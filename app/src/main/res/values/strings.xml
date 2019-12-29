@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AgroMwinda</string>
+    <string name="lbl_ville_chefferie">Ville ou territoire</string>
+    <string name="lbl_province">Province</string>
+    <string name="lbl_commune">Commune ou Secteur</string>
+    <string name="message_dialog_title" />
+    <string name="onSuccessMessage" />
+    <string name="lbl_fermer">Fermer</string>
+    <string name="waitForProcess">Opération encours...</string>
+    <string name="lbl_organisation_paysanne">Nom de l\'OP</string>
+    <string name="lbl_cooperative">Nom de la cooperative affiliée</string>
+    <string name="lbl_detail">(Remplissez seulement la case concernant les données de l\'abonné)</string>
+    <array name="list_sexe">
+        <item>---</item>
+        <item>Homme</item>
+        <item>Femme</item>
+    </array>
+</resources>
