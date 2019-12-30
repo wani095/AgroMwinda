@@ -6,12 +6,19 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Personne;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Ville;
+import com.icon.agromwinda.R;
 
+import org.apache.commons.io.IOUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,8 +51,11 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String PERSONNE_COLUMN__VILLE = "ville";
     public static final String PERSONNE_COLUMN__COMMUNE = "commune";
 
+    private Context context;
+
     public Dao(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
+        this.context = context;
     }
 
     @Override
@@ -69,6 +79,13 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "create table commune " +
                         "(id integer primary key AUTOINCREMENT not null, nom text)"
         );
+
+        init();
+
+    }
+
+    public void init() {
+
     }
 
     @Override
@@ -142,28 +159,28 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
     @Override
     public long savePerson(Personne p) {
-        SQLiteDatabase db=this.getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
 
-        ContentValues values=new ContentValues();
-        values.put(PERSONNE_COLUMN__NOM,p.getNom());
-        values.put(PERSONNE_COLUMN__POSTNOM,p.getNom());
-        values.put(PERSONNE_COLUMN__PRENOM,p.getNom());
-        values.put(PERSONNE_COLUMN__SEXE,p.getNom());
-        values.put(PERSONNE_COLUMN__NIVEAU_ETUDE,p.getNom());
-        values.put(PERSONNE_COLUMN__AGE,p.getNom());
-        values.put(PERSONNE_COLUMN__NOM_OPP,p.getNom());
-        values.put(PERSONNE_COLUMN__NOM_COOPERATIVE,p.getNom());
-        values.put(PERSONNE_COLUMN__PHONE,p.getNom());
-        values.put(PERSONNE_COLUMN__EMAIL,p.getNom());
-        values.put(PERSONNE_COLUMN__ADM,p.getNom());
-        values.put(PERSONNE_COLUMN__QUARTIER,p.getNom());
-        values.put(PERSONNE_COLUMN__AVENUE,p.getNom());
-        values.put(PERSONNE_COLUMN__DOMICILE,p.getNom());
-        values.put(PERSONNE_COLUMN__PROVINCE,p.getNom());
-        values.put(PERSONNE_COLUMN__VILLE,p.getNom());
-        values.put(PERSONNE_COLUMN__COMMUNE,p.getNom());
+        ContentValues values = new ContentValues();
+        values.put(PERSONNE_COLUMN__NOM, p.getNom());
+        values.put(PERSONNE_COLUMN__POSTNOM, p.getNom());
+        values.put(PERSONNE_COLUMN__PRENOM, p.getNom());
+        values.put(PERSONNE_COLUMN__SEXE, p.getNom());
+        values.put(PERSONNE_COLUMN__NIVEAU_ETUDE, p.getNom());
+        values.put(PERSONNE_COLUMN__AGE, p.getNom());
+        values.put(PERSONNE_COLUMN__NOM_OPP, p.getNom());
+        values.put(PERSONNE_COLUMN__NOM_COOPERATIVE, p.getNom());
+        values.put(PERSONNE_COLUMN__PHONE, p.getNom());
+        values.put(PERSONNE_COLUMN__EMAIL, p.getNom());
+        values.put(PERSONNE_COLUMN__ADM, p.getNom());
+        values.put(PERSONNE_COLUMN__QUARTIER, p.getNom());
+        values.put(PERSONNE_COLUMN__AVENUE, p.getNom());
+        values.put(PERSONNE_COLUMN__DOMICILE, p.getNom());
+        values.put(PERSONNE_COLUMN__PROVINCE, p.getNom());
+        values.put(PERSONNE_COLUMN__VILLE, p.getNom());
+        values.put(PERSONNE_COLUMN__COMMUNE, p.getNom());
 
-        long a=db.insert("personne",null,values);
+        long a = db.insert("personne", null, values);
         return a;
     }
 
@@ -205,5 +222,52 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     @Override
     public Personne getPersonne(int id) {
         return null;
+    }
+
+
+    public void initProvinces() {
+        InputStream inputStream = context.getResources().openRawResource(R.raw.provinces);
+
+        String queries = "";
+        try {
+            queries = IOUtils.toString(inputStream);
+        } catch (IOException e) {
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        for (String query : queries.split(";")) {
+            db.execSQL(query);
+        }
+    }
+
+    public void initVilles() {
+        InputStream inputStream = context.getResources().openRawResource(R.raw.villes);
+
+        String queries = "";
+        try {
+            queries = IOUtils.toString(inputStream);
+        } catch (IOException e) {
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        for (String query : queries.split(";")) {
+            Log.d("Query_Sql",query);
+            db.execSQL(query);
+        }
+    }
+
+    public void initCommunes() {
+        InputStream inputStream = context.getResources().openRawResource(R.raw.communes);
+
+        String queries = "";
+        try {
+            queries = IOUtils.toString(inputStream);
+        } catch (IOException e) {
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        for (String query : queries.split(";")) {
+            db.execSQL(query);
+        }
     }
 }

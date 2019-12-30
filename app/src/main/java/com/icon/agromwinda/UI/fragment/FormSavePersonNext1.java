@@ -13,7 +13,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Personne;
+import com.icon.agromwinda.Data.model.Province;
+import com.icon.agromwinda.Data.model.Ville;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
@@ -33,6 +38,10 @@ public class FormSavePersonNext1 extends Fragment {
     private EditText txPhone, txEmail, txAdm, txQuatier, txAvenue, txDomicile;
     private TextView spCommune, spVille, spProvince;
     private Button btnValider;
+    private Province province;
+    private Ville ville;
+    private Commune commune;
+
 
     public static FormSavePersonNext1 newInstance(String json) {
         Bundle args = new Bundle();
@@ -136,7 +145,10 @@ public class FormSavePersonNext1 extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
+            if(requestCode==7 && resultCode==77 && data!=null){
+                province=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Province>(){}.getType());
+                spProvince.setText(province.getNom());
+            }
     }
 
 
