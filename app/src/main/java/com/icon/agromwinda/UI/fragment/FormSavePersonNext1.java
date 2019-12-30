@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.icon.agromwinda.Data.model.Personne;
+import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
@@ -132,6 +134,12 @@ public class FormSavePersonNext1 extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+    }
+
+
     public class SavePersonne extends AsyncTask<Void, Void, String> {
 
         private String data;
@@ -144,7 +152,7 @@ public class FormSavePersonNext1 extends Fragment {
 
         @Override
         protected void onPreExecute() {
-                waitingDialog.show();
+            waitingDialog.show();
         }
 
         @Override
@@ -154,8 +162,21 @@ public class FormSavePersonNext1 extends Fragment {
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
+
+    public class ListVilles extends AsyncTask<Void, Void, String> {
+
+        private WaitingDialog waitingDialog = new WaitingDialog(getContext());
+
+        @Override
+        protected void onPreExecute() {
+            waitingDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            return null;
+        }
     }
 }

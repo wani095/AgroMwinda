@@ -85,11 +85,11 @@ public class Personne {
         this.nom_cooperative = nom_cooperative;
     }
 
-    public String getContact() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setContact(String contact) {
+    public void setPhone(String contact) {
         this.phone = contact;
     }
 

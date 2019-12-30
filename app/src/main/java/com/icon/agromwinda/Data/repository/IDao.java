@@ -15,7 +15,7 @@ public interface IDao {
 
     List<Commune> getCommunes();
 
-    boolean savePerson(Personne personne);
+    long savePerson(Personne personne);
 
     List<Personne> getPersonnes();
 

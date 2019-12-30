@@ -1,5 +1,6 @@
 package com.icon.agromwinda.Data.repository;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,7 +15,7 @@ import com.icon.agromwinda.Data.model.Ville;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SQLFactory extends SQLiteOpenHelper implements IDao {
+public class Dao extends SQLiteOpenHelper implements IDao {
 
     public static final String DATABASE_NAME = "agraMwinda.db";
 
@@ -43,7 +44,7 @@ public class SQLFactory extends SQLiteOpenHelper implements IDao {
     public static final String PERSONNE_COLUMN__VILLE = "ville";
     public static final String PERSONNE_COLUMN__COMMUNE = "commune";
 
-    public SQLFactory(@Nullable Context context) {
+    public Dao(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
@@ -85,7 +86,7 @@ public class SQLFactory extends SQLiteOpenHelper implements IDao {
         List<Province> provinces = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from contacts", null);
+        Cursor rs = db.rawQuery("select * from province", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
@@ -96,6 +97,7 @@ public class SQLFactory extends SQLiteOpenHelper implements IDao {
             provinces.add(p);
             rs.moveToNext();
         }
+        db.close();
         return provinces;
     }
 
@@ -139,8 +141,30 @@ public class SQLFactory extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
-    public boolean savePerson(Personne personne) {
-        return false;
+    public long savePerson(Personne p) {
+        SQLiteDatabase db=this.getReadableDatabase();
+
+        ContentValues values=new ContentValues();
+        values.put(PERSONNE_COLUMN__NOM,p.getNom());
+        values.put(PERSONNE_COLUMN__POSTNOM,p.getNom());
+        values.put(PERSONNE_COLUMN__PRENOM,p.getNom());
+        values.put(PERSONNE_COLUMN__SEXE,p.getNom());
+        values.put(PERSONNE_COLUMN__NIVEAU_ETUDE,p.getNom());
+        values.put(PERSONNE_COLUMN__AGE,p.getNom());
+        values.put(PERSONNE_COLUMN__NOM_OPP,p.getNom());
+        values.put(PERSONNE_COLUMN__NOM_COOPERATIVE,p.getNom());
+        values.put(PERSONNE_COLUMN__PHONE,p.getNom());
+        values.put(PERSONNE_COLUMN__EMAIL,p.getNom());
+        values.put(PERSONNE_COLUMN__ADM,p.getNom());
+        values.put(PERSONNE_COLUMN__QUARTIER,p.getNom());
+        values.put(PERSONNE_COLUMN__AVENUE,p.getNom());
+        values.put(PERSONNE_COLUMN__DOMICILE,p.getNom());
+        values.put(PERSONNE_COLUMN__PROVINCE,p.getNom());
+        values.put(PERSONNE_COLUMN__VILLE,p.getNom());
+        values.put(PERSONNE_COLUMN__COMMUNE,p.getNom());
+
+        long a=db.insert("personne",null,values);
+        return a;
     }
 
     @Override
@@ -157,11 +181,21 @@ public class SQLFactory extends SQLiteOpenHelper implements IDao {
             p.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
             p.setPostnom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
             p.setPrenom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__PRENOM)));
-            p.setSexe(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
-            p.setNiveauEtude(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
-            p.setPostnom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
-            p.setPostnom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
-            p.setPostnom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
+            p.setSexe(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__SEXE)));
+            p.setNiveauEtude(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NIVEAU_ETUDE)));
+            p.setAge(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__AGE)));
+            p.setNom_op(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM_OPP)));
+            p.setNom_cooperative(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM_COOPERATIVE)));
+            p.setPhone(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__PHONE)));
+            p.setEmail(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__EMAIL)));
+            p.setAdm(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__ADM)));
+            p.setQuartier(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__QUARTIER)));
+            p.setAvenue(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__AVENUE)));
+            p.setDomicile(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__DOMICILE)));
+            p.setProvince(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__PROVINCE)));
+            p.setVille(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__VILLE)));
+            p.setCommune(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__COMMUNE)));
+
             personnes.add(p);
             rs.moveToNext();
         }
