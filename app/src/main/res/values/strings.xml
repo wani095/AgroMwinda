@@ -10,9 +10,19 @@
     <string name="lbl_organisation_paysanne">Nom de l\'OP</string>
     <string name="lbl_cooperative">Nom de la cooperative affiliée</string>
     <string name="lbl_detail">(Remplissez seulement la case concernant les données de l\'abonné)</string>
+    <string name="copyrith">\@2020 AgroMwinda. Tous droits réservés</string>
+
+
     <array name="list_sexe">
         <item>---</item>
         <item>Homme</item>
         <item>Femme</item>
     </array>
+
+
+    <string name="title_home">Platforme</string>
+    <string name="title_dashboard">Marché</string>
+    <string name="title_notifications">Credit</string>
+    <string name="nav_chat">AgroSeach</string>
+    <string name="action_search_text">Search</string>
 </resources>
