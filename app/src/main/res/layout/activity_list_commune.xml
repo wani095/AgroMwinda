@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.activity.ListCommuneActivity">
-
-</android.support.constraint.ConstraintLayout>
+    tools:context=".UI.activity.ListCommuneActivity"
+    android:paddingTop="10dp">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycle_view_commune"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</ScrollView>
