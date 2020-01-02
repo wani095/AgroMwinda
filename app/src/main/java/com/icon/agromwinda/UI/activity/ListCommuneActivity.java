@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ListCommuneActivity extends AppCompatActivity {
 
-    private RecyclerView recycle_view_communes;
+    private RecyclerView recycle_view_commune;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,10 +69,10 @@ public class ListCommuneActivity extends AppCompatActivity {
                 ListCommuneAdapter listCommuneAdapter=new ListCommuneAdapter(ListCommuneActivity.this,communes,ListCommuneActivity.this);
                 listCommuneAdapter.notifyDataSetChanged();
 
-                recycle_view_communes = findViewById(R.id.recycle_view_commune);
-                recycle_view_communes.setLayoutManager(new LinearLayoutManager(ListCommuneActivity.this));
-                recycle_view_communes.setHasFixedSize(true);
-                recycle_view_communes.setAdapter(listCommuneAdapter);
+                recycle_view_commune = findViewById(R.id.recycle_view_commune);
+                recycle_view_commune.setLayoutManager(new LinearLayoutManager(ListCommuneActivity.this));
+                recycle_view_commune.setHasFixedSize(true);
+                recycle_view_commune.setAdapter(listCommuneAdapter);
             }
         }
     }
