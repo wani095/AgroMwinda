@@ -9,14 +9,13 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.icon.agromwinda.Data.model.Commune;
-import com.icon.agromwinda.Data.model.Personne;
+import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Province;
-import com.icon.agromwinda.Data.model.Ville;
+import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.R;
 
 import org.apache.commons.io.IOUtils;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -25,31 +24,39 @@ import java.util.List;
 public class Dao extends SQLiteOpenHelper implements IDao {
 
     public static final String DATABASE_NAME = "agraMwinda.db";
-
-    public static final String PERSONNE_TABLE_NAME_PERSONNE = "personne";
-    public static final String PERSONNE_TABLE_NAME_PROVINCE = "province";
-    public static final String PERSONNE_TABLE_NAME_VILLE = "ville";
-    public static final String PERSONNE_TABLE_NAME_COMMUNE = "commune";
+    public static final String COLUMN_ID = "id";
+    public static final String COLUMN_NAME = "name";
 
 
-    public static final String PERSONNE_COLUMN__ID = "id";
-    public static final String PERSONNE_COLUMN__NOM = "nom";
-    public static final String PERSONNE_COLUMN__POSTNOM = "postnom";
-    public static final String PERSONNE_COLUMN__PRENOM = "prenom";
-    public static final String PERSONNE_COLUMN__SEXE = "sexe";
-    public static final String PERSONNE_COLUMN__NIVEAU_ETUDE = "niveauEtude";
-    public static final String PERSONNE_COLUMN__AGE = "age";
-    public static final String PERSONNE_COLUMN__NOM_OPP = "nomOp";
-    public static final String PERSONNE_COLUMN__NOM_COOPERATIVE = "nom_cooperative";
-    public static final String PERSONNE_COLUMN__PHONE = "phone";
-    public static final String PERSONNE_COLUMN__EMAIL = "email";
-    public static final String PERSONNE_COLUMN__ADM = "adm";
-    public static final String PERSONNE_COLUMN__QUARTIER = "quartier";
-    public static final String PERSONNE_COLUMN__AVENUE = "avenue";
-    public static final String PERSONNE_COLUMN__DOMICILE = "domicile";
-    public static final String PERSONNE_COLUMN__PROVINCE = "province";
-    public static final String PERSONNE_COLUMN__VILLE = "ville";
-    public static final String PERSONNE_COLUMN__COMMUNE = "commune";
+    public static final String SUBSCRIBER_COLUMN__ID = "id";
+    public static final String SUBSCRIBER_COLUMN__CITY = "city_id";
+    public static final String SUBSCRIBER_COLUMN__TOWN = "town_id";
+    public static final String SUBSCRIBER_COLUMN__TERRITORY = "territory_id";
+    public static final String SUBSCRIBER_COLUMN__PROVINCE = "province_id";
+    public static final String SUBSCRIBER_COLUMN__NAME = "name";
+    public static final String SUBSCRIBER_COLUMN__LASTNAME = "lastname";
+    public static final String SUBSCRIBER_COLUMN__FIRSTNAME = "firstname";
+    public static final String SUBSCRIBER_COLUMN__SEXE = "sexe";
+    public static final String SUBSCRIBER_COLUMN__AGE = "age";
+    public static final String SUBSCRIBER_COLUMN__LEVE_OF_STUDY = "leve_of_study";
+    public static final String SUBSCRIBER_COLUMN__PHONE_NUMBER = "phone_number";
+    public static final String SUBSCRIBER_COLUMN__EMAIL = "email";
+    public static final String SUBSCRIBER_COLUMN__QUARTER = "quarter";
+    public static final String SUBSCRIBER_COLUMN__AVENUE = "avenue";
+    public static final String SUBSCRIBER_COLUMN__HOME = "home";
+    public static final String SUBSCRIBER_COLUMN__SLUG = "slug";
+    public static final String SUBSCRIBER_COLUMN__GROUPMENT = "groupment_id";
+    public static final String SUBSCRIBER_COLUMN__VILLAGE = "village";
+    public static final String SUBSCRIBER_COLUMN__AGENT = "agent_id";
+    public static final String SUBSCRIBER_COLUMN__CREATE_AT = "created_at";
+    public static final String SUBSCRIBER_COLUMN__SECTEUR = "secteur";
+    public static final String SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT = "physical_environment";
+    public static final String SUBSCRIBER_COLUMN__UPDATED_AT = "updated_at";
+    public static final String SUBSCRIBER_COLUMN__COOPERATIVE= "cooperative";
+    public static final String SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION = "peasant_organization";
+    public static final String SUBSCRIBER_COLUMN__MULTIPLIER_AGENT = "multiplier_agent";
+
+
 
     private Context context;
 
@@ -60,25 +67,50 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(
-                "create table personne " +
-                        "(id integer primary key AUTOINCREMENT not null, nom text,postnom text,prenom text, sexe text,niveauEtude text," +
-                        "age text,nomOp text,nom_cooperative text,phone text,email text,adm text,quartier text," +
-                        "avenue text,domicile text,province integer,ville integer,commune integer)"
-        );
+
         db.execSQL(
                 "create table province " +
-                        "(id integer primary key AUTOINCREMENT not null, nom text)"
+                        "(id integer primary key AUTOINCREMENT not null, name text)"
         );
         db.execSQL(
-                "create table ville " +
-                        "(id integer primary key AUTOINCREMENT not null, nom text)"
+                "create table town " +
+                        "(id integer primary key AUTOINCREMENT not null, name text)"
         );
 
         db.execSQL(
                 "create table commune " +
-                        "(id integer primary key AUTOINCREMENT not null, nom text)"
+                        "(id integer primary key AUTOINCREMENT not null, name text)"
         );
+
+        db.execSQL("CREATE TABLE subscriber(\n" +
+                "    id integer PRIMARY KEY AUTOINCREMENT," +
+                "    city_id integer,\n" +
+                "    town_id integer,\n" +
+                "    territory_id integer,\n" +
+                "    province_id integer,\n" +
+                "    name varchar(255),\n" +
+                "    lastname varchar(255),\n" +
+                "    firstname varchar(255),\n" +
+                "    sexe varchar(10),\n" +
+                "    age varchar(30),\n" +
+                "    leve_of_study varchar(50),\n" +
+                "    phone_number varchar(15),\n" +
+                "    email varchar(100),\n" +
+                "    quarter varchar(100),\n" +
+                "    avenue varchar(100),\n" +
+                "    home varchar(20),\n" +
+                "    slug varchar(255),\n" +
+                "    groupment_id int,\n" +
+                "    village varchar(255),\n" +
+                "    agent_id varchar(255),\n" +
+                "    created_at date,\n" +
+                "    secteur varchar(255),\n" +
+                "    physical_environnement varchar(255),\n" +
+                "    update_at datetime,\n" +
+                "    cooperative varchar(255),\n" +
+                "    peasant_organization varchar(255),\n" +
+                "    multiplier_agent varchar(255)\n" +
+                ")");
 
         init();
 
@@ -90,10 +122,11 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS personne");
+
         db.execSQL("DROP TABLE IF EXISTS province");
-        db.execSQL("DROP TABLE IF EXISTS ville");
+        db.execSQL("DROP TABLE IF EXISTS town");
         db.execSQL("DROP TABLE IF EXISTS commune");
+        db.execSQL("DROP TABLE IF EXISTS subscriber");
         onCreate(db);
     }
 
@@ -103,14 +136,14 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         List<Province> provinces = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from province", null);
+        Cursor rs = db.rawQuery("select * from province order by name", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
 
             Province p = new Province();
-            p.setId(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__ID)));
-            p.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
+            p.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            p.setNom(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
             provinces.add(p);
             rs.moveToNext();
         }
@@ -119,22 +152,22 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
-    public List<Ville> getVilles() {
-        List<Ville> villes = new ArrayList<>();
+    public List<Town> getTowns() {
+        List<Town> towns = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from ville", null);
+        Cursor rs = db.rawQuery("select * from town order by name", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
 
-            Ville v = new Ville();
-            v.setId(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__ID)));
-            v.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
-            villes.add(v);
+            Town v = new Town();
+            v.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            v.setNom(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            towns.add(v);
             rs.moveToNext();
         }
-        return villes;
+        return towns;
     }
 
     @Override
@@ -142,15 +175,14 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         List<Commune> communes = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from contacts", null);
+        Cursor rs = db.rawQuery("select * from commune order by name", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
 
             Commune c = new Commune();
-            c.setId(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__ID)));
-            c.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
-            c.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
+            c.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            c.setNom(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
             communes.add(c);
             rs.moveToNext();
         }
@@ -158,69 +190,36 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
-    public long savePerson(Personne p) {
+    public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(PERSONNE_COLUMN__NOM, p.getNom());
-        values.put(PERSONNE_COLUMN__POSTNOM, p.getNom());
-        values.put(PERSONNE_COLUMN__PRENOM, p.getNom());
-        values.put(PERSONNE_COLUMN__SEXE, p.getNom());
-        values.put(PERSONNE_COLUMN__NIVEAU_ETUDE, p.getNom());
-        values.put(PERSONNE_COLUMN__AGE, p.getNom());
-        values.put(PERSONNE_COLUMN__NOM_OPP, p.getNom());
-        values.put(PERSONNE_COLUMN__NOM_COOPERATIVE, p.getNom());
-        values.put(PERSONNE_COLUMN__PHONE, p.getNom());
-        values.put(PERSONNE_COLUMN__EMAIL, p.getNom());
-        values.put(PERSONNE_COLUMN__ADM, p.getNom());
-        values.put(PERSONNE_COLUMN__QUARTIER, p.getNom());
-        values.put(PERSONNE_COLUMN__AVENUE, p.getNom());
-        values.put(PERSONNE_COLUMN__DOMICILE, p.getNom());
-        values.put(PERSONNE_COLUMN__PROVINCE, p.getNom());
-        values.put(PERSONNE_COLUMN__VILLE, p.getNom());
-        values.put(PERSONNE_COLUMN__COMMUNE, p.getNom());
+
 
         long a = db.insert("personne", null, values);
         return a;
     }
 
     @Override
-    public List<Personne> getPersonnes() {
-        List<Personne> personnes = new ArrayList<>();
+    public List<Subscriber> getSubscribers() {
+        List<Subscriber> subscribers = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from contacts", null);
+        Cursor rs = db.rawQuery("select * from subscriber", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
 
-            Personne p = new Personne();
-            p.setNom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM)));
-            p.setPostnom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__POSTNOM)));
-            p.setPrenom(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__PRENOM)));
-            p.setSexe(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__SEXE)));
-            p.setNiveauEtude(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NIVEAU_ETUDE)));
-            p.setAge(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__AGE)));
-            p.setNom_op(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM_OPP)));
-            p.setNom_cooperative(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__NOM_COOPERATIVE)));
-            p.setPhone(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__PHONE)));
-            p.setEmail(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__EMAIL)));
-            p.setAdm(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__ADM)));
-            p.setQuartier(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__QUARTIER)));
-            p.setAvenue(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__AVENUE)));
-            p.setDomicile(rs.getString(rs.getColumnIndex(PERSONNE_COLUMN__DOMICILE)));
-            p.setProvince(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__PROVINCE)));
-            p.setVille(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__VILLE)));
-            p.setCommune(rs.getInt(rs.getColumnIndex(PERSONNE_COLUMN__COMMUNE)));
+            Subscriber p = new Subscriber();
 
-            personnes.add(p);
+            subscribers.add(p);
             rs.moveToNext();
         }
-        return personnes;
+        return subscribers;
     }
 
     @Override
-    public Personne getPersonne(int id) {
+    public Subscriber getSubscriber(int id) {
         return null;
     }
 
@@ -240,7 +239,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
     }
 
-    public void initVilles() {
+    public void initTowns() {
         InputStream inputStream = context.getResources().openRawResource(R.raw.villes);
 
         String queries = "";
@@ -251,7 +250,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         SQLiteDatabase db = this.getReadableDatabase();
         for (String query : queries.split(";")) {
-            Log.d("Query_Sql",query);
+            Log.d("Query_Sql", query);
             db.execSQL(query);
         }
     }

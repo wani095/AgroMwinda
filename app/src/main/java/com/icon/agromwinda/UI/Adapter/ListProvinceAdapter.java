@@ -50,9 +50,6 @@ public class ListProvinceAdapter extends RecyclerView.Adapter<ListProvinceAdapte
         provinceViewHolder.row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 Intent intent=new Intent();
                 intent.putExtra("data",new Gson().toJson(provinces.get(i)));
                 activity.setResult(77,intent);

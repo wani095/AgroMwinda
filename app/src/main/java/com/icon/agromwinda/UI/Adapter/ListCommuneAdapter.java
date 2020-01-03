@@ -51,12 +51,9 @@ public class ListCommuneAdapter extends RecyclerView.Adapter<ListCommuneAdapter.
         communeViewHolder.rowcommune.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 Intent intent=new Intent();
                 intent.putExtra("data",new Gson().toJson(communes.get(i)));
-                activity.setResult(77,intent);
+                activity.setResult(79,intent);
                 activity.finish();
             }
         });

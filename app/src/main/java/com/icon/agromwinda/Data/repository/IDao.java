@@ -1,9 +1,9 @@
 package com.icon.agromwinda.Data.repository;
 
 import com.icon.agromwinda.Data.model.Commune;
-import com.icon.agromwinda.Data.model.Personne;
+import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Province;
-import com.icon.agromwinda.Data.model.Ville;
+import com.icon.agromwinda.Data.model.Town;
 
 import java.util.List;
 
@@ -11,14 +11,14 @@ public interface IDao {
 
     List<Province> getProvinces();
 
-    List<Ville> getVilles();
+    List<Town> getTowns();
 
     List<Commune> getCommunes();
 
-    long savePerson(Personne personne);
+    long saveSubscriber(Subscriber subscriber);
 
-    List<Personne> getPersonnes();
+    List<Subscriber> getSubscribers();
 
-    Personne getPersonne(int id);
+    Subscriber getSubscriber(int id);
 
 }
