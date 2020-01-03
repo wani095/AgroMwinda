@@ -66,8 +66,15 @@ public class FormSavePerson extends Fragment {
                 try {
                     AppUtility.controlValue(txNom.getText().toString(), "Veuillez Renseigner le nom svp");
                     AppUtility.controlValue(txPrenom.getText().toString(), "Veuillez Renseigner le postnom svp");
-                    AppUtility.controlValue(spSexe.getSelectedItem().toString(), "Veuillez Renseigner le Sexe svp");
-                    AppUtility.controlValue(spEtude.getSelectedItem().toString(), "Veuillez Renseigner le niveau d'étude");
+
+                    if(spSexe.getSelectedItem().toString().equals("---")){
+                        AppUtility.controlValue(spSexe.getSelectedItem().toString(), "Veuillez Renseigner le Sexe svp");
+                    }
+
+                    if(spEtude.getSelectedItem().toString().equals("Aucune")){
+                        AppUtility.controlValue("", "Veuillez Renseigner le niveau d'étude");
+                    }
+
                     AppUtility.controlValue(spAge.getSelectedItem().toString(), "Veuillez Renseigner l'âge svp");
                     AppUtility.controlValue(txNom_op.getText().toString(), "Veuillez Renseigner l'Organisation Paysanne svp");
                     AppUtility.controlValue(txCooperative.getText().toString(), "Veuillez Renseigner la cooperative svp");
@@ -81,8 +88,8 @@ public class FormSavePerson extends Fragment {
                     json.put("sexe", spSexe.getSelectedItem().toString());
                     json.put("leve_of_study", spEtude.getSelectedItem().toString());
                     json.put("age", spAge.getSelectedItem().toString());
-                    json.put("peasant_organization",sp)
-
+                    json.put("peasant_organization",txNom_op.getText().toString());
+                    json.put("cooperative",txCooperative.getText().toString());
 
 
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();

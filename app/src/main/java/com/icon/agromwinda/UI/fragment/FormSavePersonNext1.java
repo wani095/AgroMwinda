@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,11 +20,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
+import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Town;
+import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
 import com.icon.agromwinda.UI.activity.ListVilleActivity;
+import com.icon.agromwinda.UI.activity.ListingActivity;
 import com.icon.agromwinda.UI.dialog.MessageDialog;
 import com.icon.agromwinda.UI.dialog.WaitingDialog;
 import com.icon.agromwinda.Utilities.AppUtility;
@@ -31,6 +35,8 @@ import com.icon.agromwinda.Utilities.ValueDataException;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Date;
 
 public class FormSavePersonNext1 extends Fragment {
 
@@ -122,14 +128,15 @@ public class FormSavePersonNext1 extends Fragment {
                     AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
 
                     JSONObject json = new JSONObject(getArguments().getString("data"));
-                    json.put("phone", txPhone.getText().toString());
-                    json.put("adm", txAdm.getText().toString());
-                    json.put("quartier", txQuatier.getText().toString());
+                    json.put("phone_number", txPhone.getText().toString());
+                    json.put("email",txEmail.getText().toString());
+                    json.put("multiplier_agent", txAdm.getText().toString());
+                    json.put("quarter", txQuatier.getText().toString());
                     json.put("avenue", txAvenue.getText().toString());
-                    json.put("domicile", txDomicile.getText().toString());
-                    json.put("province", spProvince.getText().toString());
-                    json.put("town", spVille.getText().toString());
-                    json.put("commune", spCommune.getText().toString());
+                    json.put("home", txDomicile.getText().toString());
+                    json.put("province_id", province.getId());
+                    json.put("town_id", town.getId());
+                    json.put("groupment_id", commune.getId());
 
                     new SaveSubscriber(json.toString()).execute();
 
@@ -164,7 +171,7 @@ public class FormSavePersonNext1 extends Fragment {
     }
 
 
-    public class SaveSubscriber extends AsyncTask<Void, Void, String> {
+    public class SaveSubscriber extends AsyncTask<Void, Void, Long> {
 
         private String data;
 
@@ -180,9 +187,28 @@ public class FormSavePersonNext1 extends Fragment {
         }
 
         @Override
-        protected String doInBackground(Void... voids) {
+        protected Long doInBackground(Void... voids) {
+            Log.d("DATASUBSCRIBER",data);
+            Subscriber subscriber=new Gson().fromJson(data,new TypeToken<Subscriber>(){}.getType());
+            subscriber.setCreated_at(new Date());
+            subscriber.setUpdate_at(new Date());
+            Dao dao=new Dao(getContext());
+            long rep=dao.saveSubscriber(subscriber);
 
-            return null;
+            return rep;
+        }
+
+        @Override
+        protected void onPostExecute(Long rep) {
+            waitingDialog.hide();
+            if (rep>0){
+                MessageDialog.getDialog(getActivity()).createDialog("Votre Operation est un succès").show();
+                Intent intent=new Intent(getActivity(), ListingActivity.class);
+                getActivity().startActivity(intent);
+            }else {
+                MessageDialog.getDialog(getActivity()).createDialog("Echec d'enregistrement").show();
+            }
+
         }
     }
 

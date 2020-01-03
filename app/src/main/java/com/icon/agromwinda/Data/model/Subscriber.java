@@ -26,7 +26,7 @@ public class Subscriber {
     private  int agent_id;
     private Date created_at ;
     private String secteur;
-    private String physical_environnement;
+    private String physical_environment;
     private Date update_at;
     private String cooperative;
     private String peasant_organization;
@@ -208,12 +208,12 @@ public class Subscriber {
         this.secteur = secteur;
     }
 
-    public String getPhysical_environnement() {
-        return physical_environnement;
+    public String getPhysical_environment() {
+        return physical_environment;
     }
 
-    public void setPhysical_environnement(String physical_environnement) {
-        this.physical_environnement = physical_environnement;
+    public void setPhysical_environment(String physical_environment) {
+        this.physical_environment = physical_environment;
     }
 
     public Date getUpdate_at() {

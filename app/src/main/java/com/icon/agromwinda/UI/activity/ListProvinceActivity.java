@@ -48,7 +48,7 @@ public class ListProvinceActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            waitingDialog.show();
+
         }
 
         @Override
@@ -63,7 +63,6 @@ public class ListProvinceActivity extends AppCompatActivity {
         protected void onPostExecute(List<Province> provinces) {
 
             if (provinces != null) {
-                waitingDialog.hide();
                 ListProvinceAdapter listProvinceAdapter=new ListProvinceAdapter(ListProvinceActivity.this,provinces,ListProvinceActivity.this);
                 listProvinceAdapter.notifyDataSetChanged();
 

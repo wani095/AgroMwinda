@@ -16,6 +16,13 @@
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
         <activity android:name=".UI.activity.ListProvinceActivity" />
+        <activity android:name=".UI.activity.ListingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Splash.Splash"
             android:theme="@style/AppTheme1">
