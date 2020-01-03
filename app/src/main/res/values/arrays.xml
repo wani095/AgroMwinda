@@ -12,4 +12,9 @@
         <item>35 à 45 ans</item>
         <item>Plus de 45 ans</item>
     </string-array>
+    <string-array name="list_resident">
+        <item>---</item>
+        <item>communes</item>
+        <item>secteurs</item>
+    </string-array>
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.icon.agromwinda">
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -12,23 +12,19 @@
         android:roundIcon="@drawable/logoagro"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
+        <activity android:name=".UI.activity.ListSecteurActivity"></activity>
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
         <activity android:name=".UI.activity.ListProvinceActivity" />
-
         <activity
             android:name=".Splash.Splash"
             android:theme="@style/AppTheme1">
             <intent-filter>
-
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".UI.activity.MainActivity">
             <intent-filter>
                 <action android:name=".MAINACTIVITY" />
@@ -36,7 +32,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

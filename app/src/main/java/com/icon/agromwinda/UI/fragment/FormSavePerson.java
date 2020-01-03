@@ -25,7 +25,7 @@ public class FormSavePerson extends Fragment {
 
     private View view;
 
-    private EditText txNom, txPostnom, txPrenom, txNom_op, txNom_cooperative;
+    private EditText txNom, txPostnom, txPrenom ;
     private Spinner spSexe, spEtude, spAge;
     private Button btnNext;
 
@@ -43,8 +43,7 @@ public class FormSavePerson extends Fragment {
         txNom = view.findViewById(R.id.txNom);
         txPostnom = view.findViewById(R.id.txPostnom);
         txPrenom = view.findViewById(R.id.txPrenom);
-        txNom_op = view.findViewById(R.id.txNom_op);
-        txNom_cooperative = view.findViewById(R.id.txNom_cooperative);
+
 
         spSexe = view.findViewById(R.id.spSexe);
         spEtude = view.findViewById(R.id.spEtude);
@@ -68,8 +67,7 @@ public class FormSavePerson extends Fragment {
                     AppUtility.controlValue(spSexe.getSelectedItem().toString(), "Veuillez Selectionner le Sexe svp");
                     AppUtility.controlValue(spEtude.getSelectedItem().toString(), "Veuillez Selectionner le niveau d'étude");
                     AppUtility.controlValue(spAge.getSelectedItem().toString(), "Veuillez Selectionner l'âge svp");
-                    AppUtility.controlValue(txNom_op.getText().toString(), "Veuillez entrer Nom de l'OP svp");
-                    AppUtility.controlValue(txNom_cooperative.getText().toString(), "Veuillez entrer Nom de la cooperative affiliée svp");
+
 
                     JSONObject json = new JSONObject();
                     json.put("nom", txNom.getText().toString());
@@ -78,8 +76,7 @@ public class FormSavePerson extends Fragment {
                     json.put("sexe", spSexe.getSelectedItem().toString());
                     json.put("niveauEtude", spEtude.getSelectedItem().toString());
                     json.put("age", spAge.getSelectedItem().toString());
-                    json.put("nomOp", txNom_op.getText().toString());
-                    json.put("nomCooperative", txNom_cooperative.getText().toString());
+
 
 
                     FragmentTransaction transaction = getFragmentManager().beginTransaction();

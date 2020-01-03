@@ -123,7 +123,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         List<Ville> villes = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from contacts", null);
+        Cursor rs = db.rawQuery("select * from ville", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
