@@ -1,6 +1,8 @@
 package com.icon.agromwinda.UI.fragment;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,10 +18,8 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.icon.agromwinda.Data.model.Commune;
-import com.icon.agromwinda.Data.model.Personne;
 import com.icon.agromwinda.Data.model.Province;
-import com.icon.agromwinda.Data.model.Ville;
-import com.icon.agromwinda.Data.repository.Dao;
+import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
@@ -39,7 +39,7 @@ public class FormSavePersonNext1 extends Fragment {
     private TextView spCommune, spVille, spProvince;
     private Button btnValider;
     private Province province;
-    private Ville ville;
+    private Town town;
     private Commune commune;
 
 
@@ -118,7 +118,7 @@ public class FormSavePersonNext1 extends Fragment {
                     AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
                     AppUtility.controlValue(txDomicile.getText().toString(), "Veuillez entrer la domicile svp");
                     AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
-                    AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la ville svp");
+                    AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
                     AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
 
                     JSONObject json = new JSONObject(getArguments().getString("data"));
@@ -128,10 +128,10 @@ public class FormSavePersonNext1 extends Fragment {
                     json.put("avenue", txAvenue.getText().toString());
                     json.put("domicile", txDomicile.getText().toString());
                     json.put("province", spProvince.getText().toString());
-                    json.put("ville", spVille.getText().toString());
+                    json.put("town", spVille.getText().toString());
                     json.put("commune", spCommune.getText().toString());
 
-                    new SavePersonne(json.toString()).execute();
+                    new SaveSubscriber(json.toString()).execute();
 
 
                 } catch (ValueDataException e) {
@@ -148,17 +148,29 @@ public class FormSavePersonNext1 extends Fragment {
             if(requestCode==7 && resultCode==77 && data!=null){
                 province=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Province>(){}.getType());
                 spProvince.setText(province.getNom());
+                spProvince.setTextColor(Color.BLACK);
+                spProvince.setTypeface(Typeface.DEFAULT_BOLD);
+            }else if(requestCode==8 && resultCode==78 && data!=null){
+                town =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
+                spVille.setText(town.getNom());
+                spVille.setTextColor(Color.BLACK);
+                spVille.setTypeface(Typeface.DEFAULT_BOLD);
+            }else if(requestCode==9 && resultCode==79 && data!=null){
+                commune=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
+                spCommune.setText(commune.getNom());
+                spCommune.setTextColor(Color.BLACK);
+                spCommune.setTypeface(Typeface.DEFAULT_BOLD);
             }
     }
 
 
-    public class SavePersonne extends AsyncTask<Void, Void, String> {
+    public class SaveSubscriber extends AsyncTask<Void, Void, String> {
 
         private String data;
 
         private WaitingDialog waitingDialog = new WaitingDialog(getContext());
 
-        public SavePersonne(String data) {
+        public SaveSubscriber(String data) {
             this.data = data;
         }
 

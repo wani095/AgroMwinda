@@ -12,11 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.icon.agromwinda.Data.model.Province;
-import com.icon.agromwinda.Data.model.Ville;
+import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.R;
-
-import org.json.JSONObject;
 
 import java.util.List;
 
@@ -25,13 +22,13 @@ public class ListVilleAdapter extends RecyclerView.Adapter<ListVilleAdapter.Vill
 
     private Context context;
     private LayoutInflater inflater;
-    private List<Ville> villes;
+    private List<Town> towns;
     private Activity activity;
 
-    public ListVilleAdapter(Context context,List<Ville> villes,Activity activity){
+    public ListVilleAdapter(Context context, List<Town> towns, Activity activity){
         this.context = context;
         this.inflater = LayoutInflater.from(context);
-        this.villes = villes;
+        this.towns = towns;
         this.activity=activity;
     }
 
@@ -46,17 +43,14 @@ public class ListVilleAdapter extends RecyclerView.Adapter<ListVilleAdapter.Vill
 
     @Override
     public void onBindViewHolder(@NonNull final VilleViewHolder villeViewHolder,final int i) {
-        villeViewHolder.txNom_ville.setText(villes.get(i).getNom());
+        villeViewHolder.txNom_ville.setText(towns.get(i).getNom());
 
         villeViewHolder.rowville.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 Intent intent=new Intent();
-                intent.putExtra("data",new Gson().toJson(villes.get(i)));
-                activity.setResult(77,intent);
+                intent.putExtra("data",new Gson().toJson(towns.get(i)));
+                activity.setResult(78,intent);
                 activity.finish();
             }
         });
@@ -64,7 +58,7 @@ public class ListVilleAdapter extends RecyclerView.Adapter<ListVilleAdapter.Vill
 
     @Override
     public int getItemCount() {
-        return villes.size();
+        return towns.size();
     }
 
     public class VilleViewHolder extends RecyclerView.ViewHolder{

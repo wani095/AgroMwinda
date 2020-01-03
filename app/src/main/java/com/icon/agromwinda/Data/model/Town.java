@@ -1,6 +1,6 @@
 package com.icon.agromwinda.Data.model;
 
-public class Ville {
+public class Town {
     private int id;
     private String nom;
 

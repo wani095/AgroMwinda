@@ -5,14 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import com.icon.agromwinda.Data.model.Province;
-import com.icon.agromwinda.Data.model.Ville;
+import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.repository.Controller;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
-import com.icon.agromwinda.UI.Adapter.ListProvinceAdapter;
 import com.icon.agromwinda.UI.Adapter.ListVilleAdapter;
 import com.icon.agromwinda.UI.dialog.WaitingDialog;
 
@@ -43,9 +40,9 @@ public class ListVilleActivity extends AppCompatActivity {
 
     }
 
-    public class ListVilles extends AsyncTask<Void, Void, List<Ville>> {
+    public class ListVilles extends AsyncTask<Void, Void, List<Town>> {
 
-        List<Ville> villes = null;
+        List<Town> towns = null;
         private WaitingDialog waitingDialog = new WaitingDialog(ListVilleActivity.this);
 
         @Override
@@ -54,19 +51,19 @@ public class ListVilleActivity extends AppCompatActivity {
         }
 
         @Override
-        protected List<Ville> doInBackground(Void... voids) {
+        protected List<Town> doInBackground(Void... voids) {
 
             Controller.initDB(ListVilleActivity.this);
-            villes = new Dao(ListVilleActivity.this).getVilles();
-            return villes;
+            towns = new Dao(ListVilleActivity.this).getTowns();
+            return towns;
         }
 
         @Override
-        protected void onPostExecute(List<Ville> villes) {
+        protected void onPostExecute(List<Town> towns) {
 
-            if (villes != null) {
+            if (towns != null) {
                 waitingDialog.hide();
-                ListVilleAdapter listVilleAdapter=new ListVilleAdapter(ListVilleActivity.this,villes,ListVilleActivity.this);
+                ListVilleAdapter listVilleAdapter=new ListVilleAdapter(ListVilleActivity.this, towns,ListVilleActivity.this);
                 listVilleAdapter.notifyDataSetChanged();
 
                 recycle_view_ville = findViewById(R.id.recycle_view_ville);

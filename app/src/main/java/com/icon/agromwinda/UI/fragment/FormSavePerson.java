@@ -25,7 +25,7 @@ public class FormSavePerson extends Fragment {
 
     private View view;
 
-    private EditText txNom, txPostnom, txPrenom ;
+    private EditText txNom, txPostnom, txPrenom,txNom_op,txCooperative;
     private Spinner spSexe, spEtude, spAge;
     private Button btnNext;
 
@@ -48,6 +48,8 @@ public class FormSavePerson extends Fragment {
         spSexe = view.findViewById(R.id.spSexe);
         spEtude = view.findViewById(R.id.spEtude);
         spAge = view.findViewById(R.id.spAge);
+        txNom_op=view.findViewById(R.id.txNom_op);
+        txCooperative=view.findViewById(R.id.txNom_cooperative);
 
         btnNext = view.findViewById(R.id.btnNext);
     }
@@ -62,20 +64,24 @@ public class FormSavePerson extends Fragment {
             public void onClick(View v) {
 
                 try {
-                    AppUtility.controlValue(txNom.getText().toString(), "Veuillez entrer le nom svp");
-                    AppUtility.controlValue(txPrenom.getText().toString(), "Veuillez entrer le postnom svp");
-                    AppUtility.controlValue(spSexe.getSelectedItem().toString(), "Veuillez Selectionner le Sexe svp");
-                    AppUtility.controlValue(spEtude.getSelectedItem().toString(), "Veuillez Selectionner le niveau d'étude");
-                    AppUtility.controlValue(spAge.getSelectedItem().toString(), "Veuillez Selectionner l'âge svp");
+                    AppUtility.controlValue(txNom.getText().toString(), "Veuillez Renseigner le nom svp");
+                    AppUtility.controlValue(txPrenom.getText().toString(), "Veuillez Renseigner le postnom svp");
+                    AppUtility.controlValue(spSexe.getSelectedItem().toString(), "Veuillez Renseigner le Sexe svp");
+                    AppUtility.controlValue(spEtude.getSelectedItem().toString(), "Veuillez Renseigner le niveau d'étude");
+                    AppUtility.controlValue(spAge.getSelectedItem().toString(), "Veuillez Renseigner l'âge svp");
+                    AppUtility.controlValue(txNom_op.getText().toString(), "Veuillez Renseigner l'Organisation Paysanne svp");
+                    AppUtility.controlValue(txCooperative.getText().toString(), "Veuillez Renseigner la cooperative svp");
+
 
 
                     JSONObject json = new JSONObject();
-                    json.put("nom", txNom.getText().toString());
-                    json.put("postnom", txPostnom.getText().toString());
-                    json.put("prenom", txPrenom.getText().toString());
+                    json.put("firstname", txNom.getText().toString());
+                    json.put("lastname", txPostnom.getText().toString());
+                    json.put("name", txPrenom.getText().toString());
                     json.put("sexe", spSexe.getSelectedItem().toString());
-                    json.put("niveauEtude", spEtude.getSelectedItem().toString());
+                    json.put("leve_of_study", spEtude.getSelectedItem().toString());
                     json.put("age", spAge.getSelectedItem().toString());
+                    json.put("peasant_organization",sp)
 
 
 

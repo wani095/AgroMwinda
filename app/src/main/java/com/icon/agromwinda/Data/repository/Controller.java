@@ -19,7 +19,7 @@ public class Controller {
             dao=new Dao(context);
             Log.d("DataBaseInit","doesn't exist");
             dao.initProvinces();
-            dao.initVilles();
+            dao.initTowns();
             dao.initCommunes();
         }
     }
