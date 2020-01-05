@@ -1,6 +1,8 @@
 package com.icon.agromwinda.UI.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Contacts;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.icon.agromwinda.R;
+import com.icon.agromwinda.UI.activity.AccueilApp;
+import com.icon.agromwinda.UI.activity.MainActivity;
 import com.icon.agromwinda.UI.dialog.MessageDialog;
 import com.icon.agromwinda.Utilities.AppUtility;
 import com.icon.agromwinda.Utilities.ValueDataException;
@@ -28,6 +32,7 @@ public class FormSavePerson extends Fragment {
     private EditText txNom, txPostnom, txPrenom,txNom_op,txCooperative;
     private Spinner spSexe, spEtude, spAge;
     private Button btnNext;
+    private Button btnRet;
 
     @Nullable
     @Override
@@ -52,6 +57,7 @@ public class FormSavePerson extends Fragment {
         txCooperative=view.findViewById(R.id.txNom_cooperative);
 
         btnNext = view.findViewById(R.id.btnNext);
+        btnRet = view.findViewById(R.id.btnRet);
     }
 
     public void init() {
@@ -59,6 +65,8 @@ public class FormSavePerson extends Fragment {
     }
 
     public void bindEvents() {
+
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,5 +112,14 @@ public class FormSavePerson extends Fragment {
                 }
             }
         });
+
+        btnRet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
     }
+
 }

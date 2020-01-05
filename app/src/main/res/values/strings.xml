@@ -12,6 +12,11 @@
     <string name="lbl_detail">(Remplissez seulement la case concernant les données de l\'abonné)</string>
     <string name="copyrith">\@2020 AgroMwinda. Tous droits réservés</string>
 
+    <string name="ajou">AJOUTER ABONNEE</string>
+    <string name="plat">PLATFORME</string>
+    <string name="lis">LISTE DES AJOUTS</string>
+    <string name="pro">PROFIL</string>
+
 
     <array name="list_sexe">
         <item>---</item>
