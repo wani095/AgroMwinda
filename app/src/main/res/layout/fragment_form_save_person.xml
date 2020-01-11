@@ -217,9 +217,23 @@
                 android:textSize="15sp"
                 android:text="Suivant"
                 android:gravity="center"/>
+            <Button
+                android:id="@+id/btnRet"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:textSize="15sp"
+                android:text="retour"
+                android:gravity="center"/>
         </LinearLayout>
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textSize="15sp"
+            android:text="@string/copyrith"
+            android:gravity="center"
+            android:textColor="#000"
+            android:textStyle="bold"/>
     </LinearLayout>
 
 </ScrollView>

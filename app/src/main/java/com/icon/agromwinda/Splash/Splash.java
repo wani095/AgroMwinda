@@ -23,7 +23,7 @@ public class Splash extends AppCompatActivity {
                     e.printStackTrace();
 
                 } finally {
-                    Intent i = new Intent(".MAINACTIVITY");
+                    Intent i = new Intent(".ACCUEILAPP");
                     startActivity(i);
 
                 }

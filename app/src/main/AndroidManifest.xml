@@ -12,7 +12,17 @@
         android:roundIcon="@drawable/logoagro"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.activity.ListSecteurActivity"></activity>
+        <activity android:name=".UI.activity.PLatForme"></activity>
+
+        <activity android:name=".UI.activity.AccueilApp"
+            android:theme="@style/AppTheme1">
+            <intent-filter>
+                <action android:name=".ACCUEILAPP" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".UI.activity.ListSecteurActivity" />
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
         <activity android:name=".UI.activity.ListProvinceActivity" />
@@ -20,7 +30,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
