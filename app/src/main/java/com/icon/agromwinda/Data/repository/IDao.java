@@ -19,6 +19,6 @@ public interface IDao {
 
     List<Subscriber> getSubscribers();
 
-    Subscriber getSubscriber(int id);
+    Subscriber getSubscriber(Integer id);
 
 }

@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.R;
+import com.icon.agromwinda.UI.activity.DetailSubscriberActivity;
 
 import java.util.List;
 
@@ -46,7 +47,14 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
     public void onBindViewHolder(@NonNull final ListingViewHolder provinceViewHolder,final int i) {
         provinceViewHolder.txFullName.setText(subscribers.get(i).getName()+" "+subscribers.get(i).getFirstname()+" "+subscribers.get(i).getLastname());
 
-
+        provinceViewHolder.row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(activity, DetailSubscriberActivity.class);
+                intent.putExtra("id",subscribers.get(i).getId());
+                activity.startActivity(intent);
+            }
+        });
     }
 
     @Override

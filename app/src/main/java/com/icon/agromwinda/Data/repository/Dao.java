@@ -27,7 +27,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
 
-
     public static final String SUBSCRIBER_COLUMN__ID = "id";
     public static final String SUBSCRIBER_COLUMN__CITY = "city_id";
     public static final String SUBSCRIBER_COLUMN__TOWN = "town_id";
@@ -52,10 +51,9 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String SUBSCRIBER_COLUMN__SECTEUR = "secteur";
     public static final String SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT = "physical_environment";
     public static final String SUBSCRIBER_COLUMN__UPDATED_AT = "update_at";
-    public static final String SUBSCRIBER_COLUMN__COOPERATIVE= "cooperative";
+    public static final String SUBSCRIBER_COLUMN__COOPERATIVE = "cooperative";
     public static final String SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION = "peasant_organization";
     public static final String SUBSCRIBER_COLUMN__MULTIPLIER_AGENT = "multiplier_agent";
-
 
 
     private Context context;
@@ -194,33 +192,33 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(SUBSCRIBER_COLUMN__NAME,p.getName());
-        values.put(SUBSCRIBER_COLUMN__LASTNAME,p.getLastname());
-        values.put(SUBSCRIBER_COLUMN__FIRSTNAME,p.getFirstname());
-        values.put(SUBSCRIBER_COLUMN__SEXE,p.getSexe());
-        values.put(SUBSCRIBER_COLUMN__AGE,p.getAge());
-        values.put(SUBSCRIBER_COLUMN__LEVE_OF_STUDY,p.getLeve_of_study());
-        values.put(SUBSCRIBER_COLUMN__PHONE_NUMBER,p.getPhone_number());
-        values.put(SUBSCRIBER_COLUMN__EMAIL,p.getEmail());
-        values.put(SUBSCRIBER_COLUMN__QUARTER,p.getQuarter());
-        values.put(SUBSCRIBER_COLUMN__AVENUE,p.getAvenue());
-        values.put(SUBSCRIBER_COLUMN__SLUG,p.getSlug());
-        values.put(SUBSCRIBER_COLUMN__GROUPMENT,p.getGroupment_id());
-        values.put(SUBSCRIBER_COLUMN__VILLAGE,p.getVillage());
-        values.put(SUBSCRIBER_COLUMN__AGENT,p.getAgent_id());
-        values.put(SUBSCRIBER_COLUMN__CREATE_AT,p.getCreated_at().toString());
-        values.put(SUBSCRIBER_COLUMN__SECTEUR,p.getSecteur());
-        values.put(SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT,p.getPhysical_environment());
-        values.put(SUBSCRIBER_COLUMN__UPDATED_AT,p.getUpdate_at().toString());
-        values.put(SUBSCRIBER_COLUMN__COOPERATIVE,p.getCooperative());
-        values.put(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION,p.getPeasant_organization());
-        values.put(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT,p.getMultiplier_agent());
+        values.put(SUBSCRIBER_COLUMN__NAME, p.getName());
+        values.put(SUBSCRIBER_COLUMN__LASTNAME, p.getLastname());
+        values.put(SUBSCRIBER_COLUMN__FIRSTNAME, p.getFirstname());
+        values.put(SUBSCRIBER_COLUMN__SEXE, p.getSexe());
+        values.put(SUBSCRIBER_COLUMN__AGE, p.getAge());
+        values.put(SUBSCRIBER_COLUMN__LEVE_OF_STUDY, p.getLeve_of_study());
+        values.put(SUBSCRIBER_COLUMN__PHONE_NUMBER, p.getPhone_number());
+        values.put(SUBSCRIBER_COLUMN__EMAIL, p.getEmail());
+        values.put(SUBSCRIBER_COLUMN__QUARTER, p.getQuarter());
+        values.put(SUBSCRIBER_COLUMN__AVENUE, p.getAvenue());
+        values.put(SUBSCRIBER_COLUMN__SLUG, p.getSlug());
+        values.put(SUBSCRIBER_COLUMN__GROUPMENT, p.getGroupment_id());
+        values.put(SUBSCRIBER_COLUMN__VILLAGE, p.getVillage());
+        values.put(SUBSCRIBER_COLUMN__AGENT, p.getAgent_id());
+        values.put(SUBSCRIBER_COLUMN__CREATE_AT, p.getCreated_at().toString());
+        values.put(SUBSCRIBER_COLUMN__SECTEUR, p.getSecteur());
+        values.put(SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT, p.getPhysical_environment());
+        values.put(SUBSCRIBER_COLUMN__UPDATED_AT, p.getUpdate_at().toString());
+        values.put(SUBSCRIBER_COLUMN__COOPERATIVE, p.getCooperative());
+        values.put(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION, p.getPeasant_organization());
+        values.put(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT, p.getMultiplier_agent());
 
         try {
             long a = db.insert("subscriber", null, values);
             return a;
-        }catch (Exception e){
-            Log.d("SAVEEXCEPTION",e.getMessage());
+        } catch (Exception e) {
+            Log.d("SAVEEXCEPTION", e.getMessage());
         }
         return 0;
     }
@@ -240,15 +238,28 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setFirstname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__FIRSTNAME)));
             p.setLastname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__LASTNAME)));
             subscribers.add(p);
-            subscribers.add(p);
             rs.moveToNext();
         }
         return subscribers;
     }
 
     @Override
-    public Subscriber getSubscriber(int id) {
-        return null;
+    public Subscriber getSubscriber(Integer id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from subscriber where id=" + id + "", null);
+        rs.moveToFirst();
+
+        Subscriber p = null;
+
+        while (rs.isAfterLast() == false) {
+            p = new Subscriber();
+            p.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            p.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            p.setFirstname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__FIRSTNAME)));
+            p.setLastname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__LASTNAME)));
+            rs.moveToNext();
+        }
+        return p;
     }
 
 

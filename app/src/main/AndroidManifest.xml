@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -12,9 +13,12 @@
         android:roundIcon="@drawable/logoagro"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.activity.PLatForme"></activity>
-
-        <activity android:name=".UI.activity.AccueilApp"
+        <activity android:name=".UI.activity.DetailSubscriberActivity"></activity>
+        <activity
+            android:name=".UI.activity.PLatForme"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".UI.activity.AccueilApp"
             android:theme="@style/AppTheme1">
             <intent-filter>
                 <action android:name=".ACCUEILAPP" />
@@ -26,13 +30,7 @@
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
         <activity android:name=".UI.activity.ListProvinceActivity" />
-        <activity android:name=".UI.activity.ListingActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".UI.activity.ListingActivity" />
         <activity
             android:name=".Splash.Splash"
             android:theme="@style/AppTheme1">
