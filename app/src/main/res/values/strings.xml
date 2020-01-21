@@ -16,6 +16,44 @@
     <string name="plat">PLATFORME</string>
     <string name="lis">LISTE DES AJOUTS</string>
     <string name="pro">PROFIL</string>
+    
+    <array name="list_typeAct">
+        <item>---</item>
+        <item>Commerce</item>
+        <item>Agriculture</item>
+        <item>Transport</item>
+    </array>
+
+    <array name="list_typesAC">
+        <item>---</item>
+        <item>Ferme</item>
+        <item>Champ</item>
+        <item>Elevage gros bétail</item>
+        <item>Elevage petit bétail et Bassecours</item>
+        <item>Pisciculture</item>
+        <item>Apiculture</item>
+        <item>PLusieurs</item>
+    </array>
+<array name="objet_Act">
+    <item>consommation vivrière</item>
+    <item>commercialisation</item>
+    <item>consommation et commercialisation</item>
+</array>
+
+    <array name="source_Act">
+        <item>Local</item>
+        <item>Etrangere</item>
+    </array>
+
+    <array name="etendue">
+        <item>Moins dun Hectare</item>
+        <item>1 à 5 Hectares</item>
+        <item>5 à 10 Hectares</item>
+        <item>10 à 50 Hectares</item>
+        <item>50 à 100 Hectares</item>
+        <item>Plus de 100 Hectares</item>
+    </array>
+
 
 
     <array name="list_sexe">
@@ -30,4 +68,14 @@
     <string name="title_notifications">Credit</string>
     <string name="nav_chat">AgroSeach</string>
     <string name="action_search_text">Search</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="ajouter_activit">Ajouter Activité</string>
 </resources>

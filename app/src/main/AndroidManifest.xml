@@ -13,7 +13,11 @@
         android:roundIcon="@drawable/logoagro"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UI.activity.DetailSubscriberActivity"></activity>
+        <activity
+            android:name=".ui.login.Login"
+            android:label="@string/title_activity_login"></activity>
+        <activity android:name=".UI.activity.DetailSubscriberActivity"
+            android:label="Id de l'Abonné"/>
         <activity
             android:name=".UI.activity.PLatForme"
             android:theme="@style/AppTheme1" />
@@ -30,7 +34,8 @@
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
         <activity android:name=".UI.activity.ListProvinceActivity" />
-        <activity android:name=".UI.activity.ListingActivity" />
+        <activity android:name=".UI.activity.ListingActivity"
+            android:label="LISTE DES ABONNES"/>
         <activity
             android:name=".Splash.Splash"
             android:theme="@style/AppTheme1">

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.icon.agromwinda.R;
 
@@ -21,7 +22,6 @@ public class AccueilApp extends AppCompatActivity {
         setContentView(R.layout.activity_accueil_app);
 
         Button btajout =(Button)findViewById(R.id.btajout);
-
         btajout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,7 +30,6 @@ public class AccueilApp extends AppCompatActivity {
         });
 
         Button btnlist = (Button)findViewById(R.id.btnList);
-
         btnlist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,7 +38,6 @@ public class AccueilApp extends AppCompatActivity {
         });
 
         Button bntplat =(Button)findViewById(R.id.btnplat);
-
         bntplat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
