@@ -88,7 +88,6 @@ public class FormSavePerson extends Fragment {
                     AppUtility.controlValue(txCooperative.getText().toString(), "Veuillez Renseigner la cooperative svp");
 
 
-
                     JSONObject json = new JSONObject();
                     json.put("firstname", txNom.getText().toString());
                     json.put("lastname", txPostnom.getText().toString());
