@@ -16,6 +16,7 @@
     <string name="plat">PLATFORME</string>
     <string name="lis">LISTE DES AJOUTS</string>
     <string name="pro">PROFIL</string>
+
     
     <array name="list_typeAct">
         <item>---</item>
@@ -34,6 +35,7 @@
         <item>Apiculture</item>
         <item>PLusieurs</item>
     </array>
+
 <array name="objet_Act">
     <item>consommation vivrière</item>
     <item>commercialisation</item>
@@ -43,6 +45,7 @@
     <array name="source_Act">
         <item>Local</item>
         <item>Etrangere</item>
+        <item>Nationale</item>
     </array>
 
     <array name="etendue">
@@ -62,6 +65,47 @@
         <item>Femme</item>
     </array>
 
+
+    <array name="comer_type_de_vente">
+        <item>Denrées Alimentaire</item>
+        <item>Produits Pharmaceutiques</item>
+        <item>Produits de Télecominication</item>
+        <item>Services</item>
+        <item>Divers</item>
+    </array>
+
+    <array name="comer_source_apro">
+        <item>Local</item>
+        <item>Etranger</item>
+        <item>Nationale</item>
+    </array>
+
+    <array name="comer_capacit">
+        <item>50 000 à 100 000fc</item>
+        <item>100 000 à 200 000fc</item>
+        <item>200 000 à 500 000fc</item>
+        <item>500 000 à 1 000 000 fc</item>
+        <item>plus de 1 000 000fc</item>
+    </array>
+
+    <array name="tran_type_ve">
+        <item>---</item>
+        <item>voiture</item>
+    </array>
+
+    <array name="tran_marque_ve">
+        <item>---</item>
+        <item>jeep</item>
+    </array>
+    <array name="tran_annee_ve">
+        <item>---</item>
+        <item>2000</item>
+    </array>
+
+    <array name="tran_capacit_ve">
+        <item>---</item>
+        <item>5 tonnes</item>
+    </array>
 
     <string name="title_home">Platforme</string>
     <string name="title_dashboard">Marché</string>
