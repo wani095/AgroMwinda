@@ -125,6 +125,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS town");
         db.execSQL("DROP TABLE IF EXISTS commune");
         db.execSQL("DROP TABLE IF EXISTS subscriber");
+        db.execSQL("DROP TABLE IF EXISTS territoires");
         onCreate(db);
     }
 
@@ -237,6 +238,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
             p.setFirstname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__FIRSTNAME)));
             p.setLastname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__LASTNAME)));
+            p.setPhone_number(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PHONE_NUMBER)));
             subscribers.add(p);
             rs.moveToNext();
         }
@@ -257,6 +259,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
             p.setFirstname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__FIRSTNAME)));
             p.setLastname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__LASTNAME)));
+            p.setPhone_number(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PHONE_NUMBER)));
             rs.moveToNext();
         }
         return p;
@@ -296,6 +299,21 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
     public void initCommunes() {
         InputStream inputStream = context.getResources().openRawResource(R.raw.communes);
+
+        String queries = "";
+        try {
+            queries = IOUtils.toString(inputStream);
+        } catch (IOException e) {
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        for (String query : queries.split(";")) {
+            db.execSQL(query);
+        }
+    }
+
+    public void initTerritoire() {
+        InputStream inputStream = context.getResources().openRawResource(R.raw.territoires);
 
         String queries = "";
         try {
