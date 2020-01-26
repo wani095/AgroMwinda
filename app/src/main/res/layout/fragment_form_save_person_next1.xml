@@ -250,9 +250,18 @@
                         android:textSize="15sp" />
                 </LinearLayout>
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textSize="12sp"
+            android:text="@string/copyrith"
+            android:gravity="center"
+            android:textColor="@color/colorWrite"
+            android:background="@color/colorPrimary"
+            android:textStyle="bold"/>
     </LinearLayout>
+
 
 </ScrollView>

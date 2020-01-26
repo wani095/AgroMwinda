@@ -82,8 +82,20 @@
                     android:paddingLeft="7dp"
                     android:background="@drawable/btn_control_forme"
                     android:inputType="text"/>
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
+
+
+        <include
+            android:visibility="gone"
+            layout="@layout/fragment_commerce"/>
+        <include
+            android:visibility="gone"
+            layout="@layout/fragment_agriculture"/>
+        <include
+            android:visibility="gone"
+            layout="@layout/fragment_tranport"/>
 
 
 
