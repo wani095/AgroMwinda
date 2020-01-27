@@ -71,7 +71,7 @@
 
                 <Spinner
                     android:id="@+id/spTerritoire"
-                    android:layout_width="match_parent"
+                    android:layouzt_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/btn_control_forme"
@@ -85,13 +85,17 @@
                     android:textColor="#000"
                     android:textSize="14sp" />
 
-                <Spinner
+                <TextView
                     android:id="@+id/spSecteur"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/btn_control_forme"
-                    android:entries="@array/list_typeAct" />
+                    android:drawableRight="@drawable/ic_spinner"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Secteur" />
+
 
 
                 <TextView

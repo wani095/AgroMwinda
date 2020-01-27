@@ -17,7 +17,7 @@
     <string name="lis">LISTE DES AJOUTS</string>
     <string name="pro">PROFIL</string>
 
-    
+
     <array name="list_typeAct">
         <item>---</item>
         <item>Commerce</item>
@@ -25,6 +25,12 @@
         <item>Transport</item>
     </array>
 
+    <array name="physiquea">
+        <item>---</item>
+        <item>Rural</item>
+        <item>urbain</item>
+
+    </array>
     <array name="list_typesAC">
         <item>---</item>
         <item>Ferme</item>
@@ -36,11 +42,11 @@
         <item>PLusieurs</item>
     </array>
 
-<array name="objet_Act">
-    <item>consommation vivrière</item>
-    <item>commercialisation</item>
-    <item>consommation et commercialisation</item>
-</array>
+    <array name="objet_Act">
+        <item>consommation vivrière</item>
+        <item>commercialisation</item>
+        <item>consommation et commercialisation</item>
+    </array>
 
     <array name="source_Act">
         <item>Local</item>
@@ -56,7 +62,6 @@
         <item>50 à 100 Hectares</item>
         <item>Plus de 100 Hectares</item>
     </array>
-
 
 
     <array name="list_sexe">

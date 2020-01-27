@@ -38,20 +38,5 @@ public class AccueilApp extends AppCompatActivity {
             }
         });
 
-        Button bntplat =(Button)findViewById(R.id.btnplat);
-        bntplat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AccueilApp.this, PLatForme.class));
-            }
-        });
-
-        Button btnajoutac =(Button) findViewById(R.id.btnajoutac);
-        btnajoutac.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent (AccueilApp.this, AjouActivite.class));
-            }
-        });
     }
 }

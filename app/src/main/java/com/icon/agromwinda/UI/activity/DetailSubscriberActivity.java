@@ -21,31 +21,21 @@ import java.util.List;
 public class DetailSubscriberActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Button btnajoutac;
+    private Button btnaj;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_subscriber);
-        btnajoutac = findViewById(R.id.btnajoutac);
-        btnajoutac.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-              startActivity(new Intent(DetailSubscriberActivity.this, AjouActivite.class));
-          }
-      });
+        init();
 
-
-        /**
-
-        Button btnajoutac =(Button) findViewById(R.id.btnajoutac);
-        btnajoutac.setOnClickListener(new View.OnClickListener() {
+        Button btnaj = (Button)findViewById(R.id.bntaj);
+        btnaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DetailSubscriberActivity.this, AjouActivite.class));
             }
         });
-*/
 
     }
 
