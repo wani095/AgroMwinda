@@ -9,8 +9,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.icon.agromwinda.Data.model.Commune;
+import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Province;
+import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.R;
 
@@ -20,6 +22,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.os.Build.VERSION_CODES.P;
 
 public class Dao extends SQLiteOpenHelper implements IDao {
 
@@ -80,6 +84,18 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                         "(id integer primary key AUTOINCREMENT not null, name text)"
         );
 
+        db.execSQL(
+                "create table secteur " +
+                        "(id integer primary key AUTOINCREMENT not null, name text)"
+        );
+
+        db.execSQL(
+                "create table territoire " +
+                        "(id integer primary key AUTOINCREMENT not null, name text)"
+        );
+
+
+
         db.execSQL("CREATE TABLE subscriber(\n" +
                 "    id integer PRIMARY KEY AUTOINCREMENT," +
                 "    city_id integer,\n" +
@@ -126,6 +142,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS commune");
         db.execSQL("DROP TABLE IF EXISTS subscriber");
         db.execSQL("DROP TABLE IF EXISTS territoires");
+        db.execSQL("DROP TABLE IF EXISTS secteurs");
         onCreate(db);
     }
 
@@ -189,6 +206,46 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
+    public List<Secteur> getSecteurs() {
+        List<Secteur> secteurs = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from secteur order by name", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+
+            Secteur s = new Secteur();
+            s.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            s.setNom(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            secteurs.add(s);
+            rs.moveToNext();
+        }
+        return secteurs;
+    }
+
+    @Override
+    public List<Territoire> getTerritoires() {
+        List<Territoire> territoires = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from territoire order by name", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+
+            Territoire t = new Territoire();
+            t.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            t.setNom(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            territoires.add(t);
+            rs.moveToNext();
+        }
+        return territoires;
+    }
+
+
+
+    @Override
     public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -239,6 +296,8 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setFirstname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__FIRSTNAME)));
             p.setLastname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__LASTNAME)));
             p.setPhone_number(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PHONE_NUMBER)));
+            p.setMultiplier_agent(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT)));
+            p.setSexe(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__SEXE)));
             subscribers.add(p);
             rs.moveToNext();
         }
@@ -260,6 +319,8 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setFirstname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__FIRSTNAME)));
             p.setLastname(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__LASTNAME)));
             p.setPhone_number(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PHONE_NUMBER)));
+            p.setMultiplier_agent(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT)));
+            p.setSexe(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__SEXE)));
             rs.moveToNext();
         }
         return p;
@@ -323,6 +384,21 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         SQLiteDatabase db = this.getReadableDatabase();
         for (String query : queries.split(";")) {
+            db.execSQL(query);
+        }
+    }
+    public void initSecteur() {
+        InputStream inputStream = context.getResources().openRawResource(R.raw.secteurs);
+
+        String queries = "";
+        try {
+            queries = IOUtils.toString(inputStream);
+        } catch (IOException e) {
+        }
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        for (String query : queries.split(";")) {
+            Log.d("Query_Sql", query);
             db.execSQL(query);
         }
     }

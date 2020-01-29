@@ -18,10 +18,12 @@ import com.icon.agromwinda.UI.dialog.WaitingDialog;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class DetailSubscriberActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Button btnaj;
+    private Button bntmod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +73,14 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             dialog.hide();
             if (subscriber != null) {
                 List<String[]> attrs = new ArrayList<>();
-                attrs.add(new String[]{"ID", String.valueOf(subscriber.getId())});
-                attrs.add(new String[]{"Nom",subscriber.getLastname()});
-                attrs.add(new String[]{"Prénom",subscriber.getName()});
-                attrs.add(new String[]{"Postnom", subscriber.getFirstname()});
-                attrs.add(new String[]{"Mobile", subscriber.getPhone_number()});
-                attrs.add(new String[]{"Nom de l'AM",subscriber.getMultiplier_agent()});
+                attrs.add(new String[]{"ID :", String.valueOf(subscriber.getId())});
+                attrs.add(new String[]{"Nom :",subscriber.getLastname()});
+                attrs.add(new String[]{"Prénom:",subscriber.getName()});
+                attrs.add(new String[]{"Postnom :", subscriber.getFirstname()});
+                attrs.add(new String[]{"Mobile :", subscriber.getPhone_number()});
+                attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
+                attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
+
                 DetailSubscriberAdapter subscriberAdapter=new DetailSubscriberAdapter(DetailSubscriberActivity.this,attrs);
 
                 recyclerView = findViewById(R.id.detailsubscriber);

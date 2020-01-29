@@ -213,7 +213,7 @@
                     android:drawableRight="@drawable/ic_spinner"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="@string/lbl_ville_chefferie" />
+                    android:text="@string/lbl_ville" />
 
                 <TextView
                     android:layout_width="match_parent"

@@ -39,6 +39,7 @@ public class TypeActivityFragment extends Fragment {
         spTypeA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 if (spTypeA.getSelectedItem().toString().equals("Commerce")) {
 
                 }

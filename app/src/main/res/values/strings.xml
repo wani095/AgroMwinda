@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">AgroMwinda</string>
-    <string name="lbl_ville_chefferie">Ville ou territoire</string>
+    <string name="lbl_chefferie">Chefferie</string>
+    <string name="lbl_ville">Ville</string>
     <string name="lbl_province">Province</string>
-    <string name="lbl_commune">Commune ou Secteur</string>
+    <string name="lbl_commune">Commune</string>
+    <string name="lbl_secteur">Secteur</string>
     <string name="message_dialog_title" />
     <string name="onSuccessMessage" />
     <string name="lbl_fermer">Fermer</string>
@@ -13,9 +15,8 @@
     <string name="copyrith">\@2020 AgroMwinda. Tous droits réservés</string>
 
     <string name="ajou">AJOUTER ABONNEE</string>
-    <string name="plat">PLATFORME</string>
     <string name="lis">LISTE DES AJOUTS</string>
-    <string name="pro">PROFIL</string>
+
 
 
     <array name="list_typeAct">

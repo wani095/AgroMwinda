@@ -21,6 +21,8 @@ public class Controller {
             dao.initProvinces();
             dao.initTowns();
             dao.initCommunes();
+            dao.initTerritoire();
+            dao.initSecteur();
         }
     }
 

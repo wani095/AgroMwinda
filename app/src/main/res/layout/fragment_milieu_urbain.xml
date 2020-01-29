@@ -78,7 +78,7 @@
                     android:drawableRight="@drawable/ic_spinner"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
-                    android:text="@string/lbl_ville_chefferie" />
+                    android:text="@string/lbl_ville" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -107,14 +107,14 @@
                     android:text="Quartier"
                     android:textColor="#000"
                     android:textSize="14sp" />
-
-                <Spinner
-                    android:id="@+id/quartier"
+                <EditText
+                    android:id="@+id/txQuartier"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
+                    android:paddingLeft="7dp"
                     android:background="@drawable/btn_control_forme"
-                    android:entries="@array/list_typeAct" />
+                    android:inputType="text"/>
 
                 <TextView
                     android:layout_width="match_parent"

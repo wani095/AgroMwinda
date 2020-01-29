@@ -4,12 +4,12 @@
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:background="@drawable/border_recycle_view"
-    android:id="@+id/row_secteur">
+    android:id="@+id/row_territoire">
     <TextView
-        android:id="@+id/txNom_secteur"
+        android:id="@+id/txNom_territoire"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Secteur"
+        android:text="Territoire"
         android:textSize="18dp"
         android:textStyle="bold"
         android:textColor="#000"

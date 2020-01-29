@@ -67,15 +67,18 @@
                     android:layout_marginTop="12dp"
                     android:text="Térritoire"
                     android:textColor="#000"
-                    android:textSize="14sp" />
+                    android:textSize="14sp" />d
 
-                <Spinner
+                <TextView
                     android:id="@+id/spTerritoire"
-                    android:layouzt_width="match_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/btn_control_forme"
-                    />
+                    android:drawableRight="@drawable/ic_spinner"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="10dp"
+                    android:text="Territoire" />
 
                 <TextView
                     android:layout_width="match_parent"
