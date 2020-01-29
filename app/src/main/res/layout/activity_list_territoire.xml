@@ -5,10 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.activity.ListSecteurActivity"
+    tools:context=".UI.activity.ListTerritoireActivity"
     android:paddingTop="10dp">
+
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_view_secteurs"
+        android:id="@+id/recycle_view_territoires"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </ScrollView>
