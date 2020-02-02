@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
@@ -93,7 +94,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "create table territoire " +
                         "(id integer primary key AUTOINCREMENT not null, name text)"
         );
-
 
 
         db.execSQL("CREATE TABLE subscriber(\n" +
@@ -324,6 +324,25 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             rs.moveToNext();
         }
         return p;
+    }
+
+    @Override
+    public List<Activity> getActivities(int fkSubscriber) {
+
+        List<Activity> activities=new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from activity where fkSubscriber=" + fkSubscriber + "", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+            Activity activit=new Activity();
+
+            activities.add(activit);
+            rs.moveToNext();
+        }
+
+        return activities;
     }
 
 

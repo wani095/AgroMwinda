@@ -90,4 +90,12 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             }
         }
     }
+
+    class LoadActivities extends AsyncTask<Integer, Subscriber, Subscriber>{
+
+        @Override
+        protected Subscriber doInBackground(Integer... integers) {
+            return null;
+        }
+    }
 }

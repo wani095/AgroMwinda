@@ -1,6 +1,7 @@
 package com.icon.agromwinda.Data.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Subscriber {
 
@@ -31,6 +32,8 @@ public class Subscriber {
     private String cooperative;
     private String peasant_organization;
     private String multiplier_agent;
+
+    private List<Activity> activityList;
 
     public int getId() {
         return id;
@@ -246,5 +249,13 @@ public class Subscriber {
 
     public void setMultiplier_agent(String multiplier_agent) {
         this.multiplier_agent = multiplier_agent;
+    }
+
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
     }
 }

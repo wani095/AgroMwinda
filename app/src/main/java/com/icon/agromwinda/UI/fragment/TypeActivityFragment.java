@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,8 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
+
+import com.icon.agromwinda.BuildConfig;
 import com.icon.agromwinda.R;
 
 public class TypeActivityFragment extends Fragment {
@@ -25,24 +28,25 @@ public class TypeActivityFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragmente_form_save_activity, container, false);
         bindUI();
+        bindEvents();
         return view;
     }
 
     public void bindUI() {
-        spTypeA = view.findViewById(R.id.spTypeA);
+        spTypeA = (Spinner) view.findViewById(R.id.spTypeA);
         pan_agriculture = view.findViewById(R.id.pan_agriculture);
         pan_commerce = view.findViewById(R.id.pan_commerce);
         pan_transport = view.findViewById(R.id.pan_transport);
     }
 
     public void bindEvents() {
-        spTypeA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+Log.d("SelectedACTIVITY","");
+
+        spTypeA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-                if (spTypeA.getSelectedItem().toString().equals("Commerce")) {
-
-                }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (BuildConfig.DEBUG)
+                    Log.d("SelectedACTIVITY", spTypeA.getSelectedItem().toString());
 
                 switch (spTypeA.getSelectedItem().toString()) {
                     case "Commerce": {
@@ -66,11 +70,6 @@ public class TypeActivityFragment extends Fragment {
                         break;
                     }
                 }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
             }
         });
     }

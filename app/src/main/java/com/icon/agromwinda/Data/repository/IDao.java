@@ -1,5 +1,6 @@
 package com.icon.agromwinda.Data.repository;
 
+import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
@@ -26,5 +27,7 @@ public interface IDao {
     List<Subscriber> getSubscribers();
 
     Subscriber getSubscriber(Integer id);
+
+    List<Activity> getActivities(int fkSubscriber);
 
 }
