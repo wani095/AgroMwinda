@@ -80,6 +80,8 @@ public class DetailSubscriberActivity extends AppCompatActivity {
                 attrs.add(new String[]{"Mobile :", subscriber.getPhone_number()});
                 attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
                 attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
+                attrs.add(new String[]{"Age :",subscriber.getAge()});
+                attrs.add(new String[]{"Organisation paysanne:",subscriber.getPeasant_organization()});
 
                 DetailSubscriberAdapter subscriberAdapter=new DetailSubscriberAdapter(DetailSubscriberActivity.this,attrs);
 

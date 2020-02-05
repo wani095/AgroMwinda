@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".UI.activity.ActivityAdressePhysiqueActivite">
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="12dp"
+        android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -32,28 +36,21 @@
             android:textColor="#000"
             android:textSize="14sp" />
     <Spinner
-        android:id="@+id/spchoix"
+        android:id="@+id/spchoixA"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="4dp"
         android:entries="@array/physiquea"
         android:background="@drawable/btn_control_forme" />
 
-        <Button
-            android:id="@+id/btngo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Go"/>
-
-        <TextView
-            android:id="@+id/txtaffi"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textSize="50sp">
-
-        </TextView>
     </LinearLayout>
 
     </android.support.v7.widget.CardView>
+
+    <include layout="@layout/fragment_milieu_urbain"/>
+    <include layout="@layout/flagment_milieu_rural"/>
+
+    </LinearLayout>
+
 
 </ScrollView>

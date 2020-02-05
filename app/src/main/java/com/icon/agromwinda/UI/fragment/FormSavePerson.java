@@ -79,13 +79,11 @@ public class FormSavePerson extends Fragment {
                         AppUtility.controlValue(spSexe.getSelectedItem().toString(), "Veuillez Renseigner le Sexe svp");
                     }
 
-                    if(spEtude.getSelectedItem().toString().equals("Aucune")){
+                    if(spEtude.getSelectedItem().toString().equals("---")){
                         AppUtility.controlValue("", "Veuillez Renseigner le niveau d'étude");
                     }
 
                     AppUtility.controlValue(spAge.getSelectedItem().toString(), "Veuillez Renseigner l'âge svp");
-                    AppUtility.controlValue(txNom_op.getText().toString(), "Veuillez Renseigner l'Organisation Paysanne svp");
-                    AppUtility.controlValue(txCooperative.getText().toString(), "Veuillez Renseigner la cooperative svp");
 
 
                     JSONObject json = new JSONObject();

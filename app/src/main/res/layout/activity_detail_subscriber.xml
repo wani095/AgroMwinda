@@ -16,19 +16,41 @@
              android:layout_width="match_parent"
              android:layout_height="wrap_content"
              android:orientation="horizontal">
-             <Button
-                 android:id="@+id/bntmod"
-                 android:layout_marginLeft="50sp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="MODIFIER ID" />
 
-             <Button
-                 android:id="@+id/bntaj"
-                 android:layout_marginLeft="40sp"
-                 android:layout_width="wrap_content"
+             <android.support.v7.widget.CardView
+                 android:layout_width="140dp"
                  android:layout_height="wrap_content"
-                 android:text="AJOUTE ACTIVITE" />
+                 android:layout_marginTop="10dp"
+                 android:layout_marginLeft="20sp"
+                 android:background="@color/colorWrite"
+                 app:cardCornerRadius="10dp">
+
+                 <Button
+                     android:id="@+id/btnmod"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:background="@color/colorWrite"
+                     android:backgroundTint="@color/colorPrimary"
+                     android:text="MODIFIER ID" />
+             </android.support.v7.widget.CardView>
+
+             <android.support.v7.widget.CardView
+                 android:layout_width="140dp"
+                 android:layout_marginLeft="40sp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="10dp"
+                 android:background="@color/colorWrite"
+                 app:cardCornerRadius="10dp">
+
+                 <Button
+                     android:id="@+id/bntaj"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:background="@color/colorWrite"
+                     android:backgroundTint="@color/colorPrimary"
+                     android:text="AJOUTE ACTIVITE" />
+             </android.support.v7.widget.CardView>
+
          </LinearLayout>
 
 
@@ -39,7 +61,39 @@
 
         </android.support.v7.widget.RecyclerView>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="200sp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20sp"
+            android:textStyle="bold"
+            android:background="@color/colorPrimary"
+            android:text="Ses Activity"
+            android:textAlignment="center"/>
+            <android.support.v7.widget.CardView
+                android:layout_width="220dp"
+                android:layout_height="150sp"
+                android:layout_marginLeft="120sp"
+                android:layout_marginTop="25sp"
 
+                />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="19dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="@string/copyrith"
+            android:textColor="@color/colorWrite"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toStartOf="parent" />
     </LinearLayout>
 
 </ScrollView>

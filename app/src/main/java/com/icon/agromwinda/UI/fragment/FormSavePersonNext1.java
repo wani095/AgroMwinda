@@ -191,7 +191,6 @@ public class FormSavePersonNext1 extends Fragment {
             Log.d("DATASUBSCRIBER",data);
             Subscriber subscriber=new Gson().fromJson(data,new TypeToken<Subscriber>(){}.getType());
             subscriber.setCreated_at(new Date());
-            subscriber.setUpdate_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveSubscriber(subscriber);
             

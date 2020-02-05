@@ -258,4 +258,7 @@ public class Subscriber {
     public void setActivityList(List<Activity> activityList) {
         this.activityList = activityList;
     }
+
+    public void getPeasant_organization(String string) {
+    }
 }

@@ -26,10 +26,18 @@
         <item>Transport</item>
     </array>
 
+    <array name="list_ANAct">
+        <item>2020</item>
+        <item>2019</item>
+        <item>2018</item>
+        <item>2017</item>
+    </array>
+
+
     <array name="physiquea">
         <item>---</item>
         <item>Rural</item>
-        <item>urbain</item>
+        <item>Urbain</item>
 
     </array>
     <array name="list_typesAC">
@@ -103,7 +111,7 @@
         <item>---</item>
         <item>jeep</item>
     </array>
-    <array name="tran_annee_ve">
+    <array name="tran_anneeve">
         <item>---</item>
         <item>2000</item>
     </array>

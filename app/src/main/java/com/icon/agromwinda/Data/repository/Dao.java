@@ -298,6 +298,8 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setPhone_number(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PHONE_NUMBER)));
             p.setMultiplier_agent(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT)));
             p.setSexe(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__SEXE)));
+            p.setAge(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__AGE)));
+            p.getPeasant_organization(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION)));
             subscribers.add(p);
             rs.moveToNext();
         }
@@ -321,6 +323,8 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             p.setPhone_number(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PHONE_NUMBER)));
             p.setMultiplier_agent(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT)));
             p.setSexe(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__SEXE)));
+            p.setAge(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__AGE)));
+            p.getPeasant_organization(rs.getString(rs.getColumnIndex(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION)));
             rs.moveToNext();
         }
         return p;

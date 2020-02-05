@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/pan_urbain"
+    android:visibility="gone">
 
     <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -160,26 +162,47 @@
             android:paddingRight="30dp"
             android:paddingLeft="20dp"
             android:layout_marginBottom="20dp">
-            <Button
-                android:id="@+id/btnNext"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:textSize="15sp"
-                android:text="Terminer"
-                android:gravity="center"/>
-            <Button
-                android:id="@+id/btnRet"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:textSize="15sp"
-                android:text="Retour à l'Activité"
-                android:gravity="center"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="30sp"
+                android:layout_marginLeft="100sp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWrite"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWrite"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Terminer" />
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="160dp"
+                android:layout_height="30sp"
+                android:layout_marginLeft="100sp"
+                android:layout_marginTop="10dp"
+                android:background="@color/colorWrite"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/btnRet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWrite"
+                    android:backgroundTint="@color/colorPrimary"
+                    android:text="Rectour à l'Activité" />
+            </android.support.v7.widget.CardView>
         </LinearLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:textSize="15sp"
+            android:background="@color/colorPrimary"
             android:text="@string/copyrith"
             android:gravity="center"
             android:textColor="#000"
