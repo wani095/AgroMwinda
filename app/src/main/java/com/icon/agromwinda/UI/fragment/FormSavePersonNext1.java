@@ -12,8 +12,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -43,6 +46,9 @@ public class FormSavePersonNext1 extends Fragment {
     private View view;
     private EditText txPhone, txEmail, txAdm, txQuatier, txAvenue, txDomicile;
     private TextView spCommune, spVille, spProvince;
+    private Spinner tvTypePerso;
+    private LinearLayout ll_person_rural;
+    private LinearLayout ll_person_urbain;
     private Button btnValider;
     private Province province;
     private Town town;
@@ -81,7 +87,11 @@ public class FormSavePersonNext1 extends Fragment {
         spProvince = view.findViewById(R.id.spProvince);
         spVille = view.findViewById(R.id.spVille);
 
-        btnValider = view.findViewById(R.id.btnValider);
+        btnValider = view.findViewById(R.id.btnTermine);
+
+        tvTypePerso=view.findViewById(R.id.tvTypePerso);
+        ll_person_rural=view.findViewById(R.id.ll_person_rural);
+        ll_person_urbain=view.findViewById(R.id.ll_person_urbain);
     }
 
     public void init() {
@@ -113,6 +123,32 @@ public class FormSavePersonNext1 extends Fragment {
             }
         });
 
+        tvTypePerso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+                switch (tvTypePerso.getSelectedItem().toString()){
+                    case "Personne Urbaine":
+                        ll_person_rural.setVisibility(View.GONE);
+                        ll_person_urbain.setVisibility(View.VISIBLE);
+                        break;
+                    case "Personne Rural":
+                        ll_person_rural.setVisibility(View.VISIBLE);
+                        ll_person_urbain.setVisibility(View.GONE);
+                        break;
+                        default:
+                            ll_person_rural.setVisibility(View.GONE);
+                            ll_person_urbain.setVisibility(View.GONE);
+                            break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -120,25 +156,47 @@ public class FormSavePersonNext1 extends Fragment {
                 try {
                     AppUtility.controlValue(txPhone.getText().toString(), "Veuillez entrer le numero de téléphone svp");
                     AppUtility.controlValue(txAdm.getText().toString(), "Veuillez entrer le nom de l'agent multiplicateur svp");
-                    AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
-                    AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
-                    AppUtility.controlValue(txDomicile.getText().toString(), "Veuillez entrer la domicile svp");
-                    AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
-                    AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
-                    AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
 
-                    JSONObject json = new JSONObject(getArguments().getString("data"));
-                    json.put("phone_number", txPhone.getText().toString());
-                    json.put("email",txEmail.getText().toString());
-                    json.put("multiplier_agent", txAdm.getText().toString());
-                    json.put("quarter", txQuatier.getText().toString());
-                    json.put("avenue", txAvenue.getText().toString());
-                    json.put("home", txDomicile.getText().toString());
-                    json.put("province_id", province.getId());
-                    json.put("town_id", town.getId());
-                    json.put("groupment_id", commune.getId());
+                    if(tvTypePerso.getSelectedItem().toString().equals("Personne Urbaine")==false &&
+                            tvTypePerso.getSelectedItem().toString().equals("Personne Rural")==false){
+                        AppUtility.controlValue("", "Veuillez renseigner le type de personne svp");
 
-                    new SaveSubscriber(json.toString()).execute();
+                    }
+
+                    if(tvTypePerso.getSelectedItem().toString().equals("Personne Urbaine")){
+
+                        AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
+                        AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
+                        AppUtility.controlValue(txDomicile.getText().toString(), "Veuillez entrer la domicile svp");
+                        AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
+                        AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
+                        AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
+
+                        JSONObject json = new JSONObject(getArguments().getString("data"));
+                        json.put("phone_number", txPhone.getText().toString());
+                        json.put("email",txEmail.getText().toString());
+                        json.put("multiplier_agent", txAdm.getText().toString());
+                        json.put("quarter", txQuatier.getText().toString());
+                        json.put("avenue", txAvenue.getText().toString());
+                        json.put("home", txDomicile.getText().toString());
+                        json.put("province_id", province.getId());
+                        json.put("town_id", town.getId());
+                        json.put("groupment_id", commune.getId());
+
+                        new SaveSubscriber(json.toString()).execute();
+
+                    }else{
+                        AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
+                        AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
+                        AppUtility.controlValue(txDomicile.getText().toString(), "Veuillez entrer la domicile svp");
+                        AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
+                        AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
+                        AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
+                    }
+
+
+
+
 
 
                 } catch (ValueDataException e) {

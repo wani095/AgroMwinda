@@ -18,4 +18,9 @@
         <item>communes</item>
         <item>secteurs</item>
     </string-array>
+    <string-array name="tyPersonnes">
+        <item>--Type de personne--</item>
+        <item>Personne Urbaine</item>
+        <item>Personne Rural</item>
+    </string-array>
 </resources>
