@@ -24,17 +24,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:textStyle="bold"
         android:text="Adresse phyique de l'Activité"
         android:textColor="#000"
         android:textSize="14sp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Choix phyique de l'Activité"
-            android:textColor="#000"
-            android:textSize="14sp" />
     <Spinner
         android:id="@+id/spchoixA"
         android:layout_width="match_parent"

@@ -23,12 +23,16 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
+import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
+import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
+import com.icon.agromwinda.UI.activity.ListSecteurActivity;
+import com.icon.agromwinda.UI.activity.ListTerritoireActivity;
 import com.icon.agromwinda.UI.activity.ListVilleActivity;
 import com.icon.agromwinda.UI.activity.ListingActivity;
 import com.icon.agromwinda.UI.dialog.MessageDialog;
@@ -53,6 +57,10 @@ public class FormSavePersonNext1 extends Fragment {
     private Province province;
     private Town town;
     private Commune commune;
+    private Territoire territoire;
+    private Secteur secteur;
+    private EditText txVillage, txGroupement;
+    private TextView spProvinc, spTerritoire, spSecteur;
 
 
     public static FormSavePersonNext1 newInstance(String json) {
@@ -82,10 +90,19 @@ public class FormSavePersonNext1 extends Fragment {
         txQuatier = view.findViewById(R.id.txQuartier);
         txAvenue = view.findViewById(R.id.txAvenue);
         txDomicile = view.findViewById(R.id.txDomicile);
+        txVillage=view.findViewById(R.id.txVillage);
+        txGroupement =view.findViewById(R.id.txGroupement);
+
+
+
 
         spCommune = view.findViewById(R.id.spCommune);
         spProvince = view.findViewById(R.id.spProvince);
         spVille = view.findViewById(R.id.spVille);
+
+        spProvinc= view.findViewById(R.id.spProvinc);
+        spTerritoire= view.findViewById(R.id.spTerritoire);
+        spSecteur = view.findViewById(R.id.spSecteur);
 
         btnValider = view.findViewById(R.id.btnTermine);
 
@@ -122,6 +139,32 @@ public class FormSavePersonNext1 extends Fragment {
                 startActivityForResult(intent, 9);
             }
         });
+
+        spProvinc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListProvinceActivity.class);
+                startActivityForResult(intent, 7);
+            }
+        });
+
+        spTerritoire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListTerritoireActivity.class);
+                startActivityForResult(intent, 10);
+            }
+        });
+
+        spSecteur.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), ListSecteurActivity.class);
+                startActivityForResult(intent, 11);
+            }
+        });
+
+
 
         tvTypePerso.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -167,7 +210,7 @@ public class FormSavePersonNext1 extends Fragment {
 
                         AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
                         AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
-                        AppUtility.controlValue(txDomicile.getText().toString(), "Veuillez entrer la domicile svp");
+
                         AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
                         AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
                         AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
@@ -181,21 +224,31 @@ public class FormSavePersonNext1 extends Fragment {
                         json.put("home", txDomicile.getText().toString());
                         json.put("province_id", province.getId());
                         json.put("town_id", town.getId());
-                        json.put("groupment_id", commune.getId());
+                        json.put("city_id ", commune.getId());
 
                         new SaveSubscriber(json.toString()).execute();
 
                     }else{
-                        AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
-                        AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
-                        AppUtility.controlValue(txDomicile.getText().toString(), "Veuillez entrer la domicile svp");
-                        AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
-                        AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
-                        AppUtility.controlValue(spCommune.getText().toString(), "Veuillez séléctionner la commune svp");
+                        AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
+                        AppUtility.controlValue(txGroupement.getText().toString(), "Veuillez entrer l'avenue svp");
+
+                        AppUtility.controlValue(spProvinc.getText().toString(), "Veuillez séléctionner la province svp");
+                        AppUtility.controlValue(spTerritoire.getText().toString(), "Veuillez séléctionner le territoire svp");
+                        AppUtility.controlValue(spSecteur.getText().toString(), "Veuillez séléctionner le secteursvp");
+
+                        JSONObject json =new JSONObject(getArguments().getString("data"));
+                        json.put("phone_number",txPhone.getText().toString());
+                        json.put("email",txEmail.getText().toString());
+                        json.put("multiplier_agent", txAdm.getText().toString());
+                        json.put(" village", txVillage.getText().toString());
+                        json.put("groupment_id", txGroupement.getText().toString());
+                        json.put("home", txDomicile.getText().toString());
+                        json.put("province_id", province.getId());
+                        json.put("territory_id", territoire.getId());
+                        json.put("secteur", secteur.getId());
+
+                        new SaveSubscriber(json.toString()).execute();
                     }
-
-
-
 
 
 
@@ -225,6 +278,26 @@ public class FormSavePersonNext1 extends Fragment {
                 spCommune.setText(commune.getNom());
                 spCommune.setTextColor(Color.BLACK);
                 spCommune.setTypeface(Typeface.DEFAULT_BOLD);
+            }
+
+            if(requestCode==7 && resultCode==77 && data!=null){
+                province=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Province>(){}.getType());
+                spProvinc.setText(province.getNom());
+                spProvinc.setTextColor(Color.BLACK);
+                spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
+
+            }else if(requestCode==10 && resultCode==81 && data!=null){
+                secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
+                spSecteur.setText(secteur.getNom());
+                spSecteur.setTextColor(Color.BLACK);
+                spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
+
+            }else if(requestCode==11 && resultCode==82 && data!=null){
+                territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
+                spTerritoire.setText(territoire.getNom());
+                spTerritoire.setTextColor(Color.BLACK);
+                spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
+
             }
     }
 

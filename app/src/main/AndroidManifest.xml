@@ -36,6 +36,8 @@
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
         <activity android:name=".UI.activity.ListProvinceActivity" />
+        <activity android:name=".UI.activity.ListTerritoireActivity" />
+
         <activity
             android:name=".UI.activity.ListingActivity"
             android:label="LISTE DES ABONNES" />

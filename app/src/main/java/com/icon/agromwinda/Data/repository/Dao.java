@@ -267,7 +267,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         values.put(SUBSCRIBER_COLUMN__CREATE_AT, p.getCreated_at().toString());
         values.put(SUBSCRIBER_COLUMN__SECTEUR, p.getSecteur());
         values.put(SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT, p.getPhysical_environment());
-        values.put(SUBSCRIBER_COLUMN__UPDATED_AT, p.getUpdate_at().toString());
+
         values.put(SUBSCRIBER_COLUMN__COOPERATIVE, p.getCooperative());
         values.put(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION, p.getPeasant_organization());
         values.put(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT, p.getMultiplier_agent());

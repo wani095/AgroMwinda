@@ -53,7 +53,7 @@ public class ListTerritoireAdapter extends RecyclerView.Adapter<ListTerritoireAd
             public void onClick(View v) {
                 Intent intent=new Intent();
                 intent.putExtra("data",new Gson().toJson(territoires.get(i)));
-                activity.setResult(77,intent);
+                activity.setResult(82,intent);
                 activity.finish();
             }
         });

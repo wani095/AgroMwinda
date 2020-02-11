@@ -1,7 +1,6 @@
 package com.icon.agromwinda.Data.model;
 
-public class Secteur{
-
+public class Secteur {
     private int id;
     private String nom;
 

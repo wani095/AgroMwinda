@@ -30,6 +30,56 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Village / Localité"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txVillage"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingLeft="7dp"
+                    android:background="@drawable/btn_control_forme"
+                    android:inputType="text"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Groupement"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txGroupement"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingLeft="7dp"
+                    android:background="@drawable/btn_control_forme"
+                    android:inputType="text"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Domicile"
+                    android:textColor="#000"
+                    android:textSize="14sp" />
+
+                <EditText
+                    android:id="@+id/txDomicile"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="4dp"
+                    android:paddingLeft="7dp"
+                    android:background="@drawable/btn_control_forme"
+                    android:inputType="text"/>
+
 
                 <TextView
                     android:layout_width="match_parent"
@@ -40,7 +90,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/spProvince"
+                    android:id="@+id/spProvinc"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -87,61 +137,6 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:text="Secteur" />
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="Village / Localité"
-                    android:textColor="#000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/village"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="4dp"
-                    android:paddingLeft="7dp"
-                    android:background="@drawable/btn_control_forme"
-                    android:inputType="text"/>
-
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="Groupement"
-                    android:textColor="#000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/groupement"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="4dp"
-                    android:paddingLeft="7dp"
-                    android:background="@drawable/btn_control_forme"
-                    android:inputType="text"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="Domicile"
-                    android:textColor="#000"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/domicile"
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="4dp"
-                    android:paddingLeft="7dp"
-                    android:background="@drawable/btn_control_forme"
-                    android:inputType="text"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
