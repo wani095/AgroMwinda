@@ -229,9 +229,10 @@ public class FormSavePersonNext1 extends Fragment {
                         new SaveSubscriber(json.toString()).execute();
 
                     }else{
-                        AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
-                        AppUtility.controlValue(txGroupement.getText().toString(), "Veuillez entrer l'avenue svp");
-
+                        AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le village svp");
+                        AppUtility.controlValue(txGroupement.getText().toString(), "Veuillez entrer le groupement svp");
+                        AppUtility.controlValue(spTerritoire.getText().toString(), "Veuillez séléctionner le territoire svp");
+                        AppUtility.controlValue(spSecteur.getText().toString(), "Veuillez séléctionner le secteur svp");
                         AppUtility.controlValue(spProvinc.getText().toString(), "Veuillez séléctionner la province svp");
 
 
@@ -244,6 +245,8 @@ public class FormSavePersonNext1 extends Fragment {
                         json.put("groupment_id", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());
                         json.put("province_id", province.getId());
+                        json.put("secteur_id",secteur.getId());
+                        json.put("territoire_id",territoire.getId());
 
 
                         new SaveSubscriber(json.toString()).execute();

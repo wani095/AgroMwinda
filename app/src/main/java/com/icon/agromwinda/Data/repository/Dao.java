@@ -61,6 +61,15 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String SUBSCRIBER_COLUMN__MULTIPLIER_AGENT = "multiplier_agent";
 
     public static final String ACTIVITY_COLUMN__SUBSCRIBER = "subscriber_id ";
+    public static final String ACTIVITY_COLUMN__QUARTER = "quarter";
+    public static final String ACTIVITY_COLUMN__AVENUE = "avenue";
+    public static final String ACTIVITY_COLUMN__HOME = "home";
+    public static final String ACTIVITY_COLUMN__CITY = "city_id";
+    public static final String ACTIVITY_COLUMN__TOWN = "town_id";
+    public static final String ACTIVITY_COLUMN__GROUPMENT = "groupment_id";
+    public static final String ACTIVITY_COLUMN__VILLAGE = "village";
+    public static final String ACTIVITY_COLUMN__TERRITORY = "territory_id";
+    public static final String ACTIVITY_COLUMN__PROVINCE = "province_id";
     public static final String ACTIVITY_COLUMN__NAME = "name";
     public static final String ACTIVITY_COLUMN__AGRICOLE_INFORMATTION ="agricole_information_id";
     public static final String ACTIVITY_COLUMN__TRADE_INFORMATION = "trade_information_id";
@@ -276,10 +285,15 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return territoires;
     }
 
+    @Override
+    public long saveActivity(Activity pp) {
+        return 0;
+    }
+
     /**bd activity*/
 
     @Override
-    public long saveActivity(Activity pp) {
+    public long SaveActivity(Activity pp) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();

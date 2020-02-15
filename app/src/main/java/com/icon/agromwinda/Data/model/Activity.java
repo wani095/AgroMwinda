@@ -1,5 +1,7 @@
 package com.icon.agromwinda.Data.model;
 
+import java.util.Date;
+
 public class Activity {
 
     private int id;
@@ -36,4 +38,7 @@ public class Activity {
     }
 
     public void setName(String string) {this.name = name; }
+
+    public void setCreated_at(Date date) {
+    }
 }

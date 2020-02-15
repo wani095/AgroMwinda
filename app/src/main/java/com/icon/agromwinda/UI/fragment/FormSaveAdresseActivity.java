@@ -23,6 +23,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.icon.agromwinda.BuildConfig;
+import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Secteur;
@@ -218,7 +219,7 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", town.getId());
                         json.put("city_id ", commune.getId());
 
-                        new FormSaveAdresseActivity.SaveSubscriber(json.toString()).execute();
+                        new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
 
                     }else{
                         AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
@@ -237,7 +238,7 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("territory_id", territoire.getId());
                         json.put("secteur", secteur.getId());
 
-                        new FormSaveAdresseActivity.SaveSubscriber(json.toString()).execute();
+                        new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
                     }
 
 
@@ -289,13 +290,13 @@ public class FormSaveAdresseActivity extends Fragment {
             spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
 
         }
-    } public class SaveSubscriber extends AsyncTask<Void, Void, Long> {
+    } public class SaveActivity extends AsyncTask<Void, Void, Long> {
 
         private String data;
 
         private WaitingDialog waitingDialog = new WaitingDialog(getContext());
 
-        public SaveSubscriber(String data) {
+        public SaveActivity(String data) {
             this.data = data;
         }
 
@@ -306,11 +307,11 @@ public class FormSaveAdresseActivity extends Fragment {
 
         @Override
         protected Long doInBackground(Void... voids) {
-            Log.d("DATASUBSCRIBER",data);
-            Subscriber subscriber=new Gson().fromJson(data,new TypeToken<Subscriber>(){}.getType());
-            subscriber.setCreated_at(new Date());
+            Log.d("DATAACTIVITY",data);
+            Activity activity =new Gson().fromJson(data,new TypeToken<Subscriber>(){}.getType());
+            activity.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
-            long rep=dao.saveSubscriber(subscriber);
+            long rep=dao.saveActivity(activity);
 
 
             return rep;

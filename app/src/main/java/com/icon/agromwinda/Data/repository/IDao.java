@@ -24,6 +24,8 @@ public interface IDao {
 
     long saveActivity(Activity pp);
 
+    long SaveActivity(Activity pp);
+
     List<Activity> getActivitys();
 
     Activity getActivitys(Integer id);
