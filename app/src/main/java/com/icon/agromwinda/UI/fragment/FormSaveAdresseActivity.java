@@ -308,7 +308,7 @@ public class FormSaveAdresseActivity extends Fragment {
         @Override
         protected Long doInBackground(Void... voids) {
             Log.d("DATAACTIVITY",data);
-            Activity activity =new Gson().fromJson(data,new TypeToken<Subscriber>(){}.getType());
+            Activity activity =new Gson().fromJson(data,new TypeToken<Activity>(){}.getType());
             activity.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveActivity(activity);
