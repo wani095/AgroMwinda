@@ -298,7 +298,8 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         ContentValues values = new ContentValues();
         values.put(ACTIVITY_COLUMN__NAME, pp.getName());
-
+        values.put(ACTIVITY_COLUMN__SUBSCRIBER, pp.getSubscriber_id());
+        
 
         try {
             long a = db.insert("activity", null, values);
