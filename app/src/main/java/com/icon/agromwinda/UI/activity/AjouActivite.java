@@ -16,8 +16,7 @@ import com.icon.agromwinda.BuildConfig;
 import com.icon.agromwinda.R;
 
 public class AjouActivite extends AppCompatActivity {
-    private Button btnret;
-    private Button btnnext;
+
     private Spinner spTypeA;
     private ScrollView pan_commerce, pan_agriculture, pan_transport;
 
@@ -76,20 +75,6 @@ public class AjouActivite extends AppCompatActivity {
             }
         });
 
-        Button btnnext = (Button) findViewById(R.id.btnnext);
-        btnnext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AjouActivite.this, ActivityAdressePhysiqueActivite.class));
-            }
-        });
 
-        Button btnret = (Button) findViewById(R.id.btnret);
-        btnret.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AjouActivite.this, DetailSubscriberActivity.class));
-            }
-        });
     }
 }

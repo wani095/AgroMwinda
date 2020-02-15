@@ -32,7 +32,6 @@ public class FormSavePerson extends Fragment {
     private EditText txNom, txPostnom, txPrenom,txNom_op,txCooperative;
     private Spinner spSexe, spEtude, spAge;
     private Button btnNext;
-    private Button btnRet;
 
     @Nullable
     @Override
@@ -57,7 +56,6 @@ public class FormSavePerson extends Fragment {
         txCooperative=view.findViewById(R.id.txNom_cooperative);
 
         btnNext = view.findViewById(R.id.btnNext);
-        btnRet = view.findViewById(R.id.btnRet);
     }
 
     public void init() {
@@ -110,12 +108,7 @@ public class FormSavePerson extends Fragment {
             }
         });
 
-        btnRet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
 
     }
 

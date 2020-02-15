@@ -290,6 +290,8 @@ public class FormSaveAdresseActivity extends Fragment {
             spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
 
         }
+
+
     } public class SaveActivity extends AsyncTask<Void, Void, Long> {
 
         private String data;

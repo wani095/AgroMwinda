@@ -47,7 +47,7 @@
                     android:textSize="14sp" />
 
                 <Spinner
-                    android:id="@+id/comer_type"
+                    android:id="@+id/spComer_type"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -62,7 +62,7 @@
                     android:textSize="14sp" />
 
                 <Spinner
-                    android:id="@+id/comer_source"
+                    android:id="@+id/spComer_source"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -78,7 +78,7 @@
                     android:textSize="14sp" />
 
                 <Spinner
-                    android:id="@+id/comer_capacit"
+                    android:id="@+id/spComer_capacit"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
