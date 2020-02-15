@@ -233,8 +233,8 @@ public class FormSavePersonNext1 extends Fragment {
                         AppUtility.controlValue(txGroupement.getText().toString(), "Veuillez entrer l'avenue svp");
 
                         AppUtility.controlValue(spProvinc.getText().toString(), "Veuillez séléctionner la province svp");
-                        AppUtility.controlValue(spTerritoire.getText().toString(), "Veuillez séléctionner le territoire svp");
-                        AppUtility.controlValue(spSecteur.getText().toString(), "Veuillez séléctionner le secteursvp");
+
+
 
                         JSONObject json =new JSONObject(getArguments().getString("data"));
                         json.put("phone_number",txPhone.getText().toString());
@@ -244,8 +244,7 @@ public class FormSavePersonNext1 extends Fragment {
                         json.put("groupment_id", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());
                         json.put("province_id", province.getId());
-                        json.put("territory_id", territoire.getId());
-                        json.put("secteur", secteur.getId());
+
 
                         new SaveSubscriber(json.toString()).execute();
                     }
@@ -286,17 +285,17 @@ public class FormSavePersonNext1 extends Fragment {
                 spProvinc.setTextColor(Color.BLACK);
                 spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
 
-            }else if(requestCode==10 && resultCode==81 && data!=null){
-                secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
-                spSecteur.setText(secteur.getNom());
-                spSecteur.setTextColor(Color.BLACK);
-                spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
-
             }else if(requestCode==11 && resultCode==82 && data!=null){
-                territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
+                territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Territoire>(){}.getType());
                 spTerritoire.setText(territoire.getNom());
                 spTerritoire.setTextColor(Color.BLACK);
                 spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
+
+            }else if(requestCode==10 && resultCode==81 && data!=null){
+                secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Secteur>(){}.getType());
+                spSecteur.setText(secteur.getNom());
+                spSecteur.setTextColor(Color.BLACK);
+                spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
 
             }
     }

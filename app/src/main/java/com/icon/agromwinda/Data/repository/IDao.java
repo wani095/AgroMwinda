@@ -22,6 +22,12 @@ public interface IDao {
 
     List<Territoire> getTerritoires();
 
+    long saveActivity(Activity pp);
+
+    List<Activity> getActivitys();
+
+    Activity getActivitys(Integer id);
+
     long saveSubscriber(Subscriber subscriber);
 
     List<Subscriber> getSubscribers();

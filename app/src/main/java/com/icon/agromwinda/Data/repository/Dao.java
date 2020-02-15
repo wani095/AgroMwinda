@@ -60,6 +60,13 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION = "peasant_organization";
     public static final String SUBSCRIBER_COLUMN__MULTIPLIER_AGENT = "multiplier_agent";
 
+    public static final String ACTIVITY_COLUMN__SUBSCRIBER = "subscriber_id ";
+    public static final String ACTIVITY_COLUMN__NAME = "name";
+    public static final String ACTIVITY_COLUMN__AGRICOLE_INFORMATTION ="agricole_information_id";
+    public static final String ACTIVITY_COLUMN__TRADE_INFORMATION = "trade_information_id";
+    public static final String ACTIVITY_COLUMN__CREATE_DATE ="created_date";
+    public static final String ACTIVITY_COLUMN__TRANSPORT_INFORMATION ="transport_information_id";
+
 
     private Context context;
 
@@ -95,7 +102,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                         "(id integer primary key AUTOINCREMENT not null, name text)"
         );
 
-
         db.execSQL("CREATE TABLE subscriber(\n" +
                 "    id integer PRIMARY KEY AUTOINCREMENT," +
                 "    city_id integer,\n" +
@@ -128,6 +134,32 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         init();
 
+        db.execSQL("CREATE TABLE activity(\n"+
+                "   id integer PRIMARY KEY AUTOINCREMENT,"+
+                "   subscriber_id integer,\n"+
+                "   type_activity_id integer,\n"+
+                "   town_id integer,\n"+
+                "   city_id integer,\n"+
+                "   territory_id integer,\n"+
+                "   province_id integer,\n"+
+                "   agricole_information_id integer,\n"+
+                "   trade_information_id integer,\n"+
+                "   name varchar(255),\n"+
+                "   quarter varchar(255),\n"+
+                "   avenue varchar(255),\n"+
+                "   home varchar(255),\n"+
+                "   created_date varchar(255),\n"+
+                "   slug varchar(255),\n"+
+                "   created_at date,\n"+
+                "   physical_environment varchar(255),\n"+
+                "   secteur_id integer,\n"+
+                "   groupment varchar(255),\n"+
+                "   village varchar(255),\n"+
+                "   transport_information_id integer,\n"+
+                ")");
+
+        init();
+
     }
 
     public void init() {
@@ -141,6 +173,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS town");
         db.execSQL("DROP TABLE IF EXISTS commune");
         db.execSQL("DROP TABLE IF EXISTS subscriber");
+        db.execSQL("DROP TABLE IF EXISTS activity");
         db.execSQL("DROP TABLE IF EXISTS territoires");
         db.execSQL("DROP TABLE IF EXISTS secteurs");
         onCreate(db);
@@ -243,8 +276,64 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return territoires;
     }
 
+    /**bd activity*/
+
+    @Override
+    public long saveActivity(Activity pp) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(ACTIVITY_COLUMN__NAME, pp.getName());
 
 
+        try {
+            long a = db.insert("activity", null, values);
+            return a;
+        } catch (Exception e) {
+            Log.d("SAVEEXCEPTION", e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Activity> getActivitys() {
+        List<Activity> activitys = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from activity", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+            Activity pp = new Activity();
+            pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+
+            activitys.add(pp);
+            rs.moveToNext();
+        }
+        return activitys;
+    }
+
+    @Override
+    public Activity getActivitys(Integer id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from activity where id=" + id + "", null);
+        rs.moveToFirst();
+
+        Activity pp = null;
+
+        while (rs.isAfterLast() == false) {
+            pp= new Activity();
+            pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+
+            rs.moveToNext();
+        }
+        return pp;
+    }
+
+
+
+    /** bd subscriber*/
     @Override
     public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -267,7 +356,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         values.put(SUBSCRIBER_COLUMN__CREATE_AT, p.getCreated_at().toString());
         values.put(SUBSCRIBER_COLUMN__SECTEUR, p.getSecteur());
         values.put(SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT, p.getPhysical_environment());
-
         values.put(SUBSCRIBER_COLUMN__COOPERATIVE, p.getCooperative());
         values.put(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION, p.getPeasant_organization());
         values.put(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT, p.getMultiplier_agent());

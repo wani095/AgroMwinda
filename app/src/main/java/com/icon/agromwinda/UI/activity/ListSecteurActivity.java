@@ -65,13 +65,13 @@ public class ListSecteurActivity extends AppCompatActivity {
         protected void onPostExecute(List<Secteur> secteurs) {
 
             if (secteurs != null) {
-                ListSecteurAdapter listSecteurAdapter=new ListSecteurAdapter(ListSecteurActivity.this,secteurs,ListSecteurActivity.this);
-                listSecteurAdapter.notifyDataSetChanged();
+                ListSecteurAdapter ListSecteurAdapter=new ListSecteurAdapter(ListSecteurActivity.this,secteurs,ListSecteurActivity.this);
+                ListSecteurAdapter.notifyDataSetChanged();
 
                 recycle_view_secteurs = findViewById(R.id.recycle_view_secteurs);
                 recycle_view_secteurs.setLayoutManager(new LinearLayoutManager(ListSecteurActivity.this));
                 recycle_view_secteurs.setHasFixedSize(true);
-                recycle_view_secteurs.setAdapter(listSecteurAdapter);
+                recycle_view_secteurs.setAdapter(ListSecteurAdapter);
             }
         }
     }

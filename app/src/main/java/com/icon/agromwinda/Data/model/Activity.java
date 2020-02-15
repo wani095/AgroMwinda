@@ -5,6 +5,7 @@ public class Activity {
     private int id;
     private String typeActivity;
     private int fkSubscriber;
+    private String name;
 
     public int getId() {
         return id;
@@ -29,4 +30,10 @@ public class Activity {
     public void setFkSubscriber(int fkSubscriber) {
         this.fkSubscriber = fkSubscriber;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String string) {this.name = name; }
 }
