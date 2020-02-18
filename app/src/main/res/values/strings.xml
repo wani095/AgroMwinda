@@ -38,10 +38,10 @@
         <item>---</item>
         <item>Rural</item>
         <item>Urbain</item>
+        <item>meme Adresse physique </item>
 
     </array>
     <array name="list_typesAC">
-        <item>---</item>
         <item>Ferme</item>
         <item>Champ</item>
         <item>Elevage gros bétail</item>

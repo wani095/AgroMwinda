@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.fragment.FormSavePerson;
+import com.icon.agromwinda.UI.fragment.TypeActivityFragment;
 
 public class MainActivity extends AppCompatActivity {
 

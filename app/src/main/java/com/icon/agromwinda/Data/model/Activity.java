@@ -67,4 +67,83 @@ public class Activity {
     public void SetSubscriber_id(int id){this.id = id; }
 
 
+    public int getCity_id() { return city_id; }
+
+    public void setCity_id(int city_id) {
+        this.city_id = city_id;
+    }
+
+    public int getTown_id() {
+        return town_id;
+    }
+
+    public void setTown_id(int town_id) {
+        this.town_id = town_id;
+    }
+
+    public int getTerritory_id() {
+        return territory_id;
+    }
+
+    public void setTerritory_id(int territory_id) {
+        this.territory_id = territory_id;
+    }
+
+    public int getProvince_id() {
+        return province_id;
+    }
+
+    public void setProvince_id(int province_id) {
+        this.province_id = province_id;
+    }
+
+
+    public String getQuarter() {
+        return quarter;
+    }
+
+    public void setQuarter(String quarter) {
+        this.quarter = quarter;
+    }
+
+    public String getAvenue() {
+        return avenue;
+    }
+
+    public void setAvenue(String avenue) {
+        this.avenue = avenue;
+    }
+
+    public String getHome() {
+        return home;
+    }
+
+    public void setHome(String home) {
+        this.home = home;
+    }
+
+    public String getSlug() {
+        return slug;
+    }
+
+    public void setSlug(String slug) {
+        this.slug = slug;
+    }
+
+    public int getGroupment_id() {
+        return groupment_id;
+    }
+
+    public void setGroupment_id(int groupment_id) {
+        this.groupment_id = groupment_id;
+    }
+
+    public String getVillage() {
+        return village;
+    }
+
+    public void setVillage(String village) {
+        this.village = village;
+    }
+
 }

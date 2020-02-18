@@ -145,6 +145,7 @@ public class FormSaveAdresseActivity extends Fragment {
             }
         });
 
+
         spTerritoire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,9 +165,10 @@ public class FormSaveAdresseActivity extends Fragment {
 
         Log.d("SelectedACTIVITY","");
 
-        spchoixA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spchoixA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 if (BuildConfig.DEBUG)
                     Log.d("SelectedACTIVITY", spchoixA.getSelectedItem().toString());
 
@@ -186,6 +188,13 @@ public class FormSaveAdresseActivity extends Fragment {
 
                 }
             }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
         });
 
 
@@ -202,9 +211,8 @@ public class FormSaveAdresseActivity extends Fragment {
                     }
 
                     if(spchoixA.getSelectedItem().toString().equals("Urbain")){
-
-                        AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
-                        AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
+                        AppUtility.controlValue(txQuatier.getText().toString(),"veuillez ecrire votre quartier");
+                        AppUtility.controlValue(txAvenue.getText().toString(),"veuillez ecrire votre avenue");
 
                         AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
                         AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
@@ -278,13 +286,13 @@ public class FormSaveAdresseActivity extends Fragment {
             spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
 
         }else if(requestCode==10 && resultCode==81 && data!=null){
-            secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
+            secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Secteur>(){}.getType());
             spSecteur.setText(secteur.getNom());
             spSecteur.setTextColor(Color.BLACK);
             spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
 
         }else if(requestCode==11 && resultCode==82 && data!=null){
-            territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
+            territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Territoire>(){}.getType());
             spTerritoire.setText(territoire.getNom());
             spTerritoire.setTextColor(Color.BLACK);
             spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);

@@ -1,7 +1,4 @@
-INSERT INTO secteur (id, nom) VALUES (1, 'la mer');
-INSERT INTO secteur (id, nom) VALUES (2, 'Boma-Bungu');
-INSERT INTO secteur (id, nom) VALUES (3, 'Mamputu');
-INSERT INTO secteur (id, nom) VALUES (4, 'Kakingo');
-INSERT INTO secteur (id, nom) VALUES (5, 'Fubu');
-INSERT INTO secteur (id, nom) VALUES (6, 'patu');
-INSERT INTO secteur (id, nom) VALUES (7, 'lemba kinsudi');
+INSERT INTO secteur (id, name) VALUES (1, 'Sud-Ubangi');
+INSERT INTO secteur (id, name) VALUES (2, 'Tanganyika');
+INSERT INTO secteur (id, name) VALUES (3, 'Tshopo');
+INSERT INTO secteur (id, name) VALUES (4, 'Tshuapa');

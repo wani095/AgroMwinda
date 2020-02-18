@@ -48,7 +48,7 @@ public class ListTerritoireAdapter extends RecyclerView.Adapter<ListTerritoireAd
     public void onBindViewHolder(@NonNull final TerritoireViewHolder territoireViewHolder,final int i) {
         territoireViewHolder.txNom_territoire.setText(territoires.get(i).getNom());
 
-        territoireViewHolder.row.setOnClickListener(new View.OnClickListener() {
+        territoireViewHolder.row_territoire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
@@ -66,13 +66,13 @@ public class ListTerritoireAdapter extends RecyclerView.Adapter<ListTerritoireAd
 
     public class TerritoireViewHolder extends RecyclerView.ViewHolder{
 
-        LinearLayout row;
+        LinearLayout row_territoire;
         TextView txNom_territoire;
 
         public TerritoireViewHolder(@NonNull View itemView) {
             super(itemView);
             txNom_territoire=itemView.findViewById(R.id.txNom_territoire);
-            row=itemView.findViewById(R.id.row_territoire);
+            row_territoire=itemView.findViewById(R.id.row_territoire);
         }
     }
 }

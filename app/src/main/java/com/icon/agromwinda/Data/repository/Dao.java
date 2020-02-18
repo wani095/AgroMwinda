@@ -164,8 +164,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "   secteur_id integer,\n"+
                 "   groupment varchar(255),\n"+
                 "   village varchar(255),\n"+
-                "   transport_information_id integer,\n"+
-                ")");
+                "   transport_information_id integer)");
 
         init();
 
@@ -299,7 +298,11 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         ContentValues values = new ContentValues();
         values.put(ACTIVITY_COLUMN__NAME, pp.getName());
         values.put(ACTIVITY_COLUMN__SUBSCRIBER, pp.getSubscriber_id());
-        
+        values.put(ACTIVITY_COLUMN__QUARTER, pp.getQuarter());
+        values.put(ACTIVITY_COLUMN__AVENUE, pp.getAvenue());
+        values.put(ACTIVITY_COLUMN__GROUPMENT, pp.getGroupment_id());
+        values.put(ACTIVITY_COLUMN__VILLAGE, pp.getVillage());
+
 
         try {
             long a = db.insert("activity", null, values);

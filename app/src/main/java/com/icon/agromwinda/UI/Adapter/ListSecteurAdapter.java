@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,10 +49,13 @@ public class ListSecteurAdapter extends RecyclerView.Adapter<ListSecteurAdapter.
     public void onBindViewHolder(@NonNull final SecteurViewHolder secteurViewHolder,final int i) {
         secteurViewHolder.txNom_secteur.setText(secteurs.get(i).getNom());
 
-        secteurViewHolder.row.setOnClickListener(new View.OnClickListener() {
+        secteurViewHolder.row_secteur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent();
+
+                Log.d("SECTEURDATA",new Gson().toJson(secteurs.get(i)));
+
                 intent.putExtra("data",new Gson().toJson(secteurs.get(i)));
                 activity.setResult(81,intent);
                 activity.finish();
@@ -66,13 +70,13 @@ public class ListSecteurAdapter extends RecyclerView.Adapter<ListSecteurAdapter.
 
     public class SecteurViewHolder extends RecyclerView.ViewHolder{
 
-        LinearLayout row;
+        LinearLayout row_secteur;
         TextView txNom_secteur;
 
         public SecteurViewHolder(@NonNull View itemView) {
             super(itemView);
             txNom_secteur=itemView.findViewById(R.id.txNom_secteur);
-            row=itemView.findViewById(R.id.row_secteur);
+            row_secteur=itemView.findViewById(R.id.row_secteur);
         }
     }
 }

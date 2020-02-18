@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/logoagro"
@@ -32,6 +31,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.activity.AjouActivite" />
         <activity android:name=".UI.activity.ListSecteurActivity" />
         <activity android:name=".UI.activity.ListCommuneActivity" />
         <activity android:name=".UI.activity.ListVilleActivity" />
@@ -57,7 +57,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.activity.AjouActivite" />
     </application>
 
 </manifest>

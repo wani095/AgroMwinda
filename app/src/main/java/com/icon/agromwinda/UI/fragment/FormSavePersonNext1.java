@@ -270,11 +270,13 @@ public class FormSavePersonNext1 extends Fragment {
                 spProvince.setText(province.getNom());
                 spProvince.setTextColor(Color.BLACK);
                 spProvince.setTypeface(Typeface.DEFAULT_BOLD);
+
             }else if(requestCode==8 && resultCode==78 && data!=null){
                 town =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
                 spVille.setText(town.getNom());
                 spVille.setTextColor(Color.BLACK);
                 spVille.setTypeface(Typeface.DEFAULT_BOLD);
+
             }else if(requestCode==9 && resultCode==79 && data!=null){
                 commune=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
                 spCommune.setText(commune.getNom());

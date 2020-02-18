@@ -8,15 +8,11 @@ import android.webkit.WebViewClient;
 import com.icon.agromwinda.R;
 
 public class PLatForme extends AppCompatActivity {
-    private WebView webView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plat_forme);
-        WebView webView =(WebView)findViewById(R.id.webview);
-        webView.loadUrl("https://agromwinda.com");
-        webView.setWebViewClient(new WebViewClient());
+
     }
 }
