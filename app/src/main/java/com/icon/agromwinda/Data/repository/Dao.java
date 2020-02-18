@@ -182,8 +182,8 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS commune");
         db.execSQL("DROP TABLE IF EXISTS subscriber");
         db.execSQL("DROP TABLE IF EXISTS activity");
-        db.execSQL("DROP TABLE IF EXISTS territoires");
-        db.execSQL("DROP TABLE IF EXISTS secteurs");
+        db.execSQL("DROP TABLE IF EXISTS territoire");
+        db.execSQL("DROP TABLE IF EXISTS secteur");
         onCreate(db);
     }
 
@@ -502,7 +502,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
     }
 
-    public void initTerritoire() {
+    public void initTerritoires() {
         InputStream inputStream = context.getResources().openRawResource(R.raw.territoires);
 
         String queries = "";
@@ -516,7 +516,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             db.execSQL(query);
         }
     }
-    public void initSecteur() {
+    public void initSecteurs() {
         InputStream inputStream = context.getResources().openRawResource(R.raw.secteurs);
 
         String queries = "";

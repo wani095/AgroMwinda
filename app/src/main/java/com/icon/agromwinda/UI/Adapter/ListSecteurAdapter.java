@@ -55,7 +55,6 @@ public class ListSecteurAdapter extends RecyclerView.Adapter<ListSecteurAdapter.
                 Intent intent=new Intent();
 
                 Log.d("SECTEURDATA",new Gson().toJson(secteurs.get(i)));
-
                 intent.putExtra("data",new Gson().toJson(secteurs.get(i)));
                 activity.setResult(81,intent);
                 activity.finish();
