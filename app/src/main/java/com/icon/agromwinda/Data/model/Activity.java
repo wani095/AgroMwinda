@@ -13,7 +13,9 @@ public class Activity {
     private  int town_id;
     private  int territory_id;
     private  int province_id;
-    private  int groupment_id;
+    private  int groupment;
+    private int transport_information_id;
+    private int secteur_id;
     public String getAgricole_information;
     private String name;
     private String typeActivity;
@@ -23,9 +25,13 @@ public class Activity {
     private String slug;
     private String village ;
     private Date created_at ;
+    private String created_date;
     private String secteur;
     private String physical_environment;
     private Date update_at;
+    private int type_activity_id;
+    private int trade_information_id;
+    private String physique_environment;
 
     public int getId() {
         return id;
@@ -63,6 +69,8 @@ public class Activity {
     public void getAgricole_information() { }
 
     public int getSubscriber_id() {return id;}
+
+    public void getSubscriber_id(int id) {this.id =id; }
 
     public void SetSubscriber_id(int id){this.id = id; }
 
@@ -130,12 +138,12 @@ public class Activity {
         this.slug = slug;
     }
 
-    public int getGroupment_id() {
-        return groupment_id;
+    public int getGroupment() {
+        return groupment;
     }
 
-    public void setGroupment_id(int groupment_id) {
-        this.groupment_id = groupment_id;
+    public void setGroupment(int groupment) {
+        this.groupment = groupment;
     }
 
     public String getVillage() {
@@ -146,13 +154,37 @@ public class Activity {
         this.village = village;
     }
 
-    public void setPhysical_environment(String physical_environment) {
-        this.physical_environment = physical_environment;
-    }
+    public void setPhysical_environment(String physical_environment) { this.physical_environment = physical_environment; }
 
     public Date getUpdate_at() {
         return update_at;
     }
+
+    public int getType_activity_id() { return type_activity_id; }
+
+    public void setType_activity_id(int type_activity_id) { this.type_activity_id = type_activity_id; }
+
+    public int getTrade_information_id() { return trade_information_id; }
+
+    public void setTrade_information_id(int trade_information_id) { this.trade_information_id = trade_information_id; }
+
+    public String getCreated_date() { return created_date; }
+
+    public void setCreated_date(String created_date) { this.created_date = created_date; }
+
+    public Date getCreated_at() { return created_at; }
+
+    public String getPhysique_environment() { return physique_environment; }
+
+    public void setPhysique_environment(String physique_environment) { this.physique_environment = physique_environment; }
+
+    public int getSecteur_id() { return secteur_id; }
+
+    public void setSecteur_id(int secteur_id) { this.secteur_id = secteur_id; }
+
+    public int getTransport_information_id() { return transport_information_id; }
+
+    public void setTransport_information_id(int transport_information_id) { this.transport_information_id = transport_information_id; }
 
 
 }

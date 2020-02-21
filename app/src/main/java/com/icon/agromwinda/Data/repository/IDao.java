@@ -1,12 +1,15 @@
 package com.icon.agromwinda.Data.repository;
 
 import com.icon.agromwinda.Data.model.Activity;
+import com.icon.agromwinda.Data.model.Agricole_information;
+import com.icon.agromwinda.Data.model.Commerce_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
+import com.icon.agromwinda.Data.model.Transport_information;
 
 import java.util.List;
 
@@ -35,6 +38,24 @@ public interface IDao {
     List<Subscriber> getSubscribers();
 
     Subscriber getSubscriber(Integer id);
+
+    long saveAgricole_infomation(Agricole_information a);
+
+    List<Agricole_information> getAgricole_informations();
+
+    Agricole_information getAgricole_information(Integer id);
+
+    long saveCommerce_infomation(Commerce_information co);
+
+    List<Commerce_information> getCommerce_informations();
+
+    Commerce_information getCommerce_information(Integer id);
+
+    long saveTransport_infomation(Transport_information tr);
+
+    List<Transport_information> getTransport_informations();
+
+    Transport_information getTransport_information(Integer id);
 
     List<Activity> getActivities(int fkSubscriber);
 

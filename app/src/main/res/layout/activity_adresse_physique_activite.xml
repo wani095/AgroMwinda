@@ -46,12 +46,30 @@
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="40sp"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:layout_gravity="center"
             android:background="@color/colorWrite">
 
             <Button
                 android:id="@+id/btnTermine"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorWrite"
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Terminer" />
+        </android.support.v7.widget.CardView>
+        <android.support.v7.widget.CardView
+            android:layout_width="160dp"
+            android:layout_height="40sp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:background="@color/colorWrite">
+
+            <Button
+                android:id="@+id/btnTermin"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWrite"

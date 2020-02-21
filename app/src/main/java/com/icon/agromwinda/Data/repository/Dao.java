@@ -9,12 +9,15 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.icon.agromwinda.Data.model.Activity;
+import com.icon.agromwinda.Data.model.Agricole_information;
+import com.icon.agromwinda.Data.model.Commerce_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
+import com.icon.agromwinda.Data.model.Transport_information;
 import com.icon.agromwinda.R;
 
 import org.apache.commons.io.IOUtils;
@@ -75,6 +78,26 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String ACTIVITY_COLUMN__TRADE_INFORMATION = "trade_information_id";
     public static final String ACTIVITY_COLUMN__CREATE_DATE ="created_date";
     public static final String ACTIVITY_COLUMN__TRANSPORT_INFORMATION ="transport_information_id";
+    public static final String ACTIVITY_COLUMN__TYPE_ACTIVITY ="type_activity_id";
+    public static final String ACTIVITY_COLUMN__CREATE_AT ="create_at";
+    public static final String ACTIVITY_COLUMN__SLUG ="slug";
+    public static final String ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT ="physique_environment";
+    public static final String ACTIVITY_COLUMN__SECTEUR ="secteur_id";
+
+    public static final String AGRICOLE_INFORMATION_COLUMN__TYPE_ACTIVITY ="typeof_activity";
+    public static final String AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT ="sourceof_supply";
+    public static final String AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY ="activity_object";
+    public static final String AGRICOLE_INFORMATION_COLUMN__ENTENDUE ="scope";
+
+    public static final String COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE ="typeof_commerce";
+    public static final String COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE ="sourceof_commerce";
+    public static final String COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE ="capaciteof_commerce";
+
+
+    public static final String TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT ="typeof_transport";
+    public static final String TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT ="marqueof_transport";
+    public static final String TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT ="annee_transport";
+    public static final String TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT ="capacite_transport";
 
 
     private Context context;
@@ -168,11 +191,37 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         init();
 
+        db.execSQL("CREATE TABLE agricole_information(\n"+
+                "id integer PRIMARY KEY AUTOINCREMENT,"+
+                "typeof_activity varchar(255),\n"+
+                "sourceof_supply varchar(255),\n"+
+                "activity_object varchar(255),\n"+
+                "scope varchar(255))");
+
+            init();
+
+            db.execSQL("CREATE TABLE commerce_information(\n"+
+                    "id integer PRIMARY KEY AUTOINCREMENT,"+
+                    "typeof_commerce varchar(255),\n"+
+                    "sourceof_commerce varchar(255),\n"+
+                    "capaciteof_commerce varchar(255))");
+            init();
+
+            db.execSQL("CREATE TABLE transport_information(\n"+
+                    "id integer PRIMARY KEY AUTOINCREMENT,"+
+                    "tupeof_transport varchar(255),\n"+
+                    "marqueof_transport varchar(255),\n"+
+                    "anneeof_transport varchar(255),\n"+
+                    "capaciteof_transport varchar(255))");
+            init();
+
     }
 
     public void init() {
 
     }
+
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -184,6 +233,9 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS activity");
         db.execSQL("DROP TABLE IF EXISTS territoire");
         db.execSQL("DROP TABLE IF EXISTS secteur");
+        db.execSQL("DROP TABLE IF EXISTS agricole_information");
+        db.execSQL("DROP TABLE IF EXISTS commerce_information");
+        db.execSQL("DROP TABLE IF EXISTS transport_information");
         onCreate(db);
     }
 
@@ -300,8 +352,22 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         values.put(ACTIVITY_COLUMN__SUBSCRIBER, pp.getSubscriber_id());
         values.put(ACTIVITY_COLUMN__QUARTER, pp.getQuarter());
         values.put(ACTIVITY_COLUMN__AVENUE, pp.getAvenue());
-        values.put(ACTIVITY_COLUMN__GROUPMENT, pp.getGroupment_id());
+        values.put(ACTIVITY_COLUMN__GROUPMENT, pp.getGroupment());
         values.put(ACTIVITY_COLUMN__VILLAGE, pp.getVillage());
+        values.put(ACTIVITY_COLUMN__TYPE_ACTIVITY,pp.getType_activity_id());
+        values.put(ACTIVITY_COLUMN__CITY,pp.getCity_id());
+        values.put(ACTIVITY_COLUMN__TOWN,pp.getTown_id());
+        values.put(ACTIVITY_COLUMN__TERRITORY,pp.getTerritory_id());
+        values.put(ACTIVITY_COLUMN__PROVINCE,pp.getProvince_id());
+
+        values.put(ACTIVITY_COLUMN__TRADE_INFORMATION,pp.getTrade_information_id());
+        values.put(ACTIVITY_COLUMN__HOME,pp.getHome());
+        values.put(ACTIVITY_COLUMN__CREATE_DATE,pp.getCreated_date());
+        values.put(ACTIVITY_COLUMN__SLUG,pp.getSlug());
+     
+        values.put(ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT,pp.getPhysique_environment());
+        values.put(ACTIVITY_COLUMN__SECTEUR,pp.getSecteur_id());
+        values.put(ACTIVITY_COLUMN__TRANSPORT_INFORMATION,pp.getTransport_information_id());
 
 
         try {
@@ -312,6 +378,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
         return 0;
     }
+
 
     @Override
     public List<Activity> getActivitys() {
@@ -324,7 +391,9 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         while (rs.isAfterLast() == false) {
             Activity pp = new Activity();
             pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            pp.getSubscriber_id(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__SUBSCRIBER)));
             pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            pp.setCreated_date(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__CREATE_DATE)));
 
             activitys.add(pp);
             rs.moveToNext();
@@ -343,6 +412,9 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         while (rs.isAfterLast() == false) {
             pp= new Activity();
             pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            pp.getSubscriber_id(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__SUBSCRIBER)));
+            pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            pp.setCreated_date(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__CREATE_DATE)));
 
             rs.moveToNext();
         }
@@ -352,6 +424,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
 
     /** bd subscriber*/
+
     @Override
     public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -435,6 +508,190 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
         return p;
     }
+
+    @Override
+    public long saveAgricole_infomation(Agricole_information ag) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+
+        values.put(AGRICOLE_INFORMATION_COLUMN__TYPE_ACTIVITY, ag.getTypeof_activity());
+        values.put(AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY, ag.getActivity_object());
+        values.put(AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT, ag.getSourceof_approvionnement());
+        values.put(AGRICOLE_INFORMATION_COLUMN__ENTENDUE, ag.getScope());
+
+
+        try {
+            long a = db.insert("agricole_information", null, values);
+            return a;
+        } catch (Exception e) {
+            Log.d("SAVEEXCEPTION", e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Agricole_information> getAgricole_informations() {
+        List<Agricole_information> agricole_informations = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from agricole_information", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+            Agricole_information ag = new Agricole_information();
+            ag.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            ag.setTypeof_activity(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__TYPE_ACTIVITY)));
+            ag.setActivity_object(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY)));
+            ag.setSourceof_approvionnement(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT)));
+            ag.setScope(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__ENTENDUE)));
+            agricole_informations.add(ag);
+            rs.moveToNext();
+        }
+        return agricole_informations;
+    }
+
+    @Override
+    public Agricole_information getAgricole_information(Integer id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from agricole_information where id=" + id + "", null);
+        rs.moveToFirst();
+
+        Agricole_information ag = null;
+
+        while (rs.isAfterLast() == false) {
+            ag = new Agricole_information();
+            ag.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            ag.setTypeof_activity(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__TYPE_ACTIVITY)));
+            ag.setActivity_object(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY)));
+            ag.setSourceof_approvionnement(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT)));
+            ag.setScope(rs.getString(rs.getColumnIndex(AGRICOLE_INFORMATION_COLUMN__ENTENDUE)));
+
+            rs.moveToNext();
+        }
+        return ag;
+    }
+
+    @Override
+    public long saveCommerce_infomation(Commerce_information co) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE, co.getTypeof_commerce());
+        values.put(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE, co.getCapaciteof_commerce());
+        values.put(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE, co.getSourceof_commerce());
+
+        try {
+            long a = db.insert("commerce_information", null, values);
+            return a;
+        } catch (Exception e) {
+            Log.d("SAVEEXCEPTION", e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Commerce_information> getCommerce_informations() {
+        List<Commerce_information> commerce_informations = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from commerce_information", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+            Commerce_information co = new  Commerce_information();
+            co.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            co.setTypeof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
+            co.setSourceof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
+            co.setCapaciteof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE)));
+            commerce_informations.add(co);
+            rs.moveToNext();
+        }
+        return commerce_informations;
+    }
+
+    @Override
+    public Commerce_information getCommerce_information(Integer id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from commerce_information where id=" + id + "", null);
+        rs.moveToFirst();
+
+        Commerce_information co = null;
+
+        while (rs.isAfterLast() == false) {
+            co = new Commerce_information();
+            co.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            co.setTypeof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
+            co.setSourceof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
+            co.setCapaciteof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE)));
+            rs.moveToNext();
+        }
+        return co;
+    }
+
+
+    @Override
+    public long saveTransport_infomation(Transport_information tr) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT,tr.getTypeof_transport());
+        values.put(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT, tr.getMarqueof_transport());
+        values.put(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT, tr.getAnneeof_transport());
+        values.put(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT, tr.getCapaciteof_transport());
+
+        try {
+            long a = db.insert("transport_information", null, values);
+            return a;
+        } catch (Exception e) {
+            Log.d("SAVEEXCEPTION", e.getMessage());
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Transport_information> getTransport_informations() {
+        List<Transport_information> transport_informations = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from transport_information", null);
+        rs.moveToFirst();
+
+        while (rs.isAfterLast() == false) {
+            Transport_information tr = new  Transport_information();
+            tr.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            tr.setTypeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
+            tr.setMarqueof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
+            tr.setAnneeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT)));
+            tr.setCapaciteof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT)));
+
+            transport_informations.add(tr);
+            rs.moveToNext();
+        }
+        return transport_informations;
+    }
+
+    @Override
+    public Transport_information getTransport_information(Integer id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from transport_information where id=" + id + "", null);
+        rs.moveToFirst();
+
+        Transport_information tr = null;
+
+        while (rs.isAfterLast() == false) {
+            tr = new Transport_information();
+            tr.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            tr.setTypeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
+            tr.setMarqueof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
+            tr.setAnneeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT)));
+            tr.setCapaciteof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT)));
+            rs.moveToNext();
+        }
+        return tr;
+    }
+
+
 
     @Override
     public List<Activity> getActivities(int fkSubscriber) {
