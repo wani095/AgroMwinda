@@ -241,12 +241,18 @@ public class FormSavePersonNext1 extends Fragment {
                         json.put("phone_number",txPhone.getText().toString());
                         json.put("email",txEmail.getText().toString());
                         json.put("multiplier_agent", txAdm.getText().toString());
-                        json.put(" village", txVillage.getText().toString());
-                        json.put("groupment_id", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());
+
                         json.put("province_id", province.getId());
                         json.put("secteur_id",secteur.getId());
                         json.put("territoire_id",territoire.getId());
+                        json.put("village", txVillage.getText().toString());
+                        json.put("groupment", txGroupement.getText().toString());
+
+                        json.put("town_id", 0);
+                        json.put("city_id ", 0);
+                        json.put("quarter","");
+                        json.put("avenue", "");
 
 
                         new SaveSubscriber(json.toString()).execute();
@@ -290,13 +296,13 @@ public class FormSavePersonNext1 extends Fragment {
                 spProvinc.setTextColor(Color.BLACK);
                 spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
 
-            }else if(requestCode==11 && resultCode==82 && data!=null){
+            }else if(requestCode==10 && resultCode==82 && data!=null){
                 territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Territoire>(){}.getType());
                 spTerritoire.setText(territoire.getNom());
                 spTerritoire.setTextColor(Color.BLACK);
                 spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
 
-            }else if(requestCode==10 && resultCode==81 && data!=null){
+            }else if(requestCode==11 && resultCode==81 && data!=null){
                 secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Secteur>(){}.getType());
                 spSecteur.setText(secteur.getNom());
                 spSecteur.setTextColor(Color.BLACK);
@@ -310,10 +316,11 @@ public class FormSavePersonNext1 extends Fragment {
 
         private String data;
 
-        private WaitingDialog waitingDialog = new WaitingDialog(getContext());
-
+         WaitingDialog waitingDialog ;
         public SaveSubscriber(String data) {
             this.data = data;
+            waitingDialog= new WaitingDialog(getContext());
+
         }
 
         @Override
@@ -328,7 +335,7 @@ public class FormSavePersonNext1 extends Fragment {
             subscriber.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveSubscriber(subscriber);
-            
+            Log.d("DATASUBSCRIBER",""+rep);
 
             return rep;
         }
@@ -337,11 +344,11 @@ public class FormSavePersonNext1 extends Fragment {
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
             if (rep>0){
-                MessageDialog.getDialog(getActivity()).createDialog("Votre Operation est un succès").show();
+                MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
                 Intent intent=new Intent(getActivity(), ListingActivity.class);
                 getActivity().startActivity(intent);
             }else {
-                MessageDialog.getDialog(getActivity()).createDialog("Echec d'enregistrement").show();
+                MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();
             }
 
         }

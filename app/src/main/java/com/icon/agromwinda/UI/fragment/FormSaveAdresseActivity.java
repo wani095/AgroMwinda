@@ -57,6 +57,7 @@ public class FormSaveAdresseActivity extends Fragment {
     private EditText txQuatier, txAvenue, txDomicile;
     private TextView spCommune, spVille, spProvince;
     private Button btnValider;
+    private Button btnTermine;
     private Province province;
     private Town town;
     private Commune commune;
@@ -244,7 +245,7 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("home", txDomicile.getText().toString());
                         json.put("province_id", province.getId());
                         json.put("territory_id", territoire.getId());
-                        json.put("secteur", secteur.getId());
+                        json.put("secteur_id", secteur.getId());
 
                         new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
                     }
@@ -285,13 +286,13 @@ public class FormSaveAdresseActivity extends Fragment {
             spProvinc.setTextColor(Color.BLACK);
             spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
 
-        }else if(requestCode==10 && resultCode==81 && data!=null){
+        }else if(requestCode==11 && resultCode==81 && data!=null){
             secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Secteur>(){}.getType());
             spSecteur.setText(secteur.getNom());
             spSecteur.setTextColor(Color.BLACK);
             spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
 
-        }else if(requestCode==11 && resultCode==82 && data!=null){
+        }else if(requestCode==10 && resultCode==82 && data!=null){
             territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Territoire>(){}.getType());
             spTerritoire.setText(territoire.getNom());
             spTerritoire.setTextColor(Color.BLACK);
@@ -322,7 +323,6 @@ public class FormSaveAdresseActivity extends Fragment {
             activity.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveActivity(activity);
-
 
             return rep;
         }

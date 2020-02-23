@@ -69,7 +69,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/avenue"
+                    android:id="@+id/txAvenue"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -85,7 +85,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/domicile"
+                    android:id="@+id/txdomicile"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"

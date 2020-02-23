@@ -106,10 +106,10 @@ public class TypeActivityFragment extends Fragment {
                         JSONObject json = new JSONObject();
 
                         json.put("name",txNomA.getText().toString());
-                        json.put("annee",txAnCR.getText().toString());
-                        json.put("comer_type",spComer_type.getSelectedItem().toString());
-                        json.put("comer_source",spSourA.getSelectedItem().toString());
-                        json.put("comer_capacite",spComer_cappacite.getSelectedItem().toString());
+                        json.put("anneeof_commerce",txAnCR.getText().toString());
+                        json.put("typeof_commerce",spComer_type.getSelectedItem().toString());
+                        json.put("sourceof_commerce",spSourA.getSelectedItem().toString());
+                        json.put("capaciteof_commerce",spComer_cappacite.getSelectedItem().toString());
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
@@ -129,11 +129,11 @@ public class TypeActivityFragment extends Fragment {
                         JSONObject json = new JSONObject();
 
                         json.put("name",txNomA.getText().toString());
-                        json.put("annee",txAnCR.getText().toString());
-                        json.put("agricu_type",spTypeAC.getSelectedItem().toString());
-                        json.put("objet",spObA.getSelectedItem().toString());
-                        json.put("source",spSourA.getSelectedItem().toString());
-                        json.put("Etendue",spEtendue.getSelectedItem().toString());
+                        json.put("anneeof_agricole",txAnCR.getText().toString());
+                        json.put("type_activity",spTypeAC.getSelectedItem().toString());
+                        json.put("activity_object",spObA.getSelectedItem().toString());
+                        json.put("sourceof_approvisionnement",spSourA.getSelectedItem().toString());
+                        json.put("scope",spEtendue.getSelectedItem().toString());
 
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -182,7 +182,9 @@ Log.d("SelectedACTIVITY","");
                         pan_transport.setVisibility(View.VISIBLE);
                         pan_commerce.setVisibility(View.GONE);
                         break;
+
                     }
+
                 }
 
             }
@@ -193,9 +195,6 @@ Log.d("SelectedACTIVITY","");
             }
 
         });
-
-
-
 
     }
 }

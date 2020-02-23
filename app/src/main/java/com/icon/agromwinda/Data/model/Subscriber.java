@@ -5,11 +5,11 @@ import java.util.List;
 
 public class Subscriber {
 
-    private  int id;
-    private  int city_id;
-    private  int town_id;
-    private  int territory_id;
-    private  int province_id;
+    private int id;
+    private int city_id;
+    private int town_id;
+    private int territory_id;
+    private int province_id;
     private String name;
     private String lastname;
     private String firstname;
@@ -20,13 +20,13 @@ public class Subscriber {
     private String email;
     private String quarter;
     private String avenue;
-    private String home ;
+    private String home;
     private String slug;
-    private  int groupment_id;
-    private String village ;
-    private  int agent_id;
-    private Date created_at ;
-    private String secteur;
+    private String groupment;
+    private String village;
+    private int agent_id;
+    private Date created_at;
+    private int secteur_id;
     private String physical_environment;
     private Date update_at;
     private String cooperative;
@@ -171,12 +171,12 @@ public class Subscriber {
         this.slug = slug;
     }
 
-    public int getGroupment_id() {
-        return groupment_id;
+    public String getGroupment() {
+        return groupment;
     }
 
-    public void setGroupment_id(int groupment_id) {
-        this.groupment_id = groupment_id;
+    public void setGroupment_id(String groupment) {
+        this.groupment= groupment;
     }
 
     public String getVillage() {
@@ -203,13 +203,6 @@ public class Subscriber {
         this.created_at = created_at;
     }
 
-    public String getSecteur() {
-        return secteur;
-    }
-
-    public void setSecteur(String secteur) {
-        this.secteur = secteur;
-    }
 
     public String getPhysical_environment() {
         return physical_environment;
@@ -260,5 +253,13 @@ public class Subscriber {
     }
 
     public void getPeasant_organization(String string) {
+    }
+
+    public int getSecteur_id() {
+        return secteur_id;
+    }
+
+    public void setSecteur_id(int secteur_id) {
+        this.secteur_id = secteur_id;
     }
 }

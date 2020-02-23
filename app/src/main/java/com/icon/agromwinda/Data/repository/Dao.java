@@ -52,11 +52,11 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String SUBSCRIBER_COLUMN__AVENUE = "avenue";
     public static final String SUBSCRIBER_COLUMN__HOME = "home";
     public static final String SUBSCRIBER_COLUMN__SLUG = "slug";
-    public static final String SUBSCRIBER_COLUMN__GROUPMENT = "groupment_id";
+    public static final String SUBSCRIBER_COLUMN__GROUPMENT = "groupment";
     public static final String SUBSCRIBER_COLUMN__VILLAGE = "village";
     public static final String SUBSCRIBER_COLUMN__AGENT = "agent_id";
     public static final String SUBSCRIBER_COLUMN__CREATE_AT = "created_at";
-    public static final String SUBSCRIBER_COLUMN__SECTEUR = "secteur";
+    public static final String SUBSCRIBER_COLUMN__SECTEUR = "secteur_id";
     public static final String SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT = "physical_environment";
     public static final String SUBSCRIBER_COLUMN__UPDATED_AT = "update_at";
     public static final String SUBSCRIBER_COLUMN__COOPERATIVE = "cooperative";
@@ -152,11 +152,11 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "    avenue varchar(100),\n" +
                 "    home varchar(20),\n" +
                 "    slug varchar(255),\n" +
-                "    groupment_id int,\n" +
+                "    groupment varchar(255),\n" +
                 "    village varchar(255),\n" +
                 "    agent_id varchar(255),\n" +
                 "    created_at date,\n" +
-                "    secteur varchar(255),\n" +
+                "    secteur_id integer,\n" +
                 "    physical_environment varchar(255),\n" +
                 "    update_at datetime,\n" +
                 "    cooperative varchar(255),\n" +
@@ -430,34 +430,39 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(SUBSCRIBER_COLUMN__NAME, p.getName());
-        values.put(SUBSCRIBER_COLUMN__LASTNAME, p.getLastname());
-        values.put(SUBSCRIBER_COLUMN__FIRSTNAME, p.getFirstname());
-        values.put(SUBSCRIBER_COLUMN__SEXE, p.getSexe());
-        values.put(SUBSCRIBER_COLUMN__AGE, p.getAge());
-        values.put(SUBSCRIBER_COLUMN__LEVE_OF_STUDY, p.getLeve_of_study());
-        values.put(SUBSCRIBER_COLUMN__PHONE_NUMBER, p.getPhone_number());
-        values.put(SUBSCRIBER_COLUMN__EMAIL, p.getEmail());
-        values.put(SUBSCRIBER_COLUMN__QUARTER, p.getQuarter());
-        values.put(SUBSCRIBER_COLUMN__AVENUE, p.getAvenue());
-        values.put(SUBSCRIBER_COLUMN__SLUG, p.getSlug());
-        values.put(SUBSCRIBER_COLUMN__GROUPMENT, p.getGroupment_id());
-        values.put(SUBSCRIBER_COLUMN__VILLAGE, p.getVillage());
-        values.put(SUBSCRIBER_COLUMN__AGENT, p.getAgent_id());
-        values.put(SUBSCRIBER_COLUMN__CREATE_AT, p.getCreated_at().toString());
-        values.put(SUBSCRIBER_COLUMN__SECTEUR, p.getSecteur());
-        values.put(SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT, p.getPhysical_environment());
-        values.put(SUBSCRIBER_COLUMN__COOPERATIVE, p.getCooperative());
-        values.put(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION, p.getPeasant_organization());
-        values.put(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT, p.getMultiplier_agent());
+
 
         try {
+
+            values.put(SUBSCRIBER_COLUMN__NAME, p.getName());
+            values.put(SUBSCRIBER_COLUMN__LASTNAME, p.getLastname());
+            values.put(SUBSCRIBER_COLUMN__FIRSTNAME, p.getFirstname());
+            values.put(SUBSCRIBER_COLUMN__SEXE, p.getSexe());
+            values.put(SUBSCRIBER_COLUMN__AGE, p.getAge());
+            values.put(SUBSCRIBER_COLUMN__LEVE_OF_STUDY, p.getLeve_of_study());
+            values.put(SUBSCRIBER_COLUMN__PHONE_NUMBER, p.getPhone_number());
+            values.put(SUBSCRIBER_COLUMN__EMAIL, p.getEmail());
+            values.put(SUBSCRIBER_COLUMN__QUARTER, p.getQuarter());
+            values.put(SUBSCRIBER_COLUMN__AVENUE, p.getAvenue());
+            values.put(SUBSCRIBER_COLUMN__SLUG, p.getSlug());
+            values.put(SUBSCRIBER_COLUMN__GROUPMENT, p.getGroupment());
+            values.put(SUBSCRIBER_COLUMN__VILLAGE, p.getVillage());
+            values.put(SUBSCRIBER_COLUMN__AGENT, p.getAgent_id());
+            values.put(SUBSCRIBER_COLUMN__CREATE_AT, p.getCreated_at().toString());
+            values.put(SUBSCRIBER_COLUMN__SECTEUR, p.getSecteur_id());
+            values.put(SUBSCRIBER_COLUMN__PHYSICAL_ENVIRONMENT, p.getPhysical_environment());
+            values.put(SUBSCRIBER_COLUMN__COOPERATIVE, p.getCooperative());
+            values.put(SUBSCRIBER_COLUMN__PEASANT_ORGANIZATION, p.getPeasant_organization());
+            values.put(SUBSCRIBER_COLUMN__MULTIPLIER_AGENT, p.getMultiplier_agent());
+            values.put(SUBSCRIBER_COLUMN__TERRITORY, p.getTerritory_id());
+
             long a = db.insert("subscriber", null, values);
+            Log.d("SAVEREP",""+a);
             return a;
         } catch (Exception e) {
             Log.d("SAVEEXCEPTION", e.getMessage());
+            return 0;
         }
-        return 0;
     }
 
     @Override
