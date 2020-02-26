@@ -210,7 +210,6 @@ public class FormSaveAdresseActivity extends Fragment {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'ativite svp");
 
                     }
-
                     if(spchoixA.getSelectedItem().toString().equals("Urbain")){
                         AppUtility.controlValue(txQuatier.getText().toString(),"veuillez ecrire votre quartier");
                         AppUtility.controlValue(txAvenue.getText().toString(),"veuillez ecrire votre avenue");
@@ -228,7 +227,7 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", town.getId());
                         json.put("city_id ", commune.getId());
 
-                        new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
+                        new SaveActivity(json.toString()).execute();
 
                     }else{
                         AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
@@ -241,13 +240,13 @@ public class FormSaveAdresseActivity extends Fragment {
                         JSONObject json =new JSONObject(getArguments().getString("data"));
 
                         json.put(" village", txVillage.getText().toString());
-                        json.put("groupment_id", txGroupement.getText().toString());
+                        json.put("groupment", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());
                         json.put("province_id", province.getId());
                         json.put("territory_id", territoire.getId());
                         json.put("secteur_id", secteur.getId());
 
-                        new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
+                        new SaveActivity(json.toString()).execute();
                     }
 
 
@@ -299,18 +298,19 @@ public class FormSaveAdresseActivity extends Fragment {
             spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
 
         }
+    }
 
 
-    } public class SaveActivity extends AsyncTask<Void, Void, Long> {
+    public class SaveActivity extends AsyncTask<Void, Void, Long> {
 
         private String data;
 
-        private WaitingDialog waitingDialog = new WaitingDialog(getContext());
-
+        WaitingDialog waitingDialog ;
         public SaveActivity(String data) {
             this.data = data;
-        }
+            waitingDialog= new WaitingDialog(getContext());
 
+        }
         @Override
         protected void onPreExecute() {
             waitingDialog.show();
@@ -323,6 +323,7 @@ public class FormSaveAdresseActivity extends Fragment {
             activity.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveActivity(activity);
+            Log.d("DATASUBSCRIBER",""+rep);
 
             return rep;
         }
@@ -331,11 +332,11 @@ public class FormSaveAdresseActivity extends Fragment {
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
             if (rep>0){
-                MessageDialog.getDialog(getActivity()).createDialog("Votre Operation est un succès").show();
+                MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
                 Intent intent=new Intent(getActivity(), ListingActivity.class);
                 getActivity().startActivity(intent);
             }else {
-                MessageDialog.getDialog(getActivity()).createDialog("Echec d'enregistrement").show();
+                MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();
             }
 
         }

@@ -51,7 +51,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/txvillage"
+                    android:id="@+id/txVillage"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -68,7 +68,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/txgroupement"
+                    android:id="@+id/txGroupement"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -84,7 +84,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/txdomicile"
+                    android:id="@+id/txDomicile"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"

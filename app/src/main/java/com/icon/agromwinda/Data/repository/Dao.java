@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Agricole_information;
-import com.icon.agromwinda.Data.model.Commerce_information;
+import com.icon.agromwinda.Data.model.trade_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
@@ -26,8 +26,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import static android.os.Build.VERSION_CODES.P;
 
 public class Dao extends SQLiteOpenHelper implements IDao {
 
@@ -89,15 +87,15 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY ="activity_object";
     public static final String AGRICOLE_INFORMATION_COLUMN__ENTENDUE ="scope";
 
-    public static final String COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE ="typeof_commerce";
-    public static final String COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE ="sourceof_commerce";
-    public static final String COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE ="capaciteof_commerce";
+    public static final String COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE ="typeof_sale";
+    public static final String COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE ="sourceof_supply";
+    public static final String COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE ="economic_capacity";
 
 
-    public static final String TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT ="typeof_transport";
-    public static final String TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT ="marqueof_transport";
-    public static final String TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT ="annee_transport";
-    public static final String TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT ="capacite_transport";
+    public static final String TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT ="vehicule_type";
+    public static final String TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT ="vehicule_marque";
+    public static final String TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT ="vehicule_marque";
+    public static final String TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT ="transport_capacity";
 
 
     private Context context;
@@ -169,7 +167,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("CREATE TABLE activity(\n"+
                 "   id integer PRIMARY KEY AUTOINCREMENT,"+
                 "   subscriber_id integer,\n"+
-                "   type_activity_id integer,\n"+
+                "   type_activity varchar(255),\n"+
                 "   town_id integer,\n"+
                 "   city_id integer,\n"+
                 "   territory_id integer,\n"+
@@ -200,19 +198,19 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
             init();
 
-            db.execSQL("CREATE TABLE commerce_information(\n"+
+            db.execSQL("CREATE TABLE trade_information(\n"+
                     "id integer PRIMARY KEY AUTOINCREMENT,"+
-                    "typeof_commerce varchar(255),\n"+
-                    "sourceof_commerce varchar(255),\n"+
-                    "capaciteof_commerce varchar(255))");
+                    "typeof_sale varchar(255),\n"+
+                    "sourceof_supply varchar(255),\n"+
+                    "economic_capacity varchar(255))");
             init();
 
             db.execSQL("CREATE TABLE transport_information(\n"+
                     "id integer PRIMARY KEY AUTOINCREMENT,"+
-                    "tupeof_transport varchar(255),\n"+
-                    "marqueof_transport varchar(255),\n"+
-                    "anneeof_transport varchar(255),\n"+
-                    "capaciteof_transport varchar(255))");
+                    "vehicule_type varchar(255),\n"+
+                    "vehicule_marque varchar(255),\n"+
+                    "acquisition_year varchar(255),\n"+
+                    "transport_capacity varchar(255))");
             init();
 
     }
@@ -234,7 +232,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS territoire");
         db.execSQL("DROP TABLE IF EXISTS secteur");
         db.execSQL("DROP TABLE IF EXISTS agricole_information");
-        db.execSQL("DROP TABLE IF EXISTS commerce_information");
+        db.execSQL("DROP TABLE IF EXISTS  trade_information");
         db.execSQL("DROP TABLE IF EXISTS transport_information");
         onCreate(db);
     }
@@ -354,7 +352,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         values.put(ACTIVITY_COLUMN__AVENUE, pp.getAvenue());
         values.put(ACTIVITY_COLUMN__GROUPMENT, pp.getGroupment());
         values.put(ACTIVITY_COLUMN__VILLAGE, pp.getVillage());
-        values.put(ACTIVITY_COLUMN__TYPE_ACTIVITY,pp.getType_activity_id());
+        values.put(ACTIVITY_COLUMN__TYPE_ACTIVITY,pp.getType_activity());
         values.put(ACTIVITY_COLUMN__CITY,pp.getCity_id());
         values.put(ACTIVITY_COLUMN__TOWN,pp.getTown_id());
         values.put(ACTIVITY_COLUMN__TERRITORY,pp.getTerritory_id());
@@ -578,16 +576,16 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
-    public long saveCommerce_infomation(Commerce_information co) {
+    public long saveTrade_information(trade_information co) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE, co.getTypeof_commerce());
-        values.put(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE, co.getCapaciteof_commerce());
-        values.put(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE, co.getSourceof_commerce());
+        values.put(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE, co.getTypeof_sale());
+        values.put(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE, co.getEconomic_capacity());
+        values.put(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE, co.getSourceof_supply());
 
         try {
-            long a = db.insert("commerce_information", null, values);
+            long a = db.insert("trade_information", null, values);
             return a;
         } catch (Exception e) {
             Log.d("SAVEEXCEPTION", e.getMessage());
@@ -595,40 +593,41 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return 0;
     }
 
+
     @Override
-    public List<Commerce_information> getCommerce_informations() {
-        List<Commerce_information> commerce_informations = new ArrayList<>();
+    public List<trade_information> getTrade_information() {
+        List<trade_information> trade_informations = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from commerce_information", null);
+        Cursor rs = db.rawQuery("select * from trade_information", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
-            Commerce_information co = new  Commerce_information();
+            trade_information co = new trade_information();
             co.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
-            co.setTypeof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
-            co.setSourceof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
-            co.setCapaciteof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE)));
-            commerce_informations.add(co);
+            co.setTypeof_sale(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
+            co.setEconomic_capacity(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
+            co.setSourceof_supply(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE)));
+            trade_informations.add(co);
             rs.moveToNext();
         }
-        return commerce_informations;
+        return trade_informations;
     }
 
     @Override
-    public Commerce_information getCommerce_information(Integer id) {
+    public trade_information getTrade_information(Integer id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from commerce_information where id=" + id + "", null);
+        Cursor rs = db.rawQuery("select * from trade_information where id=" + id + "", null);
         rs.moveToFirst();
 
-        Commerce_information co = null;
+        trade_information co = null;
 
         while (rs.isAfterLast() == false) {
-            co = new Commerce_information();
+            co = new trade_information();
             co.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
-            co.setTypeof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
-            co.setSourceof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
-            co.setCapaciteof_commerce(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE)));
+            co.setTypeof_sale(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
+            co.setSourceof_supply(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
+            co.setEconomic_capacity(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE)));
             rs.moveToNext();
         }
         return co;
@@ -640,10 +639,10 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT,tr.getTypeof_transport());
-        values.put(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT, tr.getMarqueof_transport());
-        values.put(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT, tr.getAnneeof_transport());
-        values.put(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT, tr.getCapaciteof_transport());
+        values.put(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT,tr.getVehicule_type());
+        values.put(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT, tr.getVehicule_marque());
+        values.put(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT, tr.getAcquisition_year());
+        values.put(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT, tr.getTransport_capacity());
 
         try {
             long a = db.insert("transport_information", null, values);
@@ -665,10 +664,10 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         while (rs.isAfterLast() == false) {
             Transport_information tr = new  Transport_information();
             tr.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
-            tr.setTypeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
-            tr.setMarqueof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
-            tr.setAnneeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT)));
-            tr.setCapaciteof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT)));
+            tr.setVehicule_type(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
+            tr.setVehicule_marque(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
+            tr.setAcquisition_year(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT)));
+            tr.setTransport_capacity(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT)));
 
             transport_informations.add(tr);
             rs.moveToNext();
@@ -687,10 +686,10 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         while (rs.isAfterLast() == false) {
             tr = new Transport_information();
             tr.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
-            tr.setTypeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
-            tr.setMarqueof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
-            tr.setAnneeof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT)));
-            tr.setCapaciteof_transport(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT)));
+            tr.setVehicule_type(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
+            tr.setVehicule_marque(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
+            tr.setAcquisition_year(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT)));
+            tr.setTransport_capacity(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT)));
             rs.moveToNext();
         }
         return tr;

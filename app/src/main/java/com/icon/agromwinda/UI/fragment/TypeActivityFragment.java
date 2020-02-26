@@ -51,6 +51,7 @@ public class TypeActivityFragment extends Fragment {
 
     public void bindUI() {
         spTypeA = (Spinner) view.findViewById(R.id.spTypeA);
+
         pan_agriculture = view.findViewById(R.id.pan_agriculture);
         pan_commerce = view.findViewById(R.id.pan_commerce);
         pan_transport = view.findViewById(R.id.pan_transport);
@@ -58,13 +59,17 @@ public class TypeActivityFragment extends Fragment {
 
         txNomA =view.findViewById(R.id.txNomA);
         txAnCR = view.findViewById(R.id.txAnCR);
+
+
         spComer_type = view.findViewById(R.id.spComer_type);
         spComer_source = view.findViewById(R.id.spComer_source);
         spComer_cappacite = view.findViewById(R.id.spComer_capacit);
+
         spTypeAC =view.findViewById(R.id.spTypeAc);
         spObA = view.findViewById(R.id.spObA);
         spSourA = view.findViewById(R.id.spSourA);
         spEtendue = view.findViewById(R.id.spEtendue);
+
         spTran_type = view.findViewById(R.id.spTran_type);
         spTran_marque = view.findViewById(R.id.spTran_marque);
         spTran_capacite = view.findViewById(R.id.spTran_capacite);
@@ -89,7 +94,7 @@ public class TypeActivityFragment extends Fragment {
 
                     if( spTypeA.getSelectedItem().toString().equals("Commerce")==false &&
                             spTypeA.getSelectedItem().toString().equals("Agriculture")==false){
-                        AppUtility.controlValue("", "Veuillez renseigner le type d'ativite svp");
+                        AppUtility.controlValue("", "Veuillez renseigner le type d'ativité svp");
 
                     }
 
@@ -106,10 +111,12 @@ public class TypeActivityFragment extends Fragment {
                         JSONObject json = new JSONObject();
 
                         json.put("name",txNomA.getText().toString());
-                        json.put("anneeof_commerce",txAnCR.getText().toString());
-                        json.put("typeof_commerce",spComer_type.getSelectedItem().toString());
-                        json.put("sourceof_commerce",spSourA.getSelectedItem().toString());
-                        json.put("capaciteof_commerce",spComer_cappacite.getSelectedItem().toString());
+                        json.put("type_activity", spTypeA.getSelectedItem().toString());
+                        json.put("created_date",txAnCR.getText().toString());
+
+                        json.put("typeof_sale",spComer_type.getSelectedItem().toString());
+                        json.put("sourceof_supply",spComer_source.getSelectedItem().toString());
+                        json.put("economic_capacity",spComer_cappacite.getSelectedItem().toString());
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
@@ -129,10 +136,12 @@ public class TypeActivityFragment extends Fragment {
                         JSONObject json = new JSONObject();
 
                         json.put("name",txNomA.getText().toString());
-                        json.put("anneeof_agricole",txAnCR.getText().toString());
-                        json.put("type_activity",spTypeAC.getSelectedItem().toString());
+                        json.put("type_activity", spTypeA.getSelectedItem().toString());
+                        json.put("created_date",txAnCR.getText().toString());
+
+                        json.put("sourceof_supply",spSourA.getSelectedItem().toString());
                         json.put("activity_object",spObA.getSelectedItem().toString());
-                        json.put("sourceof_approvisionnement",spSourA.getSelectedItem().toString());
+                        json.put("anneeof_agricole",txAnCR.getText().toString());
                         json.put("scope",spEtendue.getSelectedItem().toString());
 
 

@@ -28,6 +28,7 @@ public class ListingActivity extends AppCompatActivity {
         init();
     }
 
+
     public void bindUI() {
         recyclerView = findViewById(R.id.listing);
     }

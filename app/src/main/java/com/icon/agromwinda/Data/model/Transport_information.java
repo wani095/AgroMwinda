@@ -1,10 +1,10 @@
 package com.icon.agromwinda.Data.model;
 
 public class Transport_information {
-    private String typeof_transport;
-    private String marqueof_transport;
-    private String anneeof_transport;
-    private String capaciteof_transport;
+    private String  vehicule_type;
+    private String vehicule_marque;
+    private String acquisition_year;
+    private String transport_capacity;
     private int id;
     private String nom;
 
@@ -25,35 +25,35 @@ public class Transport_information {
     }
 
 
-    public String getTypeof_transport() {
-        return typeof_transport;
+    public String getVehicule_type() {
+        return  vehicule_type;
     }
 
-    public void setTypeof_transport(String typeof_transport) {
-        this.typeof_transport = typeof_transport;
+    public void setVehicule_type(String  vehicule_type) {
+        this. vehicule_type =  vehicule_type;
     }
 
-    public String getMarqueof_transport() {
-        return marqueof_transport;
+    public String getVehicule_marque() {
+        return vehicule_marque;
     }
 
-    public void setMarqueof_transport(String marqueof_transport) {
-        this.marqueof_transport = marqueof_transport;
+    public void setVehicule_marque(String vehicule_marque) {
+        this.vehicule_marque = vehicule_marque;
     }
 
-    public String getAnneeof_transport() {
-        return anneeof_transport;
+    public String getAcquisition_year() {
+        return acquisition_year;
     }
 
-    public void setAnneeof_transport(String anneeof_transport) {
-        this.anneeof_transport = anneeof_transport;
+    public void setAcquisition_year(String acquisition_year) {
+        this.acquisition_year = acquisition_year;
     }
 
-    public String getCapaciteof_transport() {
-        return capaciteof_transport;
+    public String getTransport_capacity() {
+        return transport_capacity;
     }
 
-    public void setCapaciteof_transport(String capaciteof_transport) {
-        this.capaciteof_transport = capaciteof_transport;
+    public void setTransport_capacity(String transport_capacity) {
+        this.transport_capacity = transport_capacity;
     }
 }

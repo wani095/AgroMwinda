@@ -18,14 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logoagromwinda" />
 
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginTop="212dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:orientation="vertical"
         android:textAlignment="center"
+        android:layout_marginLeft="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,36 @@
                 android:text="@string/ajou" />
         </android.support.v7.widget.CardView>
 
+
+        <TextView
+            android:id="@+id/texA"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_marginLeft="100sp"
+            android:textAlignment="center"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:text="Historique d'AgroMwinda">
+        </TextView>
+
+        <TextView
+            android:id="@+id/texAp"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="10sp"
+            android:layout_height="wrap_content"
+            android:text="@string/histagro">
+         </TextView>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+
+
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="wrap_content"
@@ -59,12 +90,13 @@
 
             <Button
                 android:id="@+id/btnList"
-                android:layout_width="match_parent"
+                android:layout_width="159dp"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWrite"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="@string/lis" />
         </android.support.v7.widget.CardView>
+
     </LinearLayout>
 
     <TextView

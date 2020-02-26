@@ -29,7 +29,7 @@ public class Activity {
     private String secteur;
     private String physical_environment;
     private Date update_at;
-    private int type_activity_id;
+    private int type_activity;
     private int trade_information_id;
     private String physique_environment;
 
@@ -160,9 +160,9 @@ public class Activity {
         return update_at;
     }
 
-    public int getType_activity_id() { return type_activity_id; }
+    public int getType_activity() { return type_activity; }
 
-    public void setType_activity_id(int type_activity_id) { this.type_activity_id = type_activity_id; }
+    public void setType_activity(int type_activity) { this.type_activity = type_activity; }
 
     public int getTrade_information_id() { return trade_information_id; }
 

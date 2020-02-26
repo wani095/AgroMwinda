@@ -2,7 +2,6 @@ package com.icon.agromwinda.Data.repository;
 
 import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Agricole_information;
-import com.icon.agromwinda.Data.model.Commerce_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
@@ -10,6 +9,7 @@ import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.model.Transport_information;
+import com.icon.agromwinda.Data.model.trade_information;
 
 import java.util.List;
 
@@ -45,11 +45,11 @@ public interface IDao {
 
     Agricole_information getAgricole_information(Integer id);
 
-    long saveCommerce_infomation(Commerce_information co);
+    long saveTrade_information(trade_information co);
 
-    List<Commerce_information> getCommerce_informations();
+    List<trade_information> getTrade_information();
 
-    Commerce_information getCommerce_information(Integer id);
+    trade_information getTrade_information(Integer id);
 
     long saveTransport_infomation(Transport_information tr);
 
