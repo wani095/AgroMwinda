@@ -67,35 +67,39 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String ACTIVITY_COLUMN__HOME = "home";
     public static final String ACTIVITY_COLUMN__CITY = "city_id";
     public static final String ACTIVITY_COLUMN__TOWN = "town_id";
-    public static final String ACTIVITY_COLUMN__GROUPMENT = "groupment_id";
+    public static final String ACTIVITY_COLUMN__GROUPMENT = "groupment";
     public static final String ACTIVITY_COLUMN__VILLAGE = "village";
     public static final String ACTIVITY_COLUMN__TERRITORY = "territory_id";
     public static final String ACTIVITY_COLUMN__PROVINCE = "province_id";
     public static final String ACTIVITY_COLUMN__NAME = "name";
-    public static final String ACTIVITY_COLUMN__AGRICOLE_INFORMATTION ="agricole_information_id";
+    public static final String ACTIVITY_COLUMN__AGRICOLE_INFORMATTION = "agricole_information_id";
     public static final String ACTIVITY_COLUMN__TRADE_INFORMATION = "trade_information_id";
-    public static final String ACTIVITY_COLUMN__CREATE_DATE ="created_date";
-    public static final String ACTIVITY_COLUMN__TRANSPORT_INFORMATION ="transport_information_id";
-    public static final String ACTIVITY_COLUMN__TYPE_ACTIVITY ="type_activity_id";
-    public static final String ACTIVITY_COLUMN__CREATE_AT ="create_at";
-    public static final String ACTIVITY_COLUMN__SLUG ="slug";
-    public static final String ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT ="physique_environment";
-    public static final String ACTIVITY_COLUMN__SECTEUR ="secteur_id";
+    public static final String ACTIVITY_COLUMN__CREATE_DATE = "created_date";
+    public static final String ACTIVITY_COLUMN__TRANSPORT_INFORMATION = "transport_information_id";
+    public static final String ACTIVITY_COLUMN__TYPE_ACTIVITY = "type_activity_id";
+    public static final String ACTIVITY_COLUMN__CREATE_AT = "create_at";
+    public static final String ACTIVITY_COLUMN__SLUG = "slug";
+    public static final String ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT = "physique_environment";
+    public static final String ACTIVITY_COLUMN__SECTEUR = "secteur_id";
 
-    public static final String AGRICOLE_INFORMATION_COLUMN__TYPE_ACTIVITY ="typeof_activity";
-    public static final String AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT ="sourceof_supply";
-    public static final String AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY ="activity_object";
-    public static final String AGRICOLE_INFORMATION_COLUMN__ENTENDUE ="scope";
+    public static final String ACTIVITY_COLUMN__TYPE_COMMERCE = "typeof_sale";
+    public static final String ACTIVITY_COLUMN__SOURCE_COMMERCE = "sourceof_supply";
+    public static final String ACTIVITY_COLUMN__CAPACITE_COMMERCE = "economic_capacity";
 
-    public static final String COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE ="typeof_sale";
-    public static final String COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE ="sourceof_supply";
-    public static final String COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE ="economic_capacity";
+    public static final String AGRICOLE_INFORMATION_COLUMN__TYPE_ACTIVITY = "typeof_activity";
+    public static final String AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT = "sourceof_supply";
+    public static final String AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY = "activity_object";
+    public static final String AGRICOLE_INFORMATION_COLUMN__ENTENDUE = "scope";
+
+    public static final String COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE = "typeof_sale";
+    public static final String COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE = "sourceof_supply";
+    public static final String COMMERCE_INFORMATION_COLUMN__CAPACITE_COMMERCE = "economic_capacity";
 
 
-    public static final String TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT ="vehicule_type";
-    public static final String TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT ="vehicule_marque";
-    public static final String TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT ="vehicule_marque";
-    public static final String TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT ="transport_capacity";
+    public static final String TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT = "vehicule_type";
+    public static final String TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT = "vehicule_marque";
+    public static final String TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT = "vehicule_marque";
+    public static final String TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT = "transport_capacity";
 
 
     private Context context;
@@ -164,61 +168,68 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         init();
 
-        db.execSQL("CREATE TABLE activity(\n"+
-                "   id integer PRIMARY KEY AUTOINCREMENT,"+
-                "   subscriber_id integer,\n"+
-                "   type_activity varchar(255),\n"+
-                "   town_id integer,\n"+
-                "   city_id integer,\n"+
-                "   territory_id integer,\n"+
-                "   province_id integer,\n"+
-                "   agricole_information_id integer,\n"+
-                "   trade_information_id integer,\n"+
-                "   name varchar(255),\n"+
-                "   quarter varchar(255),\n"+
-                "   avenue varchar(255),\n"+
-                "   home varchar(255),\n"+
-                "   created_date varchar(255),\n"+
-                "   slug varchar(255),\n"+
-                "   created_at date,\n"+
-                "   physical_environment varchar(255),\n"+
-                "   secteur_id integer,\n"+
-                "   groupment varchar(255),\n"+
-                "   village varchar(255),\n"+
-                "   transport_information_id integer)");
+        db.execSQL("CREATE TABLE activity(\n" +
+                "   id integer PRIMARY KEY AUTOINCREMENT," +
+                "   subscriber_id integer,\n" +
+                "   type_activity varchar(255),\n" +
+                "   town_id integer,\n" +
+                "   city_id integer,\n" +
+                "   territory_id integer,\n" +
+                "   province_id integer,\n" +
+                "   name varchar(255),\n" +
+                "   quarter varchar(255),\n" +
+                "   avenue varchar(255),\n" +
+                "   home varchar(255),\n" +
+                "   created_date varchar(255),\n" +
+                "   slug varchar(255),\n" +
+                "   created_at date,\n" +
+                "   physical_environment varchar(255),\n" +
+                "   secteur_id integer,\n" +
+                "   groupment varchar(255),\n" +
+                "   typeof_sale varchar(255),\n" +
+                "   source_supply varchar(255),\n" +
+                "   economic_capacity varchar(255),\n" +
+                "   village varchar(255))");
+
+        db.execSQL("CREATE TABLE activity_domain(" +
+                "activityId integer," +
+                "domainId integer)");
 
         init();
 
-        db.execSQL("CREATE TABLE agricole_information(\n"+
-                "id integer PRIMARY KEY AUTOINCREMENT,"+
-                "typeof_activity varchar(255),\n"+
-                "sourceof_supply varchar(255),\n"+
-                "activity_object varchar(255),\n"+
+        db.execSQL("CREATE TABLE agricole_information(\n" +
+                "id integer PRIMARY KEY AUTOINCREMENT," +
+                "typeof_activity varchar(255),\n" +
+                "sourceof_supply varchar(255),\n" +
+                "activity_object varchar(255),\n" +
                 "scope varchar(255))");
 
-            init();
+        /*
+         * select * from activity act
+         * */
 
-            db.execSQL("CREATE TABLE trade_information(\n"+
-                    "id integer PRIMARY KEY AUTOINCREMENT,"+
-                    "typeof_sale varchar(255),\n"+
-                    "sourceof_supply varchar(255),\n"+
-                    "economic_capacity varchar(255))");
-            init();
+        init();
 
-            db.execSQL("CREATE TABLE transport_information(\n"+
-                    "id integer PRIMARY KEY AUTOINCREMENT,"+
-                    "vehicule_type varchar(255),\n"+
-                    "vehicule_marque varchar(255),\n"+
-                    "acquisition_year varchar(255),\n"+
-                    "transport_capacity varchar(255))");
-            init();
+        db.execSQL("CREATE TABLE trade_information(\n" +
+                "id integer PRIMARY KEY AUTOINCREMENT," +
+                "typeof_sale varchar(255),\n" +
+                "sourceof_supply varchar(255),\n" +
+                "economic_capacity varchar(255))");
+        init();
+
+        db.execSQL("CREATE TABLE transport_information(\n" +
+                "id integer PRIMARY KEY AUTOINCREMENT," +
+                "vehicule_type varchar(255),\n" +
+                "vehicule_marque varchar(255),\n" +
+                "acquisition_year varchar(255),\n" +
+                "transport_capacity varchar(255))");
+        init();
 
     }
 
     public void init() {
 
     }
-
 
 
     @Override
@@ -232,7 +243,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS territoire");
         db.execSQL("DROP TABLE IF EXISTS secteur");
         db.execSQL("DROP TABLE IF EXISTS agricole_information");
-        db.execSQL("DROP TABLE IF EXISTS  trade_information");
+        db.execSQL("DROP TABLE IF EXISTS trade_information");
         db.execSQL("DROP TABLE IF EXISTS transport_information");
         onCreate(db);
     }
@@ -339,37 +350,44 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return 0;
     }
 
-    /**bd activity*/
+
+    /**
+     * bd activity
+     */
+
 
     @Override
     public long SaveActivity(Activity pp) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(ACTIVITY_COLUMN__NAME, pp.getName());
-        values.put(ACTIVITY_COLUMN__SUBSCRIBER, pp.getSubscriber_id());
-        values.put(ACTIVITY_COLUMN__QUARTER, pp.getQuarter());
-        values.put(ACTIVITY_COLUMN__AVENUE, pp.getAvenue());
-        values.put(ACTIVITY_COLUMN__GROUPMENT, pp.getGroupment());
-        values.put(ACTIVITY_COLUMN__VILLAGE, pp.getVillage());
-        values.put(ACTIVITY_COLUMN__TYPE_ACTIVITY,pp.getType_activity());
-        values.put(ACTIVITY_COLUMN__CITY,pp.getCity_id());
-        values.put(ACTIVITY_COLUMN__TOWN,pp.getTown_id());
-        values.put(ACTIVITY_COLUMN__TERRITORY,pp.getTerritory_id());
-        values.put(ACTIVITY_COLUMN__PROVINCE,pp.getProvince_id());
-
-        values.put(ACTIVITY_COLUMN__TRADE_INFORMATION,pp.getTrade_information_id());
-        values.put(ACTIVITY_COLUMN__HOME,pp.getHome());
-        values.put(ACTIVITY_COLUMN__CREATE_DATE,pp.getCreated_date());
-        values.put(ACTIVITY_COLUMN__SLUG,pp.getSlug());
-     
-        values.put(ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT,pp.getPhysique_environment());
-        values.put(ACTIVITY_COLUMN__SECTEUR,pp.getSecteur_id());
-        values.put(ACTIVITY_COLUMN__TRANSPORT_INFORMATION,pp.getTransport_information_id());
-
-
         try {
+            values.put(ACTIVITY_COLUMN__NAME, pp.getName());
+            values.put(ACTIVITY_COLUMN__SUBSCRIBER, pp.getSubscriber_id());
+            values.put(ACTIVITY_COLUMN__QUARTER, pp.getQuarter());
+            values.put(ACTIVITY_COLUMN__AVENUE, pp.getAvenue());
+            values.put(ACTIVITY_COLUMN__GROUPMENT, pp.getGroupment());
+            values.put(ACTIVITY_COLUMN__VILLAGE, pp.getVillage());
+            values.put(ACTIVITY_COLUMN__TYPE_ACTIVITY, pp.getType_activity());
+            values.put(ACTIVITY_COLUMN__CITY, pp.getCity_id());
+            values.put(ACTIVITY_COLUMN__TOWN, pp.getTown_id());
+            values.put(ACTIVITY_COLUMN__TERRITORY, pp.getTerritory_id());
+            values.put(ACTIVITY_COLUMN__PROVINCE, pp.getProvince_id());
+            values.put(ACTIVITY_COLUMN__AGRICOLE_INFORMATTION, pp.getAgricole_information_id());
+            values.put(ACTIVITY_COLUMN__TRADE_INFORMATION, pp.getTrade_information_id());
+            values.put(ACTIVITY_COLUMN__HOME, pp.getHome());
+            values.put(ACTIVITY_COLUMN__CREATE_DATE, pp.getCreated_date());
+            values.put(ACTIVITY_COLUMN__SLUG, pp.getSlug());
+            values.put(ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT, pp.getPhysique_environment());
+            values.put(ACTIVITY_COLUMN__SECTEUR, pp.getSecteur_id());
+            values.put(ACTIVITY_COLUMN__TRANSPORT_INFORMATION, pp.getTransport_information_id());
+            values.put(ACTIVITY_COLUMN__TYPE_COMMERCE, pp.getTypeof_sale());
+            values.put(ACTIVITY_COLUMN__CAPACITE_COMMERCE, pp.getEconomic_capacity());
+            values.put(ACTIVITY_COLUMN__SOURCE_COMMERCE, pp.getSourceof_supply());
+
+
             long a = db.insert("activity", null, values);
+            Log.d("SAVEREP", "" + a);
             return a;
         } catch (Exception e) {
             Log.d("SAVEEXCEPTION", e.getMessage());
@@ -408,7 +426,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         Activity pp = null;
 
         while (rs.isAfterLast() == false) {
-            pp= new Activity();
+            pp = new Activity();
             pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
             pp.getSubscriber_id(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__SUBSCRIBER)));
             pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
@@ -420,15 +438,15 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
 
-
-    /** bd subscriber*/
+    /**
+     * bd subscriber
+     */
 
     @Override
     public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-
 
         try {
 
@@ -455,7 +473,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             values.put(SUBSCRIBER_COLUMN__TERRITORY, p.getTerritory_id());
 
             long a = db.insert("subscriber", null, values);
-            Log.d("SAVEREP",""+a);
+            Log.d("SAVEREP", "" + a);
             return a;
         } catch (Exception e) {
             Log.d("SAVEEXCEPTION", e.getMessage());
@@ -639,7 +657,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT,tr.getVehicule_type());
+        values.put(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT, tr.getVehicule_type());
         values.put(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT, tr.getVehicule_marque());
         values.put(TRANSPORT_INFORMATION_COLUMN__ANNNEE_TRANSPORT, tr.getAcquisition_year());
         values.put(TRANSPORT_INFORMATION_COLUMN__CAPACITE_TRANSPORT, tr.getTransport_capacity());
@@ -662,7 +680,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
-            Transport_information tr = new  Transport_information();
+            Transport_information tr = new Transport_information();
             tr.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
             tr.setVehicule_type(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__TYPE_TRANSPORT)));
             tr.setVehicule_marque(rs.getString(rs.getColumnIndex(TRANSPORT_INFORMATION_COLUMN__MARQUE_TRANSPORT)));
@@ -696,18 +714,17 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
 
-
     @Override
     public List<Activity> getActivities(int fkSubscriber) {
 
-        List<Activity> activities=new ArrayList<>();
+        List<Activity> activities = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from activity where fkSubscriber=" + fkSubscriber + "", null);
+        Cursor rs = db.rawQuery("select * from activity,agricole_information,trade_information,transport_informatio2.n where fkSubscriber=" + fkSubscriber + "", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
-            Activity activit=new Activity();
+            Activity activit = new Activity();
 
             activities.add(activit);
             rs.moveToNext();
@@ -777,6 +794,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             db.execSQL(query);
         }
     }
+
     public void initSecteurs() {
         InputStream inputStream = context.getResources().openRawResource(R.raw.secteurs);
 

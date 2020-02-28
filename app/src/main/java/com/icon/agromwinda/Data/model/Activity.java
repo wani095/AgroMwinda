@@ -5,33 +5,45 @@ import java.util.Date;
 public class Activity {
 
 
+
     private int id;
 
     private int fkSubscriber;
-
     private  int city_id;
     private  int town_id;
     private  int territory_id;
     private  int province_id;
-    private  int groupment;
-    private int transport_information_id;
     private int secteur_id;
-    public String getAgricole_information;
+    private int agricole_information_id;
+    private int trade_information_id;
+    private int transport_information_id;
+
     private String name;
-    private String typeActivity;
+
+    private  String groupment;
     private String quarter;
     private String avenue;
     private String home ;
     private String slug;
     private String village ;
-    private Date created_at ;
-    private String created_date;
-    private String secteur;
     private String physical_environment;
+
+    private String typeActivity;
+    private String type_activity;
+
+
+    private String typeof_sale;
+    private String sourceof_supply;
+    private String economic_capacity;
+
+    private String created_at ;
     private Date update_at;
-    private int type_activity;
-    private int trade_information_id;
+    private String created_date;
     private String physique_environment;
+
+    public int getAgricole_information_id;
+
+    public void setAgricole_information_id(int agricole_information_id){this.agricole_information_id= agricole_information_id;}
 
     public int getId() {
         return id;
@@ -65,9 +77,6 @@ public class Activity {
 
     public void setCreated_at(Date date) {
     }
-
-    public void getAgricole_information() { }
-
     public int getSubscriber_id() {return id;}
 
     public void getSubscriber_id(int id) {this.id =id; }
@@ -138,11 +147,11 @@ public class Activity {
         this.slug = slug;
     }
 
-    public int getGroupment() {
+    public String  getGroupment() {
         return groupment;
     }
 
-    public void setGroupment(int groupment) {
+    public void setGroupment(String groupment) {
         this.groupment = groupment;
     }
 
@@ -160,9 +169,9 @@ public class Activity {
         return update_at;
     }
 
-    public int getType_activity() { return type_activity; }
+    public String getType_activity() { return type_activity; }
 
-    public void setType_activity(int type_activity) { this.type_activity = type_activity; }
+    public void setType_activity(String type_activity) { this.type_activity = type_activity; }
 
     public int getTrade_information_id() { return trade_information_id; }
 
@@ -172,7 +181,7 @@ public class Activity {
 
     public void setCreated_date(String created_date) { this.created_date = created_date; }
 
-    public Date getCreated_at() { return created_at; }
+    public String getCreated_at() { return created_at; }
 
     public String getPhysique_environment() { return physique_environment; }
 
@@ -187,4 +196,31 @@ public class Activity {
     public void setTransport_information_id(int transport_information_id) { this.transport_information_id = transport_information_id; }
 
 
+    public int getAgricole_information_id() {
+        return agricole_information_id;
+    }
+
+    public String getTypeof_sale() {
+        return typeof_sale;
+    }
+
+    public void setTypeof_sale(String typeof_sale) {
+        this.typeof_sale = typeof_sale;
+    }
+
+    public String getSourceof_supply() {
+        return sourceof_supply;
+    }
+
+    public void setSourceof_supply(String sourceof_supply) {
+        this.sourceof_supply = sourceof_supply;
+    }
+
+    public String getEconomic_capacity() {
+        return economic_capacity;
+    }
+
+    public void setEconomic_capacity(String economic_capacity) {
+        this.economic_capacity = economic_capacity;
+    }
 }

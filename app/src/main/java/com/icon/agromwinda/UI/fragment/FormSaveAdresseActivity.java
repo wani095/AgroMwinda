@@ -323,7 +323,7 @@ public class FormSaveAdresseActivity extends Fragment {
             activity.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveActivity(activity);
-            Log.d("DATASUBSCRIBER",""+rep);
+            Log.d("DATAACTIVITY",""+rep);
 
             return rep;
         }

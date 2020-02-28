@@ -12,7 +12,7 @@
     <string name="lbl_organisation_paysanne">Nom de l\'OP</string>
     <string name="lbl_cooperative">Nom de la cooperative affiliée</string>
     <string name="lbl_detail">(Remplissez seulement la case concernant les données de l\'abonné)</string>
-    <string name="copyrith">\@2020 AgroMwinda. Tous droits réservés</string>
+    <string name="copyrith">\©2020 AgroMwinda. Tous droits réservés</string>
 
     <string name="ajou">AJOUTER ABONNEE</string>
     <string name="lis">LISTE DES ABONNEES</string>
@@ -29,7 +29,7 @@
 
 
     <array name="list_typeAct">
-        <item>---</item>
+        <item>--Activité--</item>
         <item>Commerce</item>
         <item>Agriculture</item>
         <item>Transport</item>
@@ -44,9 +44,9 @@
 
 
     <array name="physiquea">
-        <item>---</item>
-        <item>Rural</item>
+        <item>--Physique Activity--</item>
         <item>Urbain</item>
+        <item>Rural</item>
         <item>meme Adresse physique </item>
 
     </array>

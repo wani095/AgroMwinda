@@ -15,18 +15,28 @@
         android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="350sp"
         android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginLeft="20sp"
+
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:textStyle="bold"
-        android:text="Adresse phyique de l'Activité"
-        android:textColor="#000"
-        android:textSize="14sp" />
+        <TextView
+            android:id="@+id/NomActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nom de l'Activité: "
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Adresse physique de l'activité "
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     <Spinner
         android:id="@+id/spchoixA"
@@ -46,20 +56,18 @@
         <android.support.v7.widget.CardView
             android:layout_width="160dp"
             android:layout_height="40sp"
-            android:layout_marginTop="10dp"
+            android:visibility="visible"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center"
             android:background="@color/colorWrite">
-
             <Button
                 android:id="@+id/btnTermine"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWrite"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="Terminer" />
         </android.support.v7.widget.CardView>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="45dp"

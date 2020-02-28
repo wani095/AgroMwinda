@@ -93,8 +93,9 @@ public class TypeActivityFragment extends Fragment {
                 try {
 
                     if( spTypeA.getSelectedItem().toString().equals("Commerce")==false &&
-                            spTypeA.getSelectedItem().toString().equals("Agriculture")==false){
-                        AppUtility.controlValue("", "Veuillez renseigner le type d'ativité svp");
+                            spTypeA.getSelectedItem().toString().equals("Agriculture")==false &&
+                    spTypeA.getSelectedItem().toString().equals("Transport")==false){
+                        AppUtility.controlValue("", "Veuillez renseigner le type d'activité svp");
 
                     }
 
@@ -123,7 +124,33 @@ public class TypeActivityFragment extends Fragment {
                         transaction.addToBackStack(null);
                         transaction.commit();
 
-                    }else{
+                    }/**if (spTypeA.getSelectedItem().toString().equals("Transport")){
+                        AppUtility.controlValue(txNomA.getText().toString()," Veullez ecrire le nom de l'activité");
+                        AppUtility.controlValue(txAnCR.getText().toString(),"Veullez saisir l'annee de l'activité");
+
+                        AppUtility.controlValue(spTran_type.getSelectedItem().toString(),"Veuillez selectionner le type de transport");
+                        AppUtility.controlValue(spTran_capacite.getSelectedItem().toString(),"veuillez selectionner la capacite de Transport");
+                        AppUtility.controlValue(spTran_annee.getSelectedItem().toString(),"veuillez selectionner l'annee de transport");
+                        AppUtility.controlValue(spTran_marque.getSelectedItem().toString(),"veuillez selectionner la maqrque de transport");
+
+                        JSONObject json = new JSONObject();
+
+
+                        json.put("name",txNomA.getText().toString());
+                        json.put("type-activity",spTypeA.getSelectedItem().toString());
+                        json.put("created_date",txAnCR.getText().toString());
+
+                        json.put("vehicule_type",spTran_type.getSelectedItem().toString());
+                        json.put("transport_capacity", spTran_capacite.getSelectedItem().toString());
+                        json.put("vehicule_marque",spTran_marque.getSelectedItem().toString());
+                        json.put("acquisition_year",spTran_annee.getSelectedItem().toString());
+
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
+                        transaction.addToBackStack(null);
+                        transaction.commit();
+
+                    }*/ else{
 
                         AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activité svp");
                         AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activité svp");
