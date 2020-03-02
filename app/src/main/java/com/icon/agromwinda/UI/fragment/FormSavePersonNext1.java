@@ -49,18 +49,25 @@ public class FormSavePersonNext1 extends Fragment {
 
     private View view;
     private EditText txPhone, txEmail, txAdm, txQuatier, txAvenue, txDomicile;
+    private EditText txVillage, txGroupement;
+
     private TextView spCommune, spVille, spProvince;
+    private TextView spProvinc, spTerritoire, spSecteur;
+
     private Spinner tvTypePerso;
+
     private LinearLayout ll_person_rural;
     private LinearLayout ll_person_urbain;
+
     private Button btnValider;
+
     private Province province;
     private Town town;
     private Commune commune;
     private Territoire territoire;
     private Secteur secteur;
-    private EditText txVillage, txGroupement;
-    private TextView spProvinc, spTerritoire, spSecteur;
+
+
 
 
     public static FormSavePersonNext1 newInstance(String json) {

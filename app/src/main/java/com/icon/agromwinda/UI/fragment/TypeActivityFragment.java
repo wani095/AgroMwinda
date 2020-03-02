@@ -31,10 +31,10 @@ public class TypeActivityFragment extends Fragment {
     private Spinner spTypeA;
     private ScrollView pan_commerce, pan_agriculture, pan_transport;
 
-    private EditText txNomA,txAnCR;
-    private Spinner spComer_type,spComer_source, spComer_cappacite;
-    private Spinner spTypeAC,spObA,spSourA,spEtendue;
-    private Spinner spTran_type,spTran_marque,spTran_annee,spTran_capacite;
+    private EditText txNomA, txAnCR;
+    private Spinner spComer_type, spComer_source, spComer_cappacite;
+    private Spinner spTypeAC, spObA, spSourA, spEtendue;
+    private Spinner spTran_type, spTran_marque, spTran_annee, spTran_capacite;
 
     private Button btnnextA;
 
@@ -57,7 +57,7 @@ public class TypeActivityFragment extends Fragment {
         pan_transport = view.findViewById(R.id.pan_transport);
 
 
-        txNomA =view.findViewById(R.id.txNomA);
+        txNomA = view.findViewById(R.id.txNomA);
         txAnCR = view.findViewById(R.id.txAnCR);
 
 
@@ -65,7 +65,7 @@ public class TypeActivityFragment extends Fragment {
         spComer_source = view.findViewById(R.id.spComer_source);
         spComer_cappacite = view.findViewById(R.id.spComer_capacit);
 
-        spTypeAC =view.findViewById(R.id.spTypeAc);
+        spTypeAC = view.findViewById(R.id.spTypeAc);
         spObA = view.findViewById(R.id.spObA);
         spSourA = view.findViewById(R.id.spSourA);
         spEtendue = view.findViewById(R.id.spEtendue);
@@ -92,14 +92,14 @@ public class TypeActivityFragment extends Fragment {
 
                 try {
 
-                    if( spTypeA.getSelectedItem().toString().equals("Commerce")==false &&
-                            spTypeA.getSelectedItem().toString().equals("Agriculture")==false &&
-                    spTypeA.getSelectedItem().toString().equals("Transport")==false){
+                    if (spTypeA.getSelectedItem().toString().equals("Commerce") == false &&
+                            spTypeA.getSelectedItem().toString().equals("Agriculture") == false &&
+                            spTypeA.getSelectedItem().toString().equals("Transport") == false) {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'activité svp");
 
                     }
 
-                    if( spTypeA.getSelectedItem().toString().equals("Commerce")){
+                    if (spTypeA.getSelectedItem().toString().equals("Commerce")) {
 
                         AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activité svp");
                         AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activité svp");
@@ -111,47 +111,47 @@ public class TypeActivityFragment extends Fragment {
 
                         JSONObject json = new JSONObject();
 
-                        json.put("name",txNomA.getText().toString());
+                        json.put("name", txNomA.getText().toString());
                         json.put("type_activity", spTypeA.getSelectedItem().toString());
-                        json.put("created_date",txAnCR.getText().toString());
+                        json.put("created_date", txAnCR.getText().toString());
 
-                        json.put("typeof_sale",spComer_type.getSelectedItem().toString());
-                        json.put("sourceof_supply",spComer_source.getSelectedItem().toString());
-                        json.put("economic_capacity",spComer_cappacite.getSelectedItem().toString());
+                        json.put("typeof_sale", spComer_type.getSelectedItem().toString());
+                        json.put("sourceof_supply", spComer_source.getSelectedItem().toString());
+                        json.put("economic_capacity", spComer_cappacite.getSelectedItem().toString());
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
                         transaction.commit();
 
-                    }/**if (spTypeA.getSelectedItem().toString().equals("Transport")){
-                        AppUtility.controlValue(txNomA.getText().toString()," Veullez ecrire le nom de l'activité");
-                        AppUtility.controlValue(txAnCR.getText().toString(),"Veullez saisir l'annee de l'activité");
+                    } else if (spTypeA.getSelectedItem().toString().equals("Transport")) {
 
-                        AppUtility.controlValue(spTran_type.getSelectedItem().toString(),"Veuillez selectionner le type de transport");
-                        AppUtility.controlValue(spTran_capacite.getSelectedItem().toString(),"veuillez selectionner la capacite de Transport");
-                        AppUtility.controlValue(spTran_annee.getSelectedItem().toString(),"veuillez selectionner l'annee de transport");
-                        AppUtility.controlValue(spTran_marque.getSelectedItem().toString(),"veuillez selectionner la maqrque de transport");
+                        AppUtility.controlValue(txNomA.getText().toString(), " Veullez ecrire le nom de l'activité");
+                        AppUtility.controlValue(txAnCR.getText().toString(), "Veullez saisir l'annee de l'activité");
+
+                        AppUtility.controlValue(spTran_type.getSelectedItem().toString(), "Veuillez selectionner le type de transport");
+                        AppUtility.controlValue(spTran_capacite.getSelectedItem().toString(), "veuillez selectionner la capacite de Transport");
+                        AppUtility.controlValue(spTran_annee.getSelectedItem().toString(), "veuillez selectionner l'annee de transport");
+                        AppUtility.controlValue(spTran_marque.getSelectedItem().toString(), "veuillez selectionner la maqrque de transport");
 
                         JSONObject json = new JSONObject();
 
 
-                        json.put("name",txNomA.getText().toString());
-                        json.put("type-activity",spTypeA.getSelectedItem().toString());
-                        json.put("created_date",txAnCR.getText().toString());
+                        json.put("name", txNomA.getText().toString());
+                        json.put("type-activity", spTypeA.getSelectedItem().toString());
+                        json.put("created_date", txAnCR.getText().toString());
 
-                        json.put("vehicule_type",spTran_type.getSelectedItem().toString());
+                        json.put("vehicule_type", spTran_type.getSelectedItem().toString());
                         json.put("transport_capacity", spTran_capacite.getSelectedItem().toString());
-                        json.put("vehicule_marque",spTran_marque.getSelectedItem().toString());
-                        json.put("acquisition_year",spTran_annee.getSelectedItem().toString());
+                        json.put("vehicule_marque", spTran_marque.getSelectedItem().toString());
+                        json.put("acquisition_year", spTran_annee.getSelectedItem().toString());
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
                         transaction.commit();
 
-                    }*/ else{
-
+                    } else {
                         AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activité svp");
                         AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activité svp");
 
@@ -162,14 +162,14 @@ public class TypeActivityFragment extends Fragment {
 
                         JSONObject json = new JSONObject();
 
-                        json.put("name",txNomA.getText().toString());
+                        json.put("name", txNomA.getText().toString());
                         json.put("type_activity", spTypeA.getSelectedItem().toString());
-                        json.put("created_date",txAnCR.getText().toString());
+                        json.put("created_date", txAnCR.getText().toString());
 
-                        json.put("sourceof_supply",spSourA.getSelectedItem().toString());
-                        json.put("activity_object",spObA.getSelectedItem().toString());
-                        json.put("anneeof_agricole",txAnCR.getText().toString());
-                        json.put("scope",spEtendue.getSelectedItem().toString());
+                        json.put("sourceof_supply", spSourA.getSelectedItem().toString());
+                        json.put("activity_object", spObA.getSelectedItem().toString());
+                        json.put("anneeof_agricole", txAnCR.getText().toString());
+                        json.put("scope", spEtendue.getSelectedItem().toString());
 
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -178,7 +178,6 @@ public class TypeActivityFragment extends Fragment {
                         transaction.commit();
 
                     }
-
 
 
                 } catch (ValueDataException e) {
@@ -190,7 +189,7 @@ public class TypeActivityFragment extends Fragment {
         });
 
 
-Log.d("SelectedACTIVITY","");
+        Log.d("SelectedACTIVITY", "");
 
         spTypeA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -218,9 +217,13 @@ Log.d("SelectedACTIVITY","");
                         pan_transport.setVisibility(View.VISIBLE);
                         pan_commerce.setVisibility(View.GONE);
                         break;
-
                     }
 
+                    default:
+                        pan_agriculture.setVisibility(View.GONE);
+                        pan_commerce.setVisibility(View.GONE);
+                        pan_transport.setVisibility(View.GONE);
+                        break;
                 }
 
             }

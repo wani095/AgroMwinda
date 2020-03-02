@@ -80,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
+                    android:entries="@array/list_niveau_etude"
                     android:background="@drawable/btn_control_forme"
                     />
                 <TextView

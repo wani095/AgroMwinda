@@ -184,8 +184,12 @@ public class FormSaveAdresseActivity extends Fragment {
                         pan_rural.setVisibility(View.VISIBLE);
                         pan_urbain.setVisibility(View.GONE);
                         break;
-
                     }
+
+                    default:
+                        pan_rural.setVisibility(View.GONE);
+                        pan_urbain.setVisibility(View.GONE);
+                        break;
 
                 }
             }
