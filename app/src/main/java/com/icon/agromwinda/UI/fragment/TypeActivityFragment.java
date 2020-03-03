@@ -95,18 +95,18 @@ public class TypeActivityFragment extends Fragment {
                     if (spTypeA.getSelectedItem().toString().equals("Commerce") == false &&
                             spTypeA.getSelectedItem().toString().equals("Agriculture") == false &&
                             spTypeA.getSelectedItem().toString().equals("Transport") == false) {
-                        AppUtility.controlValue("", "Veuillez renseigner le type d'activité svp");
+                        AppUtility.controlValue("", "Veuillez renseigner le type d'activit? svp");
 
                     }
 
                     if (spTypeA.getSelectedItem().toString().equals("Commerce")) {
 
-                        AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activité svp");
-                        AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activité svp");
+                        AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activit? svp");
+                        AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activit? svp");
 
-                        AppUtility.controlValue(spComer_type.getSelectedItem().toString(), "Veuillez séléctionner type de commerce svp");
-                        AppUtility.controlValue(spComer_source.getSelectedItem().toString(), "Veuillez séléctionner source de commerce svp");
-                        AppUtility.controlValue(spComer_cappacite.getSelectedItem().toString(), "Veuillez séléctionner la capacite de commerce svp");
+                        AppUtility.controlValue(spComer_type.getSelectedItem().toString(), "Veuillez s?l?ctionner type de commerce svp");
+                        AppUtility.controlValue(spComer_source.getSelectedItem().toString(), "Veuillez s?l?ctionner source de commerce svp");
+                        AppUtility.controlValue(spComer_cappacite.getSelectedItem().toString(), "Veuillez s?l?ctionner la capacite de commerce svp");
 
 
                         JSONObject json = new JSONObject();
@@ -122,12 +122,12 @@ public class TypeActivityFragment extends Fragment {
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
-                        transaction.commit();
+                       transaction.commit();
 
                     } else if (spTypeA.getSelectedItem().toString().equals("Transport")) {
 
-                        AppUtility.controlValue(txNomA.getText().toString(), " Veullez ecrire le nom de l'activité");
-                        AppUtility.controlValue(txAnCR.getText().toString(), "Veullez saisir l'annee de l'activité");
+                        AppUtility.controlValue(txNomA.getText().toString(), " Veullez ecrire le nom de l'activit?");
+                        AppUtility.controlValue(txAnCR.getText().toString(), "Veullez saisir l'annee de l'activit?");
 
                         AppUtility.controlValue(spTran_type.getSelectedItem().toString(), "Veuillez selectionner le type de transport");
                         AppUtility.controlValue(spTran_capacite.getSelectedItem().toString(), "veuillez selectionner la capacite de Transport");
@@ -152,13 +152,13 @@ public class TypeActivityFragment extends Fragment {
                         transaction.commit();
 
                     } else {
-                        AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activité svp");
-                        AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activité svp");
+                        AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activit? svp");
+                        AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activit? svp");
 
-                        AppUtility.controlValue(spTypeAC.getSelectedItem().toString(), "Veuillez séléctionner type de commerce svp");
-                        AppUtility.controlValue(spObA.getSelectedItem().toString(), "Veuillez séléctionner source de commerce svp");
-                        AppUtility.controlValue(spSourA.getSelectedItem().toString(), "Veuillez séléctionner la capacite de commerce svp");
-                        AppUtility.controlValue(spEtendue.getSelectedItem().toString(), "Veuillez séléctionner la capacite de commerce svp");
+                        AppUtility.controlValue(spTypeAC.getSelectedItem().toString(), "Veuillez s?l?ctionner type de commerce svp");
+                        AppUtility.controlValue(spObA.getSelectedItem().toString(), "Veuillez s?l?ctionner source de commerce svp");
+                        AppUtility.controlValue(spSourA.getSelectedItem().toString(), "Veuillez s?l?ctionner la capacite de commerce svp");
+                        AppUtility.controlValue(spEtendue.getSelectedItem().toString(), "Veuillez s?l?ctionner la capacite de commerce svp");
 
                         JSONObject json = new JSONObject();
 

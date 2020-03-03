@@ -108,7 +108,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }
-
     @Override
     public void onCreate(SQLiteDatabase db) {
 

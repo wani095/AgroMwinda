@@ -76,7 +76,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
                 attrs.add(new String[]{"ID :", String.valueOf(subscriber.getId())});
                 attrs.add(new String[]{"Nom :", subscriber.getFirstname()});
                 attrs.add(new String[]{"Postnom :",subscriber.getLastname()});
-                attrs.add(new String[]{"PrÃ©nom:",subscriber.getName()});
+                attrs.add(new String[]{"Prénom:",subscriber.getName()});
                 attrs.add(new String[]{"Mobile :", subscriber.getPhone_number()});
                 attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
                 attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
