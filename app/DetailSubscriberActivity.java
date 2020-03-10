@@ -18,11 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class DetailSubscriberActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private Button btnaj;
-    private Button bntmod;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +28,6 @@ public class DetailSubscriberActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_subscriber);
         init();
 
-        Button btnaj = (Button)findViewById(R.id.bntaj);
-        btnaj.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(DetailSubscriberActivity.this, AjouActivite.class));
-            }
-        });
 
     }
 
@@ -74,13 +65,6 @@ public class DetailSubscriberActivity extends AppCompatActivity {
                 List<String[]> attrs = new ArrayList<>();
                 attrs.add(new String[]{"ID :", String.valueOf(subscriber.getId())});
                 attrs.add(new String[]{"Nom :", subscriber.getFirstname()});
-                attrs.add(new String[]{"Postnom :",subscriber.getLastname()});
-                attrs.add(new String[]{"Prénom:",subscriber.getName()});
-                attrs.add(new String[]{"Mobile :", subscriber.getPhone_number()});
-                attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
-                attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
-                attrs.add(new String[]{"Age :",subscriber.getAge()});
-                attrs.add(new String[]{"Organisation paysanne:",subscriber.getPeasant_organization()});
 
                 DetailSubscriberAdapter subscriberAdapter=new DetailSubscriberAdapter(DetailSubscriberActivity.this,attrs);
 

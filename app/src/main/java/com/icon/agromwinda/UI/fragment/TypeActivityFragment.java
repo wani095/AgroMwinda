@@ -119,6 +119,16 @@ public class TypeActivityFragment extends Fragment {
                         json.put("sourceof_supply", spComer_source.getSelectedItem().toString());
                         json.put("economic_capacity", spComer_cappacite.getSelectedItem().toString());
 
+                        json.put("sourceof_supply", 0);
+                        json.put("activity_object", 0);
+                        json.put("anneeof_agricole", 0);
+                        json.put("scope", 0);
+
+                        json.put("vehicule_type", 0);
+                        json.put("transport_capacity", 0);
+                        json.put("vehicule_marque", 0);
+                        json.put("acquisition_year", 0);
+
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
@@ -146,6 +156,15 @@ public class TypeActivityFragment extends Fragment {
                         json.put("vehicule_marque", spTran_marque.getSelectedItem().toString());
                         json.put("acquisition_year", spTran_annee.getSelectedItem().toString());
 
+                        json.put("typeof_sale", 0);
+                        json.put("sourceof_supply", 0);
+                        json.put("economic_capacity", 0);
+
+                        json.put("sourceof_supply", 0);
+                        json.put("activity_object", 0);
+                        json.put("anneeof_agricole", 0);
+                        json.put("scope", 0);
+
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
@@ -170,6 +189,15 @@ public class TypeActivityFragment extends Fragment {
                         json.put("activity_object", spObA.getSelectedItem().toString());
                         json.put("anneeof_agricole", txAnCR.getText().toString());
                         json.put("scope", spEtendue.getSelectedItem().toString());
+
+                        json.put("typeof_sale", 0);
+                        json.put("sourceof_supply", 0);
+                        json.put("economic_capacity", 0);
+
+                        json.put("vehicule_type", 0);
+                        json.put("transport_capacity", 0);
+                        json.put("vehicule_marque", 0);
+                        json.put("acquisition_year", 0);
 
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();

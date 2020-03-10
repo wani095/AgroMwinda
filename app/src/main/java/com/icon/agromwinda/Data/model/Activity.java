@@ -1,10 +1,9 @@
 package com.icon.agromwinda.Data.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Activity {
-
-
 
     private int id;
 
@@ -40,6 +39,8 @@ public class Activity {
     private Date update_at;
     private String created_date;
     private String physique_environment;
+
+    private List<Activity> activityList;
 
     public int getAgricole_information_id;
 
@@ -223,4 +224,13 @@ public class Activity {
     public void setEconomic_capacity(String economic_capacity) {
         this.economic_capacity = economic_capacity;
     }
+
+    public List<Activity> getActivityList() {
+        return activityList;
+    }
+
+    public void setActivityList(List<Activity> activityList) {
+        this.activityList = activityList;
+    }
+
 }

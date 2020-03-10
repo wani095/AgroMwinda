@@ -59,4 +59,5 @@ public interface IDao {
 
     List<Activity> getActivities(int fkSubscriber);
 
+    Activity getActivity(Integer integer);
 }

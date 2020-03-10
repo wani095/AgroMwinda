@@ -1,4 +1,4 @@
-package com.icon.agromwinda.UI.ui.login;
+package com.icon.agromwinda.UI.LoginSy;
 
 import android.app.Activity;
 import android.arch.lifecycle.Observer;
@@ -19,11 +19,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.icon.agromwinda.R;
+import com.icon.agromwinda.UI.LoginSy.LoggedInUserView;
+import com.icon.agromwinda.UI.LoginSy.LoginFormState;
+import com.icon.agromwinda.UI.LoginSy.LoginResult;
+import com.icon.agromwinda.UI.LoginSy.LoginViewModel;
+import com.icon.agromwinda.UI.LoginSy.LoginViewModelFactory;
 
-public class Login extends AppCompatActivity {
+public class LoginSynchronisation extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,4 +126,5 @@ public class Login extends AppCompatActivity {
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
     }
+
 }

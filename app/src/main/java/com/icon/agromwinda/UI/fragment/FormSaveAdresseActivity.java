@@ -32,12 +32,14 @@ import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
+import com.icon.agromwinda.UI.activity.DetailSubscriberActivity;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
 import com.icon.agromwinda.UI.activity.ListSecteurActivity;
 import com.icon.agromwinda.UI.activity.ListTerritoireActivity;
 import com.icon.agromwinda.UI.activity.ListVilleActivity;
 import com.icon.agromwinda.UI.activity.ListingActivity;
+import com.icon.agromwinda.UI.activity.ListingActivityPerson;
 import com.icon.agromwinda.UI.dialog.MessageDialog;
 import com.icon.agromwinda.UI.dialog.WaitingDialog;
 import com.icon.agromwinda.Utilities.AppUtility;
@@ -250,6 +252,10 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("territory_id", territoire.getId());
                         json.put("secteur_id", secteur.getId());
 
+                        json.put("province_id", 0);
+                        json.put("town_id", 0);
+                        json.put("city_id ", 0);
+
                         new SaveActivity(json.toString()).execute();
                     }
 
@@ -328,16 +334,15 @@ public class FormSaveAdresseActivity extends Fragment {
             Dao dao=new Dao(getContext());
             long rep=dao.saveActivity(activity);
             Log.d("DATAACTIVITY",""+rep);
-
             return rep;
         }
 
         @Override
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
-            if (rep>0){
+            if (rep>=0){
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
-                Intent intent=new Intent(getActivity(), ListingActivity.class);
+                Intent intent=new Intent(getActivity(), ListingActivityPerson.class);
                 getActivity().startActivity(intent);
             }else {
                 MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();

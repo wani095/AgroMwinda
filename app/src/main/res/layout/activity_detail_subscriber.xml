@@ -61,29 +61,11 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200sp"
-            android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="20sp"
-            android:textStyle="bold"
-            android:background="@color/colorPrimary"
-            android:text="Ses Activity"
-            android:textAlignment="center"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/detailactivity"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
+        <include layout="@layout/activity_listing_person"/>
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="19dp"
+            android:layout_height="27dp"
             android:background="@color/colorPrimary"
             android:gravity="center"
             android:text="@string/copyrith"
