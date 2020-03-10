@@ -340,7 +340,7 @@ public class FormSaveAdresseActivity extends Fragment {
         @Override
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
-            if (rep>=0){
+            if (rep>0){
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
                 Intent intent=new Intent(getActivity(), ListingActivityPerson.class);
                 getActivity().startActivity(intent);
