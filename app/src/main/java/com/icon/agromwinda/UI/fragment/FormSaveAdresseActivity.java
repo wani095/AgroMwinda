@@ -214,7 +214,6 @@ public class FormSaveAdresseActivity extends Fragment {
                     if(spchoixA.getSelectedItem().toString().equals("Urbain")==false &&
                             spchoixA.getSelectedItem().toString().equals("Rural")==false){
                         AppUtility.controlValue("", "Veuillez renseigner le type d'ativite svp");
-
                     }
                     if(spchoixA.getSelectedItem().toString().equals("Urbain")){
                         AppUtility.controlValue(txQuatier.getText().toString(),"veuillez ecrire votre quartier");
@@ -342,7 +341,7 @@ public class FormSaveAdresseActivity extends Fragment {
             waitingDialog.hide();
             if (rep>0){
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
-                Intent intent=new Intent(getActivity(), ListingActivityPerson.class);
+                Intent intent = new Intent(getActivity(), ListingActivity.class);
                 getActivity().startActivity(intent);
             }else {
                 MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();
@@ -367,7 +366,5 @@ public class FormSaveAdresseActivity extends Fragment {
 
             return null;
         }
-
-
     }
 }
