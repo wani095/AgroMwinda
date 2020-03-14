@@ -100,4 +100,6 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             return null;
         }
     }
+
+
 }

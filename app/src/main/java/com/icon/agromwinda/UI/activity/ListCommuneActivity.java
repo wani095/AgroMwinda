@@ -42,6 +42,7 @@ public class ListCommuneActivity extends AppCompatActivity {
     public void bindEvents() {
 
     }
+
     public class ListCommunes extends AsyncTask<Void, Void, List<Commune>> {
 
         List<Commune> communes = null;

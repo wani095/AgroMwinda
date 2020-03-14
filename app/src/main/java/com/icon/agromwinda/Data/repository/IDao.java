@@ -38,4 +38,6 @@ public interface IDao {
 
     List<Activity> getActivities(int fkSubscriber);
 
+
+
 }

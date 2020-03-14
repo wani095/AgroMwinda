@@ -164,8 +164,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "   secteur_id integer,\n"+
                 "   groupment varchar(255),\n"+
                 "   village varchar(255),\n"+
-                "   transport_information_id integer,\n"+
-                ")");
+                "   transport_information_id integer)");
 
         init();
 
@@ -308,7 +307,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
         return 0;
     }
-
+;
     @Override
     public List<Activity> getActivitys() {
         List<Activity> activitys = new ArrayList<>();
