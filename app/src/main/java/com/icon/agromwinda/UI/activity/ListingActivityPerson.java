@@ -16,6 +16,7 @@ import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.Adapter.ListingPersonAdapter;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListingActivityPerson extends AppCompatActivity {
@@ -46,11 +47,9 @@ public class ListingActivityPerson extends AppCompatActivity {
         protected List<Activity> doInBackground(Void... voids) {
 
             Dao dao = new Dao(ListingActivityPerson.this);
-            List<Activity> activitys = (List<Activity>) dao.getActivitys();
-
+            List <Activity> activitys =( List <Activity>) dao.getActivitys();
             return activitys;
         }
-
         @Override
         protected void onPostExecute(List<Activity> activitys) {
             if (activitys != null) {

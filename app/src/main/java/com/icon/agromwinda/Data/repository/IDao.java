@@ -25,39 +25,30 @@ public interface IDao {
 
     List<Territoire> getTerritoires();
 
-    long saveActivity(Activity pp);
-
-    long SaveActivity(Activity pp);
-
+    long saveActivity(Activity activity);
     List<Activity> getActivitys();
-
-    Activity getActivitys(Integer id);
+    Activity getActivity(Integer id);
 
     long saveSubscriber(Subscriber subscriber);
-
     List<Subscriber> getSubscribers();
-
     Subscriber getSubscriber(Integer id);
 
+
+
     long saveAgricole_infomation(Agricole_information a);
-
     List<Agricole_information> getAgricole_informations();
-
     Agricole_information getAgricole_information(Integer id);
 
+
     long saveTrade_information(trade_information co);
-
     List<trade_information> getTrade_information();
-
     trade_information getTrade_information(Integer id);
 
     long saveTransport_infomation(Transport_information tr);
-
     List<Transport_information> getTransport_informations();
-
     Transport_information getTransport_information(Integer id);
 
     List<Activity> getActivities(int fkSubscriber);
 
-    Activity getActivity(Integer integer);
+
 }

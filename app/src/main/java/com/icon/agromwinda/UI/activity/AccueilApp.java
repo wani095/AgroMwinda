@@ -12,7 +12,7 @@ import com.icon.agromwinda.R;
 
 public class AccueilApp extends AppCompatActivity {
 
-    private Button btajout, btnList;
+    private Button btajout;
     private Button bntplat;
     private Button btnajoutac;
 

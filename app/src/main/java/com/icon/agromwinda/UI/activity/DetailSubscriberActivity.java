@@ -22,7 +22,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Button btnaj;
-    private Button bntmod;
+    private Button bntmod,btnlistA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +35,14 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DetailSubscriberActivity.this, AjouActivite.class));
+            }
+        });
+
+        Button btnlistA =(Button)findViewById(R.id.btnlistA);
+        btnlistA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailSubscriberActivity.this, ListingActivityPerson.class));
             }
         });
 
@@ -80,7 +88,6 @@ public class DetailSubscriberActivity extends AppCompatActivity {
                 attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
                 attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
                 attrs.add(new String[]{"Age :",subscriber.getAge()});
-                attrs.add(new String[]{"Organisation paysanne:",subscriber.getPeasant_organization()});
 
                 DetailSubscriberAdapter subscriberAdapter=new DetailSubscriberAdapter(DetailSubscriberActivity.this,attrs);
 

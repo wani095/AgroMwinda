@@ -164,6 +164,7 @@ public class Activity {
         this.village = village;
     }
 
+
     public void setPhysical_environment(String physical_environment) { this.physical_environment = physical_environment; }
 
     public Date getUpdate_at() {
@@ -233,4 +234,5 @@ public class Activity {
         this.activityList = activityList;
     }
 
+    public String getPhysical_environment() { return physical_environment; }
 }

@@ -244,7 +244,6 @@ public class TypeActivityFragment extends Fragment {
                         pan_transport.setVisibility(View.GONE);
                         break;
                 }
-
             }
 
             @Override

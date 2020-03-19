@@ -6,7 +6,7 @@
     android:background="@drawable/border_recycle_view"
     android:id="@+id/row_activity">
     <TextView
-        android:id="@+id/txFullName"
+        android:id="@+id/txFullNameActivity"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Listing"

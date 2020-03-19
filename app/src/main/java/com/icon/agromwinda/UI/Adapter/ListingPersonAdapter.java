@@ -20,7 +20,7 @@ import com.icon.agromwinda.UI.activity.DetailSubscriberActivity;
 
 import java.util.List;
 
-public class ListingPersonAdapter extends RecyclerView.Adapter<ListingPersonAdapter.PersonViewHolder> {
+public class ListingPersonAdapter extends RecyclerView.Adapter<ListingPersonAdapter.ListingPersonViewHolder> {
 
 
     private Context context;
@@ -29,25 +29,25 @@ public class ListingPersonAdapter extends RecyclerView.Adapter<ListingPersonAdap
     private Activity activity;
 
 
-    public ListingPersonAdapter(Context context, List<com.icon.agromwinda.Data.model.Activity> subscribers, Activity activity){
+    public ListingPersonAdapter(Context context, List<com.icon.agromwinda.Data.model.Activity> activitys, Activity activity){
         this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.activitys = activitys;
         this.activity=activity;
+
     }
-
-
 
     @NonNull
     @Override
-    public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public ListingPersonViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = inflater.inflate(R.layout.row_listing_activity, viewGroup, false);
-        return new PersonViewHolder(view);
+        return new ListingPersonViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PersonViewHolder PersonViewHolder,final int i) {
-        PersonViewHolder.txFullNameActivity.setText(activitys.get(i).getName());
+    public void onBindViewHolder(@NonNull final ListingPersonViewHolder PersonViewHolder, final int i) {
+        PersonViewHolder.txFullNameActivity.setText(activitys.get(i).getName()+""+activitys.get(i).getType_activity());
+
 
         PersonViewHolder.row_activity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +62,16 @@ public class ListingPersonAdapter extends RecyclerView.Adapter<ListingPersonAdap
     @Override
     public int getItemCount() {
         return activitys.size();
+
     }
 
-    public class PersonViewHolder extends RecyclerView.ViewHolder{
+
+    public class ListingPersonViewHolder extends RecyclerView.ViewHolder{
 
         LinearLayout row_activity;
         TextView txFullNameActivity;
 
-        public PersonViewHolder(@NonNull View itemView) {
+        public ListingPersonViewHolder(@NonNull View itemView) {
             super(itemView);
             txFullNameActivity=itemView.findViewById(R.id.txFullNameActivity);
             row_activity=itemView.findViewById(R.id.row_activity);

@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -27,7 +26,6 @@ import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Secteur;
-import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.repository.Dao;
@@ -48,6 +46,7 @@ import com.icon.agromwinda.Utilities.ValueDataException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.Date;
 
 public class FormSaveAdresseActivity extends Fragment {
@@ -181,13 +180,11 @@ public class FormSaveAdresseActivity extends Fragment {
                         pan_urbain.setVisibility(View.VISIBLE);
                         break;
                     }
-
                     case "Rural": {
                         pan_rural.setVisibility(View.VISIBLE);
                         pan_urbain.setVisibility(View.GONE);
                         break;
                     }
-
                     default:
                         pan_rural.setVisibility(View.GONE);
                         pan_urbain.setVisibility(View.GONE);
@@ -195,7 +192,6 @@ public class FormSaveAdresseActivity extends Fragment {
 
                 }
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
@@ -232,7 +228,7 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", town.getId());
                         json.put("city_id ", commune.getId());
 
-                        new SaveActivity(json.toString()).execute();
+                        new saveActivity(json.toString()).execute();
 
                     }else{
                         AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
@@ -255,10 +251,8 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", 0);
                         json.put("city_id ", 0);
 
-                        new SaveActivity(json.toString()).execute();
+                        new saveActivity(json.toString()).execute();
                     }
-
-
 
                 } catch (ValueDataException e) {
                     MessageDialog.getDialog(getContext()).createDialog(e.getMessage()).show();
@@ -308,14 +302,13 @@ public class FormSaveAdresseActivity extends Fragment {
 
         }
     }
+    
 
-
-    public class SaveActivity extends AsyncTask<Void, Void, Long> {
+    public class saveActivity extends AsyncTask<Void, Void, Long> {
 
         private String data;
-
         WaitingDialog waitingDialog ;
-        public SaveActivity(String data) {
+        public saveActivity(String data) {
             this.data = data;
             waitingDialog= new WaitingDialog(getContext());
 
@@ -339,9 +332,9 @@ public class FormSaveAdresseActivity extends Fragment {
         @Override
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
-            if (rep>0){
+            if (rep>1){
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
-                Intent intent = new Intent(getActivity(), ListingActivity.class);
+                Intent intent = new Intent(getActivity(), ListingActivityPerson.class);
                 getActivity().startActivity(intent);
             }else {
                 MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();
@@ -349,8 +342,6 @@ public class FormSaveAdresseActivity extends Fragment {
 
         }
     }
-
-
 
     public class ListVilles extends AsyncTask<Void, Void, String> {
 
@@ -363,7 +354,6 @@ public class FormSaveAdresseActivity extends Fragment {
 
         @Override
         protected String doInBackground(Void... voids) {
-
             return null;
         }
     }
