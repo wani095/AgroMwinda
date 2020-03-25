@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
@@ -31,7 +32,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_subscriber);
         init();
 
-        Button btnaj = (Button)findViewById(R.id.bntaj);
+        Button btnaj = (Button) findViewById(R.id.bntaj);
         btnaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -43,7 +44,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
 
     public void init() {
 
-        Integer id = (Integer)getIntent().getExtras().get("id");
+        Integer id = (Integer) getIntent().getExtras().get("id");
         new LoadSubcriber(new WaitingDialog(this)).execute(id);
     }
 
@@ -74,29 +75,39 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             if (subscriber != null) {
                 List<String[]> attrs = new ArrayList<>();
                 attrs.add(new String[]{"ID :", String.valueOf(subscriber.getId())});
-                attrs.add(new String[]{"Nom :",subscriber.getLastname()});
-                attrs.add(new String[]{"Prénom:",subscriber.getName()});
-                attrs.add(new String[]{"Postnom :", subscriber.getFirstname()});
+                attrs.add(new String[]{"Nom :", subscriber.getFirstname()});
+                attrs.add(new String[]{"Postnom :", subscriber.getLastname()});
+                attrs.add(new String[]{"Prénom:", subscriber.getName()});
                 attrs.add(new String[]{"Mobile :", subscriber.getPhone_number()});
-                attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
-                attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
-                attrs.add(new String[]{"Age :",subscriber.getAge()});
-                attrs.add(new String[]{"Organisation paysanne:",subscriber.getPeasant_organization()});
+                attrs.add(new String[]{"Nom de l'AM :", subscriber.getMultiplier_agent()});
+                attrs.add(new String[]{"Sexe :", subscriber.getSexe()});
+                attrs.add(new String[]{"Age :", subscriber.getAge()});
+                attrs.add(new String[]{"Organisation paysanne:", subscriber.getPeasant_organization()});
 
-                DetailSubscriberAdapter subscriberAdapter=new DetailSubscriberAdapter(DetailSubscriberActivity.this,attrs);
+                DetailSubscriberAdapter subscriberAdapter = new DetailSubscriberAdapter(DetailSubscriberActivity.this, attrs);
 
                 recyclerView = findViewById(R.id.detailsubscriber);
                 recyclerView.setLayoutManager(new LinearLayoutManager(DetailSubscriberActivity.this));
                 recyclerView.setHasFixedSize(true);
                 recyclerView.setAdapter(subscriberAdapter);
+
+                new LoadActivities(subscriber.getId()).execute();
             }
         }
     }
 
-    class LoadActivities extends AsyncTask<Integer, Subscriber, Subscriber>{
+    class LoadActivities extends AsyncTask<Integer, Subscriber, Subscriber> {
+
+        private int subscriber_id;
+
+        public LoadActivities(int id) {
+            subscriber_id = id;
+        }
 
         @Override
         protected Subscriber doInBackground(Integer... integers) {
+
+            List<Activity> activities=new Dao(DetailSubscriberActivity.this).getListActivitys(subscriber_id);
             return null;
         }
     }

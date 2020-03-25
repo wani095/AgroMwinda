@@ -45,7 +45,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
 
     @Override
     public void onBindViewHolder(@NonNull final ListingViewHolder provinceViewHolder,final int i) {
-        provinceViewHolder.txFullName.setText(subscribers.get(i).getName()+" "+subscribers.get(i).getFirstname()+" "+subscribers.get(i).getLastname());
+        provinceViewHolder.txFullName.setText(subscribers.get(i).getName()+" "+subscribers.get(i).getFirstname()+" "+subscribers.get(i).getLastname()+" "+subscribers.get(i).getPhone_number());
 
         provinceViewHolder.row.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".UI.activity.PLatForme">
 
-    <WebView
-        android:id="@+id/webview"
+    <Button
+        android:id="@+id/btnfollow"
+        android:text="show popup "
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="85dp" />
 
     <include layout="@layout/activity_navigation"/>
     <include layout="@layout/menu_flot"/>

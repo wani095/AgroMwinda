@@ -52,8 +52,6 @@ public class DetailActivityAdapter extends RecyclerView.Adapter<DetailActivityAd
 
             atribut = itemView.findViewById(R.id.atribut);
             value = itemView.findViewById(R.id.value);
-
-
         }
     }
 }

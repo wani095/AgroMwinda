@@ -32,12 +32,14 @@ import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
+import com.icon.agromwinda.UI.activity.DetailSubscriberActivity;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
 import com.icon.agromwinda.UI.activity.ListSecteurActivity;
 import com.icon.agromwinda.UI.activity.ListTerritoireActivity;
 import com.icon.agromwinda.UI.activity.ListVilleActivity;
 import com.icon.agromwinda.UI.activity.ListingActivity;
+import com.icon.agromwinda.UI.activity.ListingActivityPerson;
 import com.icon.agromwinda.UI.dialog.MessageDialog;
 import com.icon.agromwinda.UI.dialog.WaitingDialog;
 import com.icon.agromwinda.Utilities.AppUtility;
@@ -57,6 +59,7 @@ public class FormSaveAdresseActivity extends Fragment {
     private EditText txQuatier, txAvenue, txDomicile;
     private TextView spCommune, spVille, spProvince;
     private Button btnValider;
+    private Button btnTermine;
     private Province province;
     private Town town;
     private Commune commune;
@@ -145,6 +148,7 @@ public class FormSaveAdresseActivity extends Fragment {
             }
         });
 
+
         spTerritoire.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -164,9 +168,10 @@ public class FormSaveAdresseActivity extends Fragment {
 
         Log.d("SelectedACTIVITY","");
 
-        spchoixA.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        spchoixA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
                 if (BuildConfig.DEBUG)
                     Log.d("SelectedACTIVITY", spchoixA.getSelectedItem().toString());
 
@@ -181,11 +186,22 @@ public class FormSaveAdresseActivity extends Fragment {
                         pan_rural.setVisibility(View.VISIBLE);
                         pan_urbain.setVisibility(View.GONE);
                         break;
-
                     }
+
+                    default:
+                        pan_rural.setVisibility(View.GONE);
+                        pan_urbain.setVisibility(View.GONE);
+                        break;
 
                 }
             }
+
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
         });
 
 
@@ -200,11 +216,9 @@ public class FormSaveAdresseActivity extends Fragment {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'ativite svp");
 
                     }
-
                     if(spchoixA.getSelectedItem().toString().equals("Urbain")){
-
-                        AppUtility.controlValue(txQuatier.getText().toString(), "Veuillez entrer le quartier svp");
-                        AppUtility.controlValue(txAvenue.getText().toString(), "Veuillez entrer l'avenue svp");
+                        AppUtility.controlValue(txQuatier.getText().toString(),"veuillez ecrire votre quartier");
+                        AppUtility.controlValue(txAvenue.getText().toString(),"veuillez ecrire votre avenue");
 
                         AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
                         AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
@@ -219,7 +233,7 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", town.getId());
                         json.put("city_id ", commune.getId());
 
-                        new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
+                        new SaveActivity(json.toString()).execute();
 
                     }else{
                         AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
@@ -232,13 +246,17 @@ public class FormSaveAdresseActivity extends Fragment {
                         JSONObject json =new JSONObject(getArguments().getString("data"));
 
                         json.put(" village", txVillage.getText().toString());
-                        json.put("groupment_id", txGroupement.getText().toString());
+                        json.put("groupment", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());
                         json.put("province_id", province.getId());
                         json.put("territory_id", territoire.getId());
-                        json.put("secteur", secteur.getId());
+                        json.put("secteur_id", secteur.getId());
 
-                        new FormSaveAdresseActivity.SaveActivity(json.toString()).execute();
+                        json.put("province_id", 0);
+                        json.put("town_id", 0);
+                        json.put("city_id ", 0);
+
+                        new SaveActivity(json.toString()).execute();
                     }
 
 
@@ -277,31 +295,32 @@ public class FormSaveAdresseActivity extends Fragment {
             spProvinc.setTextColor(Color.BLACK);
             spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
 
-        }else if(requestCode==10 && resultCode==81 && data!=null){
-            secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
+        }else if(requestCode==11 && resultCode==81 && data!=null){
+            secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Secteur>(){}.getType());
             spSecteur.setText(secteur.getNom());
             spSecteur.setTextColor(Color.BLACK);
             spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
 
-        }else if(requestCode==11 && resultCode==82 && data!=null){
-            territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
+        }else if(requestCode==10 && resultCode==82 && data!=null){
+            territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Territoire>(){}.getType());
             spTerritoire.setText(territoire.getNom());
             spTerritoire.setTextColor(Color.BLACK);
             spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
 
         }
+    }
 
 
-    } public class SaveActivity extends AsyncTask<Void, Void, Long> {
+    public class SaveActivity extends AsyncTask<Void, Void, Long> {
 
         private String data;
 
-        private WaitingDialog waitingDialog = new WaitingDialog(getContext());
-
+        WaitingDialog waitingDialog ;
         public SaveActivity(String data) {
             this.data = data;
-        }
+            waitingDialog= new WaitingDialog(getContext());
 
+        }
         @Override
         protected void onPreExecute() {
             waitingDialog.show();
@@ -314,8 +333,7 @@ public class FormSaveAdresseActivity extends Fragment {
             activity.setCreated_at(new Date());
             Dao dao=new Dao(getContext());
             long rep=dao.saveActivity(activity);
-
-
+            Log.d("DATAACTIVITY",""+rep);
             return rep;
         }
 
@@ -323,11 +341,11 @@ public class FormSaveAdresseActivity extends Fragment {
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
             if (rep>0){
-                MessageDialog.getDialog(getActivity()).createDialog("Votre Operation est un succès").show();
-                Intent intent=new Intent(getActivity(), ListingActivity.class);
+                MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
+                Intent intent=new Intent(getActivity(), ListingActivityPerson.class);
                 getActivity().startActivity(intent);
             }else {
-                MessageDialog.getDialog(getActivity()).createDialog("Echec d'enregistrement").show();
+                MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();
             }
 
         }

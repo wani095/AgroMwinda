@@ -18,7 +18,6 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             app:cardCornerRadius="10dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -28,20 +27,6 @@
                 android:paddingRight="10dp"
                 android:paddingBottom="20dp">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nom de l'Activité "
-                    android:textColor="#000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Adresse physique de l'activité "
-                    android:textColor="#000"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -52,16 +37,13 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/village"
+                    android:id="@+id/txVillage"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
                     android:paddingLeft="7dp"
                     android:background="@drawable/btn_control_forme"
                     android:inputType="text"/>
-
-
-
 
                 <TextView
                     android:layout_width="match_parent"
@@ -72,7 +54,7 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/groupement"
+                    android:id="@+id/txGroupement"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -88,13 +70,13 @@
                     android:textSize="14sp" />
 
                 <EditText
-                    android:id="@+id/domicile"
+                    android:id="@+id/txDomicile"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
                     android:paddingLeft="7dp"
                     android:background="@drawable/btn_control_forme"
-                    android:inputType="text"/>
+                    android:inputType="number"/>
 
 
                 <TextView
@@ -106,7 +88,7 @@
                     android:textSize="14sp" />
 
                 <TextView
-                    android:id="@+id/spProvince"
+                    android:id="@+id/spProvinc"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="4dp"
@@ -122,7 +104,7 @@
                     android:layout_marginTop="12dp"
                     android:text="Térritoire"
                     android:textColor="#000"
-                    android:textSize="14sp" />d
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/spTerritoire"
@@ -153,67 +135,7 @@
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:text="Secteur" />
-
-
-
-
             </LinearLayout>
         </android.support.v7.widget.CardView>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp"
-        android:paddingRight="30dp"
-        android:paddingLeft="90dp"
-        android:layout_marginBottom="20dp">
-
-
-        <android.support.v7.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="30sp"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorWrite"
-            app:cardCornerRadius="10dp">
-
-            <Button
-                android:id="@+id/btnTermine"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWrite"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Terminer" />
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="160dp"
-            android:layout_height="30sp"
-            android:layout_marginTop="10dp"
-            android:background="@color/colorWrite"
-            app:cardCornerRadius="10dp">
-
-            <Button
-                android:id="@+id/btnRetA"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/colorWrite"
-                android:backgroundTint="@color/colorPrimary"
-                android:text="Rectour à l'Activité" />
-        </android.support.v7.widget.CardView>
-
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:textSize="15sp"
-        android:text="@string/copyrith"
-        android:gravity="center"
-        android:background="@color/colorPrimary"
-        android:textColor="#000"
-        android:textStyle="bold"/>
     </LinearLayout>
 </ScrollView>

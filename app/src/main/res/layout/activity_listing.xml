@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.activity.ListCommuneActivity"
+    tools:context=".UI.activity.ListingActivity"
     android:paddingTop="10dp">
 
     <LinearLayout
@@ -29,7 +29,7 @@
             app:cardCornerRadius="10dp">
 
             <Button
-                android:id="@+id/btnList"
+                android:id="@+id/btnsynchry"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorWrite"

@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.icon.agromwinda.R;
 
-class LoginActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
 

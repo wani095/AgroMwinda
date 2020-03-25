@@ -12,15 +12,24 @@
     <string name="lbl_organisation_paysanne">Nom de l\'OP</string>
     <string name="lbl_cooperative">Nom de la cooperative affiliée</string>
     <string name="lbl_detail">(Remplissez seulement la case concernant les données de l\'abonné)</string>
-    <string name="copyrith">\@2020 AgroMwinda. Tous droits réservés</string>
+    <string name="copyrith">\©2020 AgroMwinda. Tous droits réservés</string>
 
     <string name="ajou">AJOUTER ABONNEE</string>
-    <string name="lis">LISTE DES AJOUTS</string>
+    <string name="lis">LISTE DES ABONNEES</string>
+
+    <string name="histagro">
+    «Nous sommes une plate-forme sociale, éducative et économique intelligente qui soutient
+        les petits agriculteurs, les micro-entreprises et les transporteurs avec des solutions
+        innovantes qui rendent l\'agrobusiness rentable et l\'accès à l\'information et aux services
+        financiers plus facile pour les petites entreprises locales. Nous sommes une plateforme sociale,
+        éducationnelle et économique qui soutient les petits fermiers, les micro entrepreneurs et
+        les transporteurs avec des solutions innovantes qui recherchent l\'agrobusiness rentable et
+        l\'accès à l\'information et aux services finaciers faciles pour les petites entreprises locales. "</string>
 
 
 
     <array name="list_typeAct">
-        <item>---</item>
+        <item>--Activité--</item>
         <item>Commerce</item>
         <item>Agriculture</item>
         <item>Transport</item>
@@ -35,13 +44,13 @@
 
 
     <array name="physiquea">
-        <item>---</item>
-        <item>Rural</item>
+        <item>--Physique Activity--</item>
         <item>Urbain</item>
+        <item>Rural</item>
+        <item>meme Adresse physique </item>
 
     </array>
     <array name="list_typesAC">
-        <item>---</item>
         <item>Ferme</item>
         <item>Champ</item>
         <item>Elevage gros bétail</item>
@@ -111,7 +120,7 @@
         <item>---</item>
         <item>jeep</item>
     </array>
-    <array name="tran_anneeve">
+    <array name="tran_annee">
         <item>---</item>
         <item>2000</item>
     </array>
@@ -127,11 +136,11 @@
     <string name="nav_chat">AgroSeach</string>
     <string name="action_search_text">Search</string>
     <string name="title_activity_login">Sign in</string>
-    <string name="prompt_email">Email</string>
+    <string name="prompt_email">Email ou numero</string>
     <string name="prompt_password">Password</string>
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
+    <string name="welcome">"synchronisation effectué !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
