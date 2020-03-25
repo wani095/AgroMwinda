@@ -119,15 +119,7 @@ public class TypeActivityFragment extends Fragment {
                         json.put("sourceof_supply", spComer_source.getSelectedItem().toString());
                         json.put("economic_capacity", spComer_cappacite.getSelectedItem().toString());
 
-                        json.put("sourceof_supply", 0);
-                        json.put("activity_object", 0);
-                        json.put("anneeof_agricole", 0);
-                        json.put("scope", 0);
 
-                        json.put("vehicule_type", 0);
-                        json.put("transport_capacity", 0);
-                        json.put("vehicule_marque", 0);
-                        json.put("acquisition_year", 0);
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
@@ -207,7 +199,6 @@ public class TypeActivityFragment extends Fragment {
 
                     }
 
-
                 } catch (ValueDataException e) {
                     MessageDialog.getDialog(getContext()).createDialog(e.getMessage()).show();
                 } catch (JSONException e) {
@@ -253,7 +244,6 @@ public class TypeActivityFragment extends Fragment {
                         pan_transport.setVisibility(View.GONE);
                         break;
                 }
-
             }
 
             @Override

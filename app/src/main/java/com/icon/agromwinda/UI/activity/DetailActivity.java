@@ -65,7 +65,8 @@ public class DetailActivity extends AppCompatActivity {
                 List<String[]> attrs = new ArrayList<>();
                 attrs.add(new String[]{"ID :", String.valueOf(activity.getId())});
                 attrs.add(new String[]{"Nom :", activity.getName()});
-
+                attrs.add(new String[]{"type d'activité :", activity.getType_activity()});
+                attrs.add(new String[]{"annee de creation :", activity.getCreated_at()});
                 DetailActivityAdapter activityAdapter=new DetailActivityAdapter(DetailActivity.this,attrs);
 
                 recyclerView = findViewById(R.id.detailactivity);

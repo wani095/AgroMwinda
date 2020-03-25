@@ -47,7 +47,6 @@ public class ListingActivity extends AppCompatActivity {
     public void init() {
         new GetSubscriber().execute();
 
-
     }
 
 

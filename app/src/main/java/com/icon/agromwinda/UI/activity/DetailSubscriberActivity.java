@@ -24,7 +24,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Button btnaj;
-    private Button bntmod;
+    private Button bntmod,btnlistA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detail_subscriber);
         init();
 
-        Button btnaj = (Button) findViewById(R.id.bntaj);
+        Button btnaj = (Button)findViewById(R.id.bntaj);
         btnaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,11 +40,19 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             }
         });
 
+        Button btnlistA =(Button)findViewById(R.id.btnlistA);
+        btnlistA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(DetailSubscriberActivity.this, ListingActivityPerson.class));
+            }
+        });
+
     }
 
     public void init() {
 
-        Integer id = (Integer) getIntent().getExtras().get("id");
+        Integer id = (Integer)getIntent().getExtras().get("id");
         new LoadSubcriber(new WaitingDialog(this)).execute(id);
     }
 
@@ -76,15 +84,14 @@ public class DetailSubscriberActivity extends AppCompatActivity {
                 List<String[]> attrs = new ArrayList<>();
                 attrs.add(new String[]{"ID :", String.valueOf(subscriber.getId())});
                 attrs.add(new String[]{"Nom :", subscriber.getFirstname()});
-                attrs.add(new String[]{"Postnom :", subscriber.getLastname()});
-                attrs.add(new String[]{"Prénom:", subscriber.getName()});
+                attrs.add(new String[]{"Postnom :",subscriber.getLastname()});
+                attrs.add(new String[]{"Prénom:",subscriber.getName()});
                 attrs.add(new String[]{"Mobile :", subscriber.getPhone_number()});
-                attrs.add(new String[]{"Nom de l'AM :", subscriber.getMultiplier_agent()});
-                attrs.add(new String[]{"Sexe :", subscriber.getSexe()});
-                attrs.add(new String[]{"Age :", subscriber.getAge()});
-                attrs.add(new String[]{"Organisation paysanne:", subscriber.getPeasant_organization()});
+                attrs.add(new String[]{"Nom de l'AM :",subscriber.getMultiplier_agent()});
+                attrs.add(new String[]{"Sexe :",subscriber.getSexe()});
+                attrs.add(new String[]{"Age :",subscriber.getAge()});
 
-                DetailSubscriberAdapter subscriberAdapter = new DetailSubscriberAdapter(DetailSubscriberActivity.this, attrs);
+                DetailSubscriberAdapter subscriberAdapter=new DetailSubscriberAdapter(DetailSubscriberActivity.this,attrs);
 
                 recyclerView = findViewById(R.id.detailsubscriber);
                 recyclerView.setLayoutManager(new LinearLayoutManager(DetailSubscriberActivity.this));

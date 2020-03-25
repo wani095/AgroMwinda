@@ -27,8 +27,6 @@ public interface IDao {
 
     long saveActivity(Activity pp);
 
-    long SaveActivity(Activity pp);
-
     long saveSubscriber(Subscriber subscriber);
 
     List<Subscriber> getSubscribers();
