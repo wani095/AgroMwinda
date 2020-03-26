@@ -27,7 +27,6 @@
         l\'accès à l\'information et aux services finaciers faciles pour les petites entreprises locales. "</string>
 
 
-
     <array name="list_typeAct">
         <item>--Activité--</item>
         <item>Commerce</item>
@@ -47,7 +46,7 @@
         <item>--Physique Activity--</item>
         <item>Urbain</item>
         <item>Rural</item>
-        <item>meme Adresse physique </item>
+        <item>meme Adresse physique</item>
 
     </array>
     <array name="list_typesAC">

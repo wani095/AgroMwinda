@@ -17,7 +17,7 @@ public class Activity {
     private int trade_information_id;
     private int transport_information_id;
 
-    private String name;
+    private   String name;
 
     private  String groupment;
     private String quarter;
@@ -70,11 +70,7 @@ public class Activity {
         this.fkSubscriber = fkSubscriber;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String string) {this.name = name; }
 
     public void setCreated_at(Date date) {
     }
@@ -235,4 +231,8 @@ public class Activity {
     }
 
     public String getPhysical_environment() { return physical_environment; }
+
+    public String getName() { return name; }
+
+    public void setName(String name) { this.name = name; }
 }

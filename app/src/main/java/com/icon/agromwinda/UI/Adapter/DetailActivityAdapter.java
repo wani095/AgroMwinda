@@ -34,8 +34,8 @@ public class DetailActivityAdapter extends RecyclerView.Adapter<DetailActivityAd
 
     @Override
     public void onBindViewHolder(@NonNull DetailHolder detailHolder, int i) {
-        detailHolder.atribut.setText(infos.get(i)[0]);
-        detailHolder.value.setText(infos.get(i)[1]);
+        detailHolder.atributA.setText(infos.get(i)[0]);
+        detailHolder.valueA.setText(infos.get(i)[1]);
     }
 
     @Override
@@ -45,13 +45,13 @@ public class DetailActivityAdapter extends RecyclerView.Adapter<DetailActivityAd
 
     public class DetailHolder extends RecyclerView.ViewHolder {
 
-        TextView atribut, value;
+        TextView atributA, valueA;
 
         public DetailHolder(@NonNull View itemView) {
             super(itemView);
 
-            atribut = itemView.findViewById(R.id.atribut);
-            value = itemView.findViewById(R.id.value);
+            atributA = itemView.findViewById(R.id.atributA);
+            valueA = itemView.findViewById(R.id.valueA);
         }
     }
 }

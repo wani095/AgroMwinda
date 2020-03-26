@@ -60,7 +60,6 @@ public class TypeActivityFragment extends Fragment {
         txNomA = view.findViewById(R.id.txNomA);
         txAnCR = view.findViewById(R.id.txAnCR);
 
-
         spComer_type = view.findViewById(R.id.spComer_type);
         spComer_source = view.findViewById(R.id.spComer_source);
         spComer_cappacite = view.findViewById(R.id.spComer_capacit);
@@ -75,30 +74,22 @@ public class TypeActivityFragment extends Fragment {
         spTran_capacite = view.findViewById(R.id.spTran_capacite);
         spTran_annee = view.findViewById(R.id.spTran_annee);
 
-
         btnnextA = view.findViewById(R.id.btnnexT);
     }
-
     public void init() {
-
     }
-
     public void bindEvents() {
-
 
         btnnextA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
-
                     if (spTypeA.getSelectedItem().toString().equals("Commerce") == false &&
                             spTypeA.getSelectedItem().toString().equals("Agriculture") == false &&
                             spTypeA.getSelectedItem().toString().equals("Transport") == false) {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'activit? svp");
-
                     }
-
                     if (spTypeA.getSelectedItem().toString().equals("Commerce")) {
 
                         AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activit? svp");
@@ -120,7 +111,6 @@ public class TypeActivityFragment extends Fragment {
                         json.put("economic_capacity", spComer_cappacite.getSelectedItem().toString());
 
 
-
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
@@ -138,9 +128,8 @@ public class TypeActivityFragment extends Fragment {
 
                         JSONObject json = new JSONObject();
 
-
                         json.put("name", txNomA.getText().toString());
-                        json.put("type-activity", spTypeA.getSelectedItem().toString());
+                        json.put("type_activity", spTypeA.getSelectedItem().toString());
                         json.put("created_date", txAnCR.getText().toString());
 
                         json.put("vehicule_type", spTran_type.getSelectedItem().toString());
@@ -191,14 +180,11 @@ public class TypeActivityFragment extends Fragment {
                         json.put("vehicule_marque", 0);
                         json.put("acquisition_year", 0);
 
-
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
                         transaction.commit();
-
                     }
-
                 } catch (ValueDataException e) {
                     MessageDialog.getDialog(getContext()).createDialog(e.getMessage()).show();
                 } catch (JSONException e) {
@@ -223,14 +209,12 @@ public class TypeActivityFragment extends Fragment {
                         pan_commerce.setVisibility(View.VISIBLE);
                         break;
                     }
-
                     case "Agriculture": {
                         pan_agriculture.setVisibility(View.VISIBLE);
                         pan_transport.setVisibility(View.GONE);
                         pan_commerce.setVisibility(View.GONE);
                         break;
                     }
-
                     case "Transport": {
                         pan_agriculture.setVisibility(View.GONE);
                         pan_transport.setVisibility(View.VISIBLE);
@@ -245,13 +229,9 @@ public class TypeActivityFragment extends Fragment {
                         break;
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
             }
-
         });
-
     }
 }

@@ -26,6 +26,7 @@ import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Secteur;
+import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.repository.Dao;
@@ -76,7 +77,6 @@ public class FormSaveAdresseActivity extends Fragment {
         return fragment;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,9 +97,6 @@ public class FormSaveAdresseActivity extends Fragment {
         txDomicile = view.findViewById(R.id.txDomicile);
         txVillage=view.findViewById(R.id.txVillage);
         txGroupement =view.findViewById(R.id.txGroupement);
-
-
-
 
         spCommune = view.findViewById(R.id.spCommune);
         spProvince = view.findViewById(R.id.spProvince);
@@ -221,6 +218,7 @@ public class FormSaveAdresseActivity extends Fragment {
 
                         JSONObject json = new JSONObject(getArguments().getString("data"));
 
+                        json.put("physical_environment",spchoixA.getSelectedItem().toString());
                         json.put("quarter", txQuatier.getText().toString());
                         json.put("avenue", txAvenue.getText().toString());
                         json.put("home", txDomicile.getText().toString());
@@ -240,6 +238,7 @@ public class FormSaveAdresseActivity extends Fragment {
 
                         JSONObject json =new JSONObject(getArguments().getString("data"));
 
+                        json.put("physical_environment",spchoixA.getSelectedItem().toString());
                         json.put(" village", txVillage.getText().toString());
                         json.put("groupment", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());

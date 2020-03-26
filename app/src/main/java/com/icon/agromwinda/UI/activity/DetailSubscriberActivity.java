@@ -6,7 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.icon.agromwinda.Data.model.Activity;
@@ -44,7 +46,7 @@ public class DetailSubscriberActivity extends AppCompatActivity {
         btnlistA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DetailSubscriberActivity.this, ListingActivityPerson.class));
+               startActivity(new Intent(DetailSubscriberActivity.this, ListingActivityPerson.class));
             }
         });
 
@@ -57,7 +59,6 @@ public class DetailSubscriberActivity extends AppCompatActivity {
     }
 
     public class LoadSubcriber extends AsyncTask<Integer, Subscriber, Subscriber> {
-
         private WaitingDialog dialog;
 
         private LoadSubcriber(WaitingDialog dialog) {

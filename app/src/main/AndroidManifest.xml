@@ -30,6 +30,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".UI.activity.DetailActivity" />
         <activity android:name=".UI.activity.ListingActivityPerson" />
         <activity android:name=".UI.LoginSy.LoginSynchronisation" />
         <activity android:name=".UI.activity.AjouActivite" />

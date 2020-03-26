@@ -762,4 +762,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             db.execSQL(query);
         }
     }
+
+
 }

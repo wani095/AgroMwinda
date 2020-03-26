@@ -80,13 +80,8 @@
                 android:text="ses activités" />
         </android.support.v7.widget.CardView>
 
+       <include layout="@layout/activity_listing_person"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/listingActivity"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-        </android.support.v7.widget.RecyclerView>
 
         <TextView
             android:layout_width="match_parent"

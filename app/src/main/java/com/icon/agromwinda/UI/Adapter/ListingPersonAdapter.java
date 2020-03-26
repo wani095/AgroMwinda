@@ -46,7 +46,7 @@ public class ListingPersonAdapter extends RecyclerView.Adapter<ListingPersonAdap
 
     @Override
     public void onBindViewHolder(@NonNull final ListingPersonViewHolder PersonViewHolder, final int i) {
-        PersonViewHolder.txFullNameActivity.setText(activitys.get(i).getName()+""+activitys.get(i).getType_activity());
+        PersonViewHolder.txFullNameActivity.setText(activitys.get(i).getName()+" "+activitys.get(i).getType_activity());
 
 
         PersonViewHolder.row_activity.setOnClickListener(new View.OnClickListener() {

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondagrom"
+    android:background="@color/colorWrite"
     tools:context=".Splash.Splash">
 
 
@@ -35,7 +35,7 @@
         android:layout_marginRight="8dp"
         android:text="@string/copyrith"
         android:gravity="center"
-        android:textColor="@color/colorWrite"
+        android:textColor="@color/colorBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
