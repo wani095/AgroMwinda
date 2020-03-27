@@ -1,6 +1,6 @@
 package com.icon.agromwinda.Data.model;
 
-public class trade_information {
+public class Trade_information {
 
     public static int activity_id;
     private String typeof_sale;

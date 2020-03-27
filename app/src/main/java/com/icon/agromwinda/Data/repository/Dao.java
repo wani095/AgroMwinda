@@ -10,7 +10,7 @@ import android.util.Log;
 
 import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Agricole_information;
-import com.icon.agromwinda.Data.model.trade_information;
+import com.icon.agromwinda.Data.model.Trade_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
@@ -194,6 +194,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "   trade_information_id integer,\n" +
                 "   agricole_information_id integer,\n" +
                 "   transport_information_id integer,\n" +
+                "   idDomaine_id integer,"+
                 "   village varchar(255))");
 
         init();
@@ -219,6 +220,19 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "vehicule_marque varchar(255),\n" +
                 "acquisition_year varchar(255),\n" +
                 "transport_capacity varchar(255))");
+        init();
+
+
+       // db.execSQL("CREATE TABLE type_activity(" +
+                //"trade_informatiton_id integer,"+
+                //"transport_information_id integer"+
+                //"agricole_information_id integer)");
+
+        db.execSQL("CREATE TABLE idDomaine("+
+                "id integer PRIMARY KEY AUTOINCREMENT,"+
+                "trade_information_id integer,"+
+                "transport_information_id  integer,"+
+                "agricole_informaation_id integer)");
         init();
 
     }
@@ -371,8 +385,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             values.put(ACTIVITY_COLUMN__AGRICOLE_INFORMATTION, pp.getAgricole_information_id());
             values.put(ACTIVITY_COLUMN__TRADE_INFORMATION, pp.getTrade_information_id());
 
-
-
             long a = db.insert("activity", null, values);
             Log.d("SAVEACTIVITY", "" + a);
             return a;
@@ -400,14 +412,32 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             Activity pp =pp = new Activity();
             pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
             pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
-            pp.getSubscriber_id(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__SUBSCRIBER)));
             pp.setCreated_date(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__CREATE_DATE)));
 
             activities.add(pp);
-
             rs.moveToNext();
         }
         return activities;
+    }
+
+    @Override
+    public Activity getListActivitys(Integer id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor rs = db.rawQuery("select * from activity where id=" + id + "", null);
+        rs.moveToFirst();
+        Activity pp = null;
+
+        while (rs.isAfterLast() == false) {
+            pp = new Activity();
+            pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
+            pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            pp.getSubscriber_id(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__SUBSCRIBER)));
+            pp.setCreated_date(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__CREATE_DATE)));
+
+
+            rs.moveToNext();
+        }
+        return pp;
     }
 
 
@@ -421,7 +451,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         ContentValues values = new ContentValues();
 
         try {
-
             values.put(SUBSCRIBER_COLUMN__NAME, p.getName());
             values.put(SUBSCRIBER_COLUMN__LASTNAME, p.getLastname());
             values.put(SUBSCRIBER_COLUMN__FIRSTNAME, p.getFirstname());
@@ -483,7 +512,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor rs = db.rawQuery("select * from subscriber where id=" + id + "", null);
         rs.moveToFirst();
-
         Subscriber p = null;
 
         while (rs.isAfterLast() == false) {
@@ -566,7 +594,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
-    public long saveTrade_information(trade_information co) {
+    public long saveTrade_information(Trade_information co) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
@@ -585,15 +613,15 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
 
     @Override
-    public List<trade_information> getTrade_information() {
-        List<trade_information> trade_informations = new ArrayList<>();
+    public List<Trade_information> getTrade_information() {
+        List<Trade_information> trade_informations = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor rs = db.rawQuery("select * from trade_information", null);
         rs.moveToFirst();
 
         while (rs.isAfterLast() == false) {
-            trade_information co = new trade_information();
+            Trade_information co = new Trade_information();
             co.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
             co.setTypeof_sale(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
             co.setEconomic_capacity(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));
@@ -605,15 +633,15 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     @Override
-    public trade_information getTrade_information(Integer id) {
+    public Trade_information getTrade_information(Integer id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor rs = db.rawQuery("select * from trade_information where id=" + id + "", null);
         rs.moveToFirst();
 
-        trade_information co = null;
+        Trade_information co = null;
 
         while (rs.isAfterLast() == false) {
-            co = new trade_information();
+            co = new Trade_information();
             co.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
             co.setTypeof_sale(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__TYPE_COMMERCE)));
             co.setSourceof_supply(rs.getString(rs.getColumnIndex(COMMERCE_INFORMATION_COLUMN__SOURCE_COMMERCE)));

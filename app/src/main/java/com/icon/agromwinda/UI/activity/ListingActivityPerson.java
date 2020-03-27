@@ -47,8 +47,8 @@ public class ListingActivityPerson extends AppCompatActivity {
         protected List<Activity> doInBackground(Void... voids) {
 
             Dao dao = new Dao(ListingActivityPerson.this);
-            List <Activity> activitys =( List <Activity>) dao.getActivitys();
-            return activitys;
+            //List <Activity> activitys =( List <Activity>) dao.getActivitys();
+            return null;
         }
         @Override
         protected void onPostExecute(List<Activity> activitys) {

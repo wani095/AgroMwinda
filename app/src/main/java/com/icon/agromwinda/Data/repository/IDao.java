@@ -9,7 +9,7 @@ import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.model.Transport_information;
-import com.icon.agromwinda.Data.model.trade_information;
+import com.icon.agromwinda.Data.model.Trade_information;
 
 import java.util.List;
 
@@ -27,6 +27,8 @@ public interface IDao {
 
     long saveActivity(Activity pp);
 
+    Activity getListActivitys(Integer id);
+
     long saveSubscriber(Subscriber subscriber);
 
     List<Subscriber> getSubscribers();
@@ -39,11 +41,11 @@ public interface IDao {
 
     Agricole_information getAgricole_information(Integer id);
 
-    long saveTrade_information(trade_information co);
+    long saveTrade_information(Trade_information co);
 
-    List<trade_information> getTrade_information();
+    List<Trade_information> getTrade_information();
 
-    trade_information getTrade_information(Integer id);
+    Trade_information getTrade_information(Integer id);
 
     long saveTransport_infomation(Transport_information tr);
 

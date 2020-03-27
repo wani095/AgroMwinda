@@ -24,7 +24,6 @@ public class DetailActivityAdapter extends RecyclerView.Adapter<DetailActivityAd
         this.infos = infos;
         this.inflater= LayoutInflater.from(context);
     }
-
     @NonNull
     @Override
     public DetailHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {

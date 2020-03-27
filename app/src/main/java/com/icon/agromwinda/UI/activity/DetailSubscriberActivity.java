@@ -16,6 +16,7 @@ import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.Adapter.DetailSubscriberAdapter;
+import com.icon.agromwinda.UI.Adapter.ListingPersonAdapter;
 import com.icon.agromwinda.UI.dialog.WaitingDialog;
 
 import java.util.ArrayList;
@@ -49,15 +50,12 @@ public class DetailSubscriberActivity extends AppCompatActivity {
                startActivity(new Intent(DetailSubscriberActivity.this, ListingActivityPerson.class));
             }
         });
-
     }
 
     public void init() {
-
         Integer id = (Integer)getIntent().getExtras().get("id");
         new LoadSubcriber(new WaitingDialog(this)).execute(id);
     }
-
     public class LoadSubcriber extends AsyncTask<Integer, Subscriber, Subscriber> {
         private WaitingDialog dialog;
 
@@ -66,18 +64,11 @@ public class DetailSubscriberActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPreExecute() {
-            dialog.show();
-        }
-
-
-        @Override
         protected Subscriber doInBackground(Integer... id) {
 
             Subscriber subscriber = new Dao(DetailSubscriberActivity.this).getSubscriber(id[0]);
             return subscriber;
         }
-
         @Override
         protected void onPostExecute(Subscriber subscriber) {
             dialog.hide();
@@ -103,22 +94,27 @@ public class DetailSubscriberActivity extends AppCompatActivity {
             }
         }
     }
-
-    class LoadActivities extends AsyncTask<Integer, Subscriber, Subscriber> {
-
+    public class LoadActivities extends AsyncTask<Integer, Subscriber,  List<Activity>> {
         private int subscriber_id;
 
         public LoadActivities(int id) {
             subscriber_id = id;
         }
-
         @Override
-        protected Subscriber doInBackground(Integer... integers) {
+        protected  List<Activity> doInBackground(Integer... integers) { List<Activity> activities=new Dao(DetailSubscriberActivity.this).getListActivitys(subscriber_id);
+            return activities;
+        }
+        @Override
+        protected void onPostExecute( List<Activity> activitys) {
+            if (activitys != null) {
+                ListingPersonAdapter listingPersonAdapter=new ListingPersonAdapter(DetailSubscriberActivity.this,activitys,DetailSubscriberActivity.this);
+                listingPersonAdapter.notifyDataSetChanged();
 
-            List<Activity> activities=new Dao(DetailSubscriberActivity.this).getListActivitys(subscriber_id);
-            return null;
+                recyclerView = findViewById(R.id.listingActivity);
+                recyclerView.setLayoutManager(new LinearLayoutManager(DetailSubscriberActivity.this));
+                recyclerView.setHasFixedSize(true);
+                recyclerView.setAdapter(listingPersonAdapter);
+            }
         }
     }
-
-
 }

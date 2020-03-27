@@ -48,8 +48,8 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         protected Activity doInBackground(Integer... id) {
-            Activity activity = new Dao(DetailActivity.this).getActivity(id[0]);
-            return activity;
+            //Activity activity = new Dao(DetailActivity.this).getActivity(id[0]);
+            return null;
         }
         @Override
         protected void onPostExecute(Activity activity) {

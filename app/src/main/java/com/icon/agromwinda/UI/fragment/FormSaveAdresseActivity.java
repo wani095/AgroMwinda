@@ -23,12 +23,15 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.icon.agromwinda.BuildConfig;
 import com.icon.agromwinda.Data.model.Activity;
+import com.icon.agromwinda.Data.model.Agricole_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Secteur;
 import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
+import com.icon.agromwinda.Data.model.Trade_information;
+import com.icon.agromwinda.Data.model.Transport_information;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.activity.DetailSubscriberActivity;
@@ -67,6 +70,7 @@ public class FormSaveAdresseActivity extends Fragment {
     private Secteur secteur;
     private EditText txVillage, txGroupement;
     private TextView spProvinc, spTerritoire, spSecteur;
+    long idDomain=0;
 
 
     public static FormSaveAdresseActivity newInstance(String json) {
@@ -95,15 +99,15 @@ public class FormSaveAdresseActivity extends Fragment {
         txQuatier = view.findViewById(R.id.txQuartier);
         txAvenue = view.findViewById(R.id.txAvenue);
         txDomicile = view.findViewById(R.id.txDomicile);
-        txVillage=view.findViewById(R.id.txVillage);
-        txGroupement =view.findViewById(R.id.txGroupement);
+        txVillage = view.findViewById(R.id.txVillage);
+        txGroupement = view.findViewById(R.id.txGroupement);
 
         spCommune = view.findViewById(R.id.spCommune);
         spProvince = view.findViewById(R.id.spProvince);
         spVille = view.findViewById(R.id.spVille);
 
-        spProvinc= view.findViewById(R.id.spProvinc);
-        spTerritoire= view.findViewById(R.id.spTerritoire);
+        spProvinc = view.findViewById(R.id.spProvinc);
+        spTerritoire = view.findViewById(R.id.spTerritoire);
         spSecteur = view.findViewById(R.id.spSecteur);
 
         btnValider = view.findViewById(R.id.btnTermine);
@@ -162,7 +166,7 @@ public class FormSaveAdresseActivity extends Fragment {
         });
 
 
-        Log.d("SelectedACTIVITY","");
+        Log.d("SelectedACTIVITY", "");
 
         spchoixA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -186,7 +190,6 @@ public class FormSaveAdresseActivity extends Fragment {
                         pan_rural.setVisibility(View.GONE);
                         pan_urbain.setVisibility(View.GONE);
                         break;
-
                 }
             }
 
@@ -197,20 +200,19 @@ public class FormSaveAdresseActivity extends Fragment {
 
         });
 
-
         btnValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 try {
 
-                    if(spchoixA.getSelectedItem().toString().equals("Urbain")==false &&
-                            spchoixA.getSelectedItem().toString().equals("Rural")==false){
+                    if (spchoixA.getSelectedItem().toString().equals("Urbain") == false &&
+                            spchoixA.getSelectedItem().toString().equals("Rural") == false) {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'ativite svp");
                     }
-                    if(spchoixA.getSelectedItem().toString().equals("Urbain")){
-                        AppUtility.controlValue(txQuatier.getText().toString(),"veuillez ecrire votre quartier");
-                        AppUtility.controlValue(txAvenue.getText().toString(),"veuillez ecrire votre avenue");
+                    if (spchoixA.getSelectedItem().toString().equals("Urbain")) {
+                        AppUtility.controlValue(txQuatier.getText().toString(), "veuillez ecrire votre quartier");
+                        AppUtility.controlValue(txAvenue.getText().toString(), "veuillez ecrire votre avenue");
 
                         AppUtility.controlValue(spProvince.getText().toString(), "Veuillez séléctionner la province svp");
                         AppUtility.controlValue(spVille.getText().toString(), "Veuillez séléctionner la town svp");
@@ -218,7 +220,7 @@ public class FormSaveAdresseActivity extends Fragment {
 
                         JSONObject json = new JSONObject(getArguments().getString("data"));
 
-                        json.put("physical_environment",spchoixA.getSelectedItem().toString());
+                        json.put("physical_environment", spchoixA.getSelectedItem().toString());
                         json.put("quarter", txQuatier.getText().toString());
                         json.put("avenue", txAvenue.getText().toString());
                         json.put("home", txDomicile.getText().toString());
@@ -226,9 +228,26 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", town.getId());
                         json.put("city_id ", commune.getId());
 
+                        String type_activity=json.getString("type_activity");
+
+                        switch (type_activity){
+                            case "Commerce":
+                                new saveTradeInformation().execute();
+                                json.put("trade_information_id",idDomain) ;
+                                break;
+                            case "Transport":
+                                new saveTransportInformation().execute();
+                                json.put("transport_information_id",idDomain);
+                                break;
+                            case "Agricole":
+                                new saveAgricoleInformation().execute();
+                                json.put("agricole_information", idDomain);
+                                break;
+                        }
+
                         new saveActivity(json.toString()).execute();
 
-                    }else{
+                    } else {
                         AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
                         AppUtility.controlValue(txGroupement.getText().toString(), "Veuillez entrer l'avenue svp");
 
@@ -236,9 +255,9 @@ public class FormSaveAdresseActivity extends Fragment {
                         AppUtility.controlValue(spTerritoire.getText().toString(), "Veuillez séléctionner le territoire svp");
                         AppUtility.controlValue(spSecteur.getText().toString(), "Veuillez séléctionner le secteursvp");
 
-                        JSONObject json =new JSONObject(getArguments().getString("data"));
+                        JSONObject json = new JSONObject(getArguments().getString("data"));
 
-                        json.put("physical_environment",spchoixA.getSelectedItem().toString());
+                        json.put("physical_environment", spchoixA.getSelectedItem().toString());
                         json.put(" village", txVillage.getText().toString());
                         json.put("groupment", txGroupement.getText().toString());
                         json.put("home", txDomicile.getText().toString());
@@ -250,92 +269,153 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", 0);
                         json.put("city_id ", 0);
 
+                        String type_activity=json.getString("type_activity");
+
+                        switch (type_activity){
+                            case "Commerce":
+                                new saveTradeInformation().execute();
+                                json.put("trade_information_id",idDomain) ;
+                                break;
+                            case "Transport":
+                                new saveTransportInformation().execute();
+                                json.put("transport_information_id",idDomain);
+                                break;
+                            case "Agricole":
+                                new saveAgricoleInformation().execute();
+                                json.put("agricole_information", idDomain);
+                                break;
+                        }
                         new saveActivity(json.toString()).execute();
                     }
-
                 } catch (ValueDataException e) {
                     MessageDialog.getDialog(getContext()).createDialog(e.getMessage()).show();
                 } catch (JSONException e) {
-
                 }
             }
         });
     }
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==7 && resultCode==77 && data!=null){
-            province=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Province>(){}.getType());
+        if (requestCode == 7 && resultCode == 77 && data != null) {
+            province = new Gson().fromJson(data.getExtras().get("data").toString(), new TypeToken<Province>() {
+            }.getType());
             spProvince.setText(province.getNom());
             spProvince.setTextColor(Color.BLACK);
             spProvince.setTypeface(Typeface.DEFAULT_BOLD);
-        }else if(requestCode==8 && resultCode==78 && data!=null){
-            town =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Town>(){}.getType());
+        } else if (requestCode == 8 && resultCode == 78 && data != null) {
+            town = new Gson().fromJson(data.getExtras().get("data").toString(), new TypeToken<Town>() {
+            }.getType());
             spVille.setText(town.getNom());
             spVille.setTextColor(Color.BLACK);
             spVille.setTypeface(Typeface.DEFAULT_BOLD);
-        }else if(requestCode==9 && resultCode==79 && data!=null){
-            commune=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Commune>(){}.getType());
+        } else if (requestCode == 9 && resultCode == 79 && data != null) {
+            commune = new Gson().fromJson(data.getExtras().get("data").toString(), new TypeToken<Commune>() {
+            }.getType());
             spCommune.setText(commune.getNom());
             spCommune.setTextColor(Color.BLACK);
             spCommune.setTypeface(Typeface.DEFAULT_BOLD);
         }
 
-        if(requestCode==7 && resultCode==77 && data!=null){
-            province=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Province>(){}.getType());
+        if (requestCode == 7 && resultCode == 77 && data != null) {
+            province = new Gson().fromJson(data.getExtras().get("data").toString(), new TypeToken<Province>() {
+            }.getType());
             spProvinc.setText(province.getNom());
             spProvinc.setTextColor(Color.BLACK);
             spProvinc.setTypeface(Typeface.DEFAULT_BOLD);
 
-        }else if(requestCode==11 && resultCode==81 && data!=null){
-            secteur =new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Secteur>(){}.getType());
+        } else if (requestCode == 11 && resultCode == 81 && data != null) {
+            secteur = new Gson().fromJson(data.getExtras().get("data").toString(), new TypeToken<Secteur>() {
+            }.getType());
             spSecteur.setText(secteur.getNom());
             spSecteur.setTextColor(Color.BLACK);
             spSecteur.setTypeface(Typeface.DEFAULT_BOLD);
 
-        }else if(requestCode==10 && resultCode==82 && data!=null){
-            territoire=new Gson().fromJson(data.getExtras().get("data").toString(),new TypeToken<Territoire>(){}.getType());
+        } else if (requestCode == 10 && resultCode == 82 && data != null) {
+            territoire = new Gson().fromJson(data.getExtras().get("data").toString(), new TypeToken<Territoire>() {
+            }.getType());
             spTerritoire.setText(territoire.getNom());
             spTerritoire.setTextColor(Color.BLACK);
             spTerritoire.setTypeface(Typeface.DEFAULT_BOLD);
 
         }
     }
-    
+
+    public class saveTradeInformation extends AsyncTask<Void, Void, Long> {
+        @Override
+        protected Long doInBackground(Void... voids) {
+            Dao dao=new Dao(getContext());
+            Trade_information trade_information=new Trade_information();
+
+           return dao.saveTrade_information(trade_information);
+        }
+        @Override
+        protected void onPostExecute(Long aLong) {
+          idDomain=aLong;
+        }
+    }
+
+    public class saveTransportInformation extends AsyncTask<Void, Void, Long> {
+        @Override
+        protected Long doInBackground(Void... voids) {
+            Dao dao=new Dao(getContext());
+            Transport_information transport_information=new Transport_information();
+            return dao.saveTransport_infomation(transport_information);
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+            idDomain=aLong;
+        }
+    }
+
+    public class saveAgricoleInformation extends AsyncTask<Void, Void, Long> {
+        @Override
+        protected Long doInBackground(Void... voids) {
+            Dao dao=new Dao(getContext());
+            Agricole_information agricole_information= new Agricole_information();
+            return dao.saveAgricole_infomation(agricole_information);
+        }
+
+        @Override
+        protected void onPostExecute(Long aLong) {
+           idDomain= aLong;
+        }
+    }
 
     public class saveActivity extends AsyncTask<Void, Void, Long> {
 
         private String data;
-        WaitingDialog waitingDialog ;
+        WaitingDialog waitingDialog;
+
         public saveActivity(String data) {
             this.data = data;
-            waitingDialog= new WaitingDialog(getContext());
-
+            waitingDialog = new WaitingDialog(getContext());
         }
         @Override
         protected void onPreExecute() {
             waitingDialog.show();
         }
-
         @Override
         protected Long doInBackground(Void... voids) {
-            Log.d("DATAACTIVITY",data);
-            Activity activity =new Gson().fromJson(data,new TypeToken<Activity>(){}.getType());
+            Log.d("DATAACTIVITY", data);
+            Activity activity = new Gson().fromJson(data, new TypeToken<Activity>() {
+            }.getType());
             activity.setCreated_at(new Date());
-            Dao dao=new Dao(getContext());
-            long rep=dao.saveActivity(activity);
-            Log.d("DATAACTIVITY",""+rep);
+            Dao dao = new Dao(getContext());
+            long rep = dao.saveActivity(activity);
+            Log.d("DATAACTIVITY", "" + rep);
             return rep;
         }
 
         @Override
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
-            if (rep>1){
+            if (rep > 1) {
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
                 Intent intent = new Intent(getActivity(), ListingActivityPerson.class);
                 getActivity().startActivity(intent);
-            }else {
+
+            } else {
                 MessageDialog.getDialog(getContext()).createDialog("Echec d'enregistrement").show();
             }
 

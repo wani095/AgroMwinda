@@ -221,7 +221,6 @@ public class TypeActivityFragment extends Fragment {
                         pan_commerce.setVisibility(View.GONE);
                         break;
                     }
-
                     default:
                         pan_agriculture.setVisibility(View.GONE);
                         pan_commerce.setVisibility(View.GONE);
