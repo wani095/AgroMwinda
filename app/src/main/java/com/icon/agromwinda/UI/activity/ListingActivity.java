@@ -14,7 +14,7 @@ import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.Adapter.ListingAdapter;
-import com.icon.agromwinda.UI.LoginSy.LoginSynchronisation;
+import com.icon.agromwinda.UI.LoginSy.Login;
 
 import java.util.List;
 
@@ -42,7 +42,7 @@ public class ListingActivity extends AppCompatActivity {
         bntsynchry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(ListingActivity.this, LoginSynchronisation.class));
+                startActivity(new Intent(ListingActivity.this, Login.class));
             }
         });
         error.setOnClickListener(new View.OnClickListener() {
