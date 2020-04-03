@@ -58,11 +58,9 @@ public class ListingPersonAdapter extends RecyclerView.Adapter<ListingPersonAdap
             }
         });
     }
-
     @Override
     public int getItemCount() {
         return activitys.size();
-
     }
 
 

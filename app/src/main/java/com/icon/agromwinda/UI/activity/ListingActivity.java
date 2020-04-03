@@ -22,6 +22,8 @@ public class ListingActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private Button bntsynchry;
+    private Button error;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,11 +37,18 @@ public class ListingActivity extends AppCompatActivity {
     public void bindUI() {
         recyclerView = findViewById(R.id.listing);
         bntsynchry =findViewById(R.id.btnsynchry);
+        error=findViewById(R.id.error);
 
         bntsynchry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ListingActivity.this, LoginSynchronisation.class));
+            }
+        });
+        error.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ListingActivity.this, ErrorActivity.class));
             }
         });
     }

@@ -75,6 +75,7 @@
                 android:id="@+id/btnlistA"
                 android:layout_width="match_parent"
                 android:layout_height="30sp"
+                android:visibility="gone"
                 android:background="@color/colorWrite"
                 android:backgroundTint="@color/colorPrimary"
                 android:text="ses activités" />

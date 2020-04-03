@@ -1,6 +1,6 @@
 package com.icon.agromwinda.UI.activity;
 
-import android.content.Intent;
+
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,13 +21,11 @@ public class DetailActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_activity);
         init();
-
     }
     public void init() {
 
@@ -48,8 +46,8 @@ public class DetailActivity extends AppCompatActivity {
 
         @Override
         protected Activity doInBackground(Integer... id) {
-            //Activity activity = new Dao(DetailActivity.this).getActivity(id[0]);
-            return null;
+            Activity activity = new Dao(DetailActivity.this).getListActivitys(id[0]);
+            return activity;
         }
         @Override
         protected void onPostExecute(Activity activity) {
@@ -72,7 +70,6 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
     class LoadActivities extends AsyncTask<Integer, Activity, Activity>{
-
         @Override
         protected Activity doInBackground(Integer... integers) {
             return null;

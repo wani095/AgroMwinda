@@ -80,9 +80,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String ACTIVITY_COLUMN__SLUG = "slug";
     public static final String ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT = "physical_environment";
     public static final String ACTIVITY_COLUMN__SECTEUR = "secteur_id";
-    public static final String ACTIVITY_COLUMN__TYPE_COMMERCE = "typeof_sale";
-    public static final String ACTIVITY_COLUMN__SOURCE_COMMERCE = "sourceof_supply";
-    public static final String ACTIVITY_COLUMN__CAPACITE_COMMERCE = "economic_capacity";
+
     public static final String ACTIVITY_COLUMN__TRADE_INFORMATION = "trade_information_id";
     public static final String ACTIVITY_COLUMN__AGRICOLE_INFORMATTION = "agricole_information_id";
     public static final String ACTIVITY_COLUMN__TRANSPORT_INFORMATION = "transport_information_id";
@@ -106,6 +104,10 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
     private Context context;
     private Object trade_information;
+    private Object agricole_information;
+    private Object transport_information;
+
+
 
     public Dao(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -167,7 +169,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "    peasant_organization varchar(255),\n" +
                 "    multiplier_agent varchar(255)\n" +
                 ")");
-
         init();
 
         db.execSQL("CREATE TABLE activity(\n" +
@@ -196,7 +197,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "   transport_information_id integer,\n" +
                 "   idDomaine_id integer,"+
                 "   village varchar(255))");
-
         init();
 
         db.execSQL("CREATE TABLE trade_information(\n" +
@@ -222,7 +222,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "transport_capacity varchar(255))");
         init();
 
-
        // db.execSQL("CREATE TABLE type_activity(" +
                 //"trade_informatiton_id integer,"+
                 //"transport_information_id integer"+
@@ -236,9 +235,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         init();
 
     }
-
     public void init() {
-
     }
 
     @Override
@@ -254,6 +251,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         db.execSQL("DROP TABLE IF EXISTS agricole_information");
         db.execSQL("DROP TABLE IF EXISTS trade_information");
         db.execSQL("DROP TABLE IF EXISTS transport_information");
+        db.execSQL("DROP TABLE IF EXISTS iDomaine");
         onCreate(db);
     }
 
@@ -377,10 +375,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             values.put(ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT, pp.getPhysical_environment());
             values.put(ACTIVITY_COLUMN__SECTEUR, pp.getSecteur_id());
 
-            values.put(ACTIVITY_COLUMN__TYPE_COMMERCE, pp.getTypeof_sale());
-            values.put(ACTIVITY_COLUMN__CAPACITE_COMMERCE, pp.getEconomic_capacity());
-            values.put(ACTIVITY_COLUMN__SOURCE_COMMERCE, pp.getSourceof_supply());
-
             values.put(ACTIVITY_COLUMN__TRANSPORT_INFORMATION, pp.getTransport_information_id());
             values.put(ACTIVITY_COLUMN__AGRICOLE_INFORMATTION, pp.getAgricole_information_id());
             values.put(ACTIVITY_COLUMN__TRADE_INFORMATION, pp.getTrade_information_id());
@@ -394,11 +388,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return 0;
     }
 
-
-    /**
-     * bd activity
-     */
-
+     // bd activity
 
 @Override
     public List<Activity> getListActivitys(int subscriber_id) {
@@ -409,10 +399,12 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         List<Activity> activities=new ArrayList<>();
 
         while (rs.isAfterLast() == false) {
-            Activity pp =pp = new Activity();
-            pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
-            pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
+            Activity pp  = new Activity();
+            pp.setId(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__ID)));
+            pp.setName(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__NAME)));
+            pp.setType_activity(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__TYPE_ACTIVITY)));
             pp.setCreated_date(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__CREATE_DATE)));
+            pp.setPhysical_environment(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT)));
 
             activities.add(pp);
             rs.moveToNext();
@@ -429,27 +421,22 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         while (rs.isAfterLast() == false) {
             pp = new Activity();
-            pp.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
-            pp.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
-            pp.getSubscriber_id(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__SUBSCRIBER)));
+            pp.setId(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__ID)));
+            pp.setName(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__NAME)));
+            pp.setType_activity(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__TYPE_ACTIVITY)));
             pp.setCreated_date(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__CREATE_DATE)));
-
+            pp.setPhysical_environment(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__PHYSIQUE_ENVIRONMENT)));
 
             rs.moveToNext();
         }
         return pp;
     }
 
-
-    /**
-     * bd subscriber
-     */
-
+     // bd subscriber
     @Override
     public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
         ContentValues values = new ContentValues();
-
         try {
             values.put(SUBSCRIBER_COLUMN__NAME, p.getName());
             values.put(SUBSCRIBER_COLUMN__LASTNAME, p.getLastname());
@@ -540,7 +527,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         values.put(AGRICOLE_INFORMATION_COLUMN__OBJECT_ACTIVITY, ag.getActivity_object());
         values.put(AGRICOLE_INFORMATION_COLUMN__SOURCE_APPROVISIONNNEMENT, ag.getSourceof_approvionnement());
         values.put(AGRICOLE_INFORMATION_COLUMN__ENTENDUE, ag.getScope());
-
 
         try {
             long a = db.insert("agricole_information", null, values);
@@ -670,7 +656,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
         return 0;
     }
-
     @Override
     public List<Transport_information> getTransport_informations() {
         List<Transport_information> transport_informations = new ArrayList<>();
@@ -790,6 +775,4 @@ public class Dao extends SQLiteOpenHelper implements IDao {
             db.execSQL(query);
         }
     }
-
-
 }

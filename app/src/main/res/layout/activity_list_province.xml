@@ -7,8 +7,31 @@
     android:layout_height="match_parent"
     tools:context=".UI.activity.ListProvinceActivity"
     android:paddingTop="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <SearchView
+            android:id="@+id/searchVieu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:queryHint="Recherche province"
+            android:iconifiedByDefault="false"
+            android:layout_alignParentTop="true">
+
+            <requestFocus />
+        </SearchView>
+
+        <ListView
+            android:id="@+id/list_view"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_below="@+id/search" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_view_provinces"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    </LinearLayout>
 </ScrollView>

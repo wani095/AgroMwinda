@@ -341,6 +341,7 @@ public class FormSaveAdresseActivity extends Fragment {
     }
 
     public class saveTradeInformation extends AsyncTask<Void, Void, Long> {
+
         @Override
         protected Long doInBackground(Void... voids) {
             Dao dao=new Dao(getContext());
@@ -410,9 +411,9 @@ public class FormSaveAdresseActivity extends Fragment {
         @Override
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
-            if (rep > 1) {
+            if (rep>0) {
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
-                Intent intent = new Intent(getActivity(), ListingActivityPerson.class);
+                Intent intent = new Intent(getActivity(), ListingActivity.class);
                 getActivity().startActivity(intent);
 
             } else {

@@ -1,5 +1,6 @@
 package com.icon.agromwinda.UI.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -29,17 +30,37 @@ public class DetailSubscriberActivity extends AppCompatActivity {
     private Button btnaj;
     private Button bntmod,btnlistA;
 
+    private Context context;
+    private LayoutInflater inflater;
+    private List<Subscriber> subscribers;
+    private android.app.Activity activity;
+    private  int i;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_subscriber);
         init();
 
+        this.context = context;
+        this.subscribers = subscribers;
+        this.activity=activity;
+
         Button btnaj = (Button)findViewById(R.id.bntaj);
         btnaj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(DetailSubscriberActivity.this, AjouActivite.class));
+                return ;
+                /**
+                Intent intent =new Intent(activity, AjouActivite.class);
+                intent.putExtra("id",subscribers.get(i).getId());
+                startActivity(intent);
+                 */
+
+                //Intent intent =new Intent(activity, AjouActivite.class);
+               // intent.putExtra("id",subscribers.get(i).getId());
+                //.startActivity(intent);
             }
         });
 

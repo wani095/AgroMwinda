@@ -26,6 +26,7 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
     private LayoutInflater inflater;
     private List<Subscriber> subscribers;
     private Activity activity;
+    private RecyclerView recyclerView;
 
     public ListingAdapter(Context context, List<Subscriber> subscribers, Activity activity){
         this.context = context;
@@ -44,10 +45,10 @@ public class ListingAdapter extends RecyclerView.Adapter<ListingAdapter.ListingV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ListingViewHolder provinceViewHolder,final int i) {
-        provinceViewHolder.txFullName.setText(subscribers.get(i).getName()+" "+subscribers.get(i).getFirstname()+" "+subscribers.get(i).getLastname()+" "+subscribers.get(i).getPhone_number());
+    public void onBindViewHolder(@NonNull final ListingViewHolder ListingViewHolder,final int i) {
+        ListingViewHolder.txFullName.setText(subscribers.get(i).getName()+" "+subscribers.get(i).getFirstname()+" "+subscribers.get(i).getLastname()+" "+subscribers.get(i).getPhone_number());
 
-        provinceViewHolder.row.setOnClickListener(new View.OnClickListener() {
+        ListingViewHolder.row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(activity, DetailSubscriberActivity.class);

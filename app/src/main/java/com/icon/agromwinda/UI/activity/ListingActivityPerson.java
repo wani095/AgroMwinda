@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.icon.agromwinda.Data.model.Activity;
+import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
 import com.icon.agromwinda.UI.Adapter.ListingPersonAdapter;
@@ -28,7 +29,6 @@ public class ListingActivityPerson extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listing_person);
         bindUI();
-        init();
     }
 
     public void bindUI() {
@@ -36,19 +36,16 @@ public class ListingActivityPerson extends AppCompatActivity {
 
     }
 
-    public void init() {
-        new GetActivity().execute();
-    }
+    public class LoadActivities extends AsyncTask<Integer, Subscriber,  List<Activity>> {
+        private int subscriber_id;
 
-
-    public class GetActivity extends AsyncTask<Void, Void, List<Activity>> {
+        public LoadActivities(int id) {
+            subscriber_id = id;
+        }
 
         @Override
-        protected List<Activity> doInBackground(Void... voids) {
-
-            Dao dao = new Dao(ListingActivityPerson.this);
-            //List <Activity> activitys =( List <Activity>) dao.getActivitys();
-            return null;
+        protected  List<Activity> doInBackground(Integer... integers) { List<Activity> activities=new Dao(ListingActivityPerson.this).getListActivitys(subscriber_id);
+            return activities;
         }
         @Override
         protected void onPostExecute(List<Activity> activitys) {
