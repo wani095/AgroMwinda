@@ -330,7 +330,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
         return secteurs;
     }
-
     @Override
     public List<Territoire> getTerritoires() {
         List<Territoire> territoires = new ArrayList<>();
@@ -390,7 +389,6 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     }
 
     // bd activity
-
     @Override
     public List<Activity> getListActivitys(int subscriber_id) {
         String sql = "select * from activity where subscriber_id="+subscriber_id;
