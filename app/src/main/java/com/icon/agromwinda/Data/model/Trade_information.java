@@ -2,11 +2,10 @@ package com.icon.agromwinda.Data.model;
 
 public class Trade_information {
 
-    public static int activity_id;
+    private int id;
     private String typeof_sale;
     private String sourceof_supply;
     private String economic_capacity;
-    private int id;
     private String nom;
 
     public int getId() {

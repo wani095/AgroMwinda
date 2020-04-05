@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 
@@ -28,7 +27,7 @@ import org.json.JSONObject;
 public class TypeActivityFragment extends Fragment {
 
     private View view;
-    private Spinner spTypeA;
+    private Spinner spTypeActivity;
     private ScrollView pan_commerce, pan_agriculture, pan_transport;
 
     private EditText txNomA, txAnCR;
@@ -37,6 +36,25 @@ public class TypeActivityFragment extends Fragment {
     private Spinner spTran_type, spTran_marque, spTran_annee, spTran_capacite;
 
     private Button btnnextA;
+    long subscriber;
+
+    public long getSubscriber() {
+        return subscriber;
+    }
+
+    public void setSubscriber(long subscriber) {
+        this.subscriber = subscriber;
+    }
+
+    public static TypeActivityFragment newInstance(String subscriber) {
+        TypeActivityFragment typeActivityFragment = new TypeActivityFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putString("subscriber", subscriber);
+        typeActivityFragment.setArguments(bundle);
+
+        return typeActivityFragment;
+    }
 
     @Nullable
     @Override
@@ -50,7 +68,7 @@ public class TypeActivityFragment extends Fragment {
     }
 
     public void bindUI() {
-        spTypeA = (Spinner) view.findViewById(R.id.spTypeA);
+        spTypeActivity = (Spinner) view.findViewById(R.id.spTypeA);
 
         pan_agriculture = view.findViewById(R.id.pan_agriculture);
         pan_commerce = view.findViewById(R.id.pan_commerce);
@@ -76,8 +94,10 @@ public class TypeActivityFragment extends Fragment {
 
         btnnextA = view.findViewById(R.id.btnnexT);
     }
+
     public void init() {
     }
+
     public void bindEvents() {
 
         btnnextA.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +105,12 @@ public class TypeActivityFragment extends Fragment {
             public void onClick(View v) {
 
                 try {
-                    if (spTypeA.getSelectedItem().toString().equals("Commerce") == false &&
-                            spTypeA.getSelectedItem().toString().equals("Agriculture") == false &&
-                            spTypeA.getSelectedItem().toString().equals("Transport") == false) {
+                    if (!spTypeActivity.getSelectedItem().toString().equals("Commerce") &&
+                            !spTypeActivity.getSelectedItem().toString().equals("Agriculture") &&
+                            !spTypeActivity.getSelectedItem().toString().equals("Transport")) {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'activit? svp");
                     }
-                    if (spTypeA.getSelectedItem().toString().equals("Commerce")) {
+                    if (spTypeActivity.getSelectedItem().toString().equals("Commerce")) {
 
                         AppUtility.controlValue(txNomA.getText().toString(), "Veuillez ecrire le nom de l'activit? svp");
                         AppUtility.controlValue(txAnCR.getText().toString(), "Veuillez saisir l'annee de l'activit? svp");
@@ -99,24 +119,25 @@ public class TypeActivityFragment extends Fragment {
                         AppUtility.controlValue(spComer_source.getSelectedItem().toString(), "Veuillez s?l?ctionner source de commerce svp");
                         AppUtility.controlValue(spComer_cappacite.getSelectedItem().toString(), "Veuillez s?l?ctionner la capacite de commerce svp");
 
-
                         JSONObject json = new JSONObject();
-
+                        Log.d("subscriber_id", "" + subscriber);
+                        json.put("subscriber_id", subscriber);
                         json.put("name", txNomA.getText().toString());
-                        json.put("type_activity", spTypeA.getSelectedItem().toString());
+                        json.put("type_activity", spTypeActivity.getSelectedItem().toString());
                         json.put("created_date", txAnCR.getText().toString());
 
                         json.put("typeof_sale", spComer_type.getSelectedItem().toString());
                         json.put("sourceof_supply", spComer_source.getSelectedItem().toString());
                         json.put("economic_capacity", spComer_cappacite.getSelectedItem().toString());
 
+                        Log.d("ACTIVITYDETAIL", json.toString());
 
                         FragmentTransaction transaction = getFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragment_contenta, FormSaveAdresseActivity.newInstance(json.toString()));
                         transaction.addToBackStack(null);
-                       transaction.commit();
+                        transaction.commit();
 
-                    } else if (spTypeA.getSelectedItem().toString().equals("Transport")) {
+                    } else if (spTypeActivity.getSelectedItem().toString().equals("Transport")) {
 
                         AppUtility.controlValue(txNomA.getText().toString(), " Veullez ecrire le nom de l'activit?");
                         AppUtility.controlValue(txAnCR.getText().toString(), "Veullez saisir l'annee de l'activit?");
@@ -128,9 +149,11 @@ public class TypeActivityFragment extends Fragment {
 
                         JSONObject json = new JSONObject();
 
+                        json.put("subscriber_id", subscriber);
                         json.put("name", txNomA.getText().toString());
-                        json.put("type_activity", spTypeA.getSelectedItem().toString());
+                        json.put("type_activity", spTypeActivity.getSelectedItem().toString());
                         json.put("created_date", txAnCR.getText().toString());
+                        json.put("subscriber_id", subscriber);
 
                         json.put("vehicule_type", spTran_type.getSelectedItem().toString());
                         json.put("transport_capacity", spTran_capacite.getSelectedItem().toString());
@@ -162,8 +185,9 @@ public class TypeActivityFragment extends Fragment {
 
                         JSONObject json = new JSONObject();
 
+                        json.put("subscriber_id", subscriber);
                         json.put("name", txNomA.getText().toString());
-                        json.put("type_activity", spTypeA.getSelectedItem().toString());
+                        json.put("type_activity", spTypeActivity.getSelectedItem().toString());
                         json.put("created_date", txAnCR.getText().toString());
 
                         json.put("sourceof_supply", spSourA.getSelectedItem().toString());
@@ -196,13 +220,13 @@ public class TypeActivityFragment extends Fragment {
 
         Log.d("SelectedACTIVITY", "");
 
-        spTypeA.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spTypeActivity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (BuildConfig.DEBUG)
-                    Log.d("SelectedACTIVITY", spTypeA.getSelectedItem().toString());
+                    Log.d("SelectedACTIVITY", spTypeActivity.getSelectedItem().toString());
 
-                switch (spTypeA.getSelectedItem().toString()) {
+                switch (spTypeActivity.getSelectedItem().toString()) {
                     case "Commerce": {
                         pan_agriculture.setVisibility(View.GONE);
                         pan_transport.setVisibility(View.GONE);
@@ -228,6 +252,7 @@ public class TypeActivityFragment extends Fragment {
                         break;
                 }
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }

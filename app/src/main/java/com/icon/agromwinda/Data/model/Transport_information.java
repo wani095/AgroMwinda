@@ -1,11 +1,11 @@
 package com.icon.agromwinda.Data.model;
 
 public class Transport_information {
-    private String  vehicule_type;
+    private int id;
+    private String vehicule_type;
     private String vehicule_marque;
     private String acquisition_year;
     private String transport_capacity;
-    private int id;
     private String nom;
 
     public int getId() {
@@ -26,11 +26,11 @@ public class Transport_information {
 
 
     public String getVehicule_type() {
-        return  vehicule_type;
+        return vehicule_type;
     }
 
-    public void setVehicule_type(String  vehicule_type) {
-        this. vehicule_type =  vehicule_type;
+    public void setVehicule_type(String vehicule_type) {
+        this.vehicule_type = vehicule_type;
     }
 
     public String getVehicule_marque() {

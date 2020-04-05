@@ -1,50 +1,28 @@
 package com.icon.agromwinda.Data.model;
 
-import java.util.Date;
-import java.util.List;
-
 public class Activity {
 
     private int id;
-
-    private int fkSubscriber;
-    private  int city_id;
-    private  int town_id;
-    private  int territory_id;
-    private  int province_id;
-    private int secteur_id;
-    private int agricole_information_id;
-    private int trade_information_id;
-    private int transport_information_id;
-
-    private   String name;
-
-    private  String groupment;
+    private int subscriber_id;
+    private String type_activity;
+    private int town_id;
+    private int city_id;
+    private int territory_id;
+    private int province_id;
+    private String name;
     private String quarter;
     private String avenue;
-    private String home ;
-    private String slug;
-    private String village ;
-    private String physical_environment;
-
-    private String typeActivity;
-    private String type_activity;
-
-
-    private String typeof_sale;
-    private String sourceof_supply;
-    private String economic_capacity;
-
-    private String created_at ;
-    private Date update_at;
+    private String home;
     private String created_date;
-    private String physique_environment;
-
-    private List<Activity> activityList;
-
-    public int getAgricole_information_id;
-
-    public void setAgricole_information_id(int agricole_information_id){this.agricole_information_id= agricole_information_id;}
+    private String slug;
+    private String created_at;
+    private String physical_environment;
+    private int secteur_id;
+    private String groupment;
+    private int trade_information_id;
+    private int agricole_information_id;
+    private int transport_information_id;
+    private String village;
 
     public int getId() {
         return id;
@@ -54,37 +32,20 @@ public class Activity {
         this.id = id;
     }
 
-    public String getTypeActivity() {
-        return typeActivity;
+    public int getSubscriber_id() {
+        return subscriber_id;
     }
 
-    public void setTypeActivity(String typeActivity) {
-        this.typeActivity = typeActivity;
+    public void setSubscriber_id(int subscriber_id) {
+        this.subscriber_id = subscriber_id;
     }
 
-    public int getFkSubscriber() {
-        return fkSubscriber;
+    public String getType_activity() {
+        return type_activity;
     }
 
-    public void setFkSubscriber(int fkSubscriber) {
-        this.fkSubscriber = fkSubscriber;
-    }
-
-
-
-    public void setCreated_at(Date date) {
-    }
-    public int getSubscriber_id() {return id;}
-
-    public void getSubscriber_id(int id) {this.id =id; }
-
-    public void SetSubscriber_id(int id){this.id = id; }
-
-
-    public int getCity_id() { return city_id; }
-
-    public void setCity_id(int city_id) {
-        this.city_id = city_id;
+    public void setType_activity(String type_activity) {
+        this.type_activity = type_activity;
     }
 
     public int getTown_id() {
@@ -93,6 +54,14 @@ public class Activity {
 
     public void setTown_id(int town_id) {
         this.town_id = town_id;
+    }
+
+    public int getCity_id() {
+        return city_id;
+    }
+
+    public void setCity_id(int city_id) {
+        this.city_id = city_id;
     }
 
     public int getTerritory_id() {
@@ -111,6 +80,13 @@ public class Activity {
         this.province_id = province_id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getQuarter() {
         return quarter;
@@ -136,6 +112,14 @@ public class Activity {
         this.home = home;
     }
 
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
     public String getSlug() {
         return slug;
     }
@@ -144,12 +128,60 @@ public class Activity {
         this.slug = slug;
     }
 
-    public String  getGroupment() {
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getPhysical_environment() {
+        return physical_environment;
+    }
+
+    public void setPhysical_environment(String physical_environment) {
+        this.physical_environment = physical_environment;
+    }
+
+    public int getSecteur_id() {
+        return secteur_id;
+    }
+
+    public void setSecteur_id(int secteur_id) {
+        this.secteur_id = secteur_id;
+    }
+
+    public String getGroupment() {
         return groupment;
     }
 
     public void setGroupment(String groupment) {
         this.groupment = groupment;
+    }
+
+    public int getTrade_information_id() {
+        return trade_information_id;
+    }
+
+    public void setTrade_information_id(int trade_information_id) {
+        this.trade_information_id = trade_information_id;
+    }
+
+    public int getAgricole_information_id() {
+        return agricole_information_id;
+    }
+
+    public void setAgricole_information_id(int agricole_information_id) {
+        this.agricole_information_id = agricole_information_id;
+    }
+
+    public int getTransport_information_id() {
+        return transport_information_id;
+    }
+
+    public void setTransport_information_id(int transport_information_id) {
+        this.transport_information_id = transport_information_id;
     }
 
     public String getVillage() {
@@ -159,80 +191,4 @@ public class Activity {
     public void setVillage(String village) {
         this.village = village;
     }
-
-
-    public void setPhysical_environment(String physical_environment) { this.physical_environment = physical_environment; }
-
-    public Date getUpdate_at() {
-        return update_at;
-    }
-
-    public String getType_activity() { return type_activity; }
-
-    public void setType_activity(String type_activity) { this.type_activity = type_activity; }
-
-    public int getTrade_information_id() { return trade_information_id; }
-
-    public void setTrade_information_id(int trade_information_id) { this.trade_information_id = trade_information_id; }
-
-    public String getCreated_date() { return created_date; }
-
-    public void setCreated_date(String created_date) { this.created_date = created_date; }
-
-    public String getCreated_at() { return created_at; }
-
-    public String getPhysique_environment() { return physique_environment; }
-
-    public void setPhysique_environment(String physique_environment) { this.physique_environment = physique_environment; }
-
-    public int getSecteur_id() { return secteur_id; }
-
-    public void setSecteur_id(int secteur_id) { this.secteur_id = secteur_id; }
-
-    public int getTransport_information_id() { return transport_information_id; }
-
-    public void setTransport_information_id(int transport_information_id) { this.transport_information_id = transport_information_id; }
-
-
-    public int getAgricole_information_id() {
-        return agricole_information_id;
-    }
-
-    public String getTypeof_sale() {
-        return typeof_sale;
-    }
-
-    public void setTypeof_sale(String typeof_sale) {
-        this.typeof_sale = typeof_sale;
-    }
-
-    public String getSourceof_supply() {
-        return sourceof_supply;
-    }
-
-    public void setSourceof_supply(String sourceof_supply) {
-        this.sourceof_supply = sourceof_supply;
-    }
-
-    public String getEconomic_capacity() {
-        return economic_capacity;
-    }
-
-    public void setEconomic_capacity(String economic_capacity) {
-        this.economic_capacity = economic_capacity;
-    }
-
-    public List<Activity> getActivityList() {
-        return activityList;
-    }
-
-    public void setActivityList(List<Activity> activityList) {
-        this.activityList = activityList;
-    }
-
-    public String getPhysical_environment() { return physical_environment; }
-
-    public String getName() { return name; }
-
-    public void setName(String name) { this.name = name; }
 }

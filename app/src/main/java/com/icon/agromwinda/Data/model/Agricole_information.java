@@ -1,12 +1,12 @@
 package com.icon.agromwinda.Data.model;
 
 public class Agricole_information {
+
+    private int id;
     private String typeof_activity;
     private String activity_object;
     private String sourceof_approvionnement;
     private String scope;
-    private int id;
-    private int name;
     private String nom;
 
     public int getId() {
@@ -41,12 +41,4 @@ public class Agricole_information {
 
     public void setScope(String scope) { this.scope = scope; }
 
-
-    public void setName(int name) {
-        this.name = name;
-    }
-
-    public int getName() {
-        return name;
-    }
 }

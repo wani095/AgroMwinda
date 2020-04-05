@@ -27,21 +27,18 @@ import com.icon.agromwinda.Data.model.Agricole_information;
 import com.icon.agromwinda.Data.model.Commune;
 import com.icon.agromwinda.Data.model.Province;
 import com.icon.agromwinda.Data.model.Secteur;
-import com.icon.agromwinda.Data.model.Subscriber;
 import com.icon.agromwinda.Data.model.Territoire;
 import com.icon.agromwinda.Data.model.Town;
 import com.icon.agromwinda.Data.model.Trade_information;
 import com.icon.agromwinda.Data.model.Transport_information;
 import com.icon.agromwinda.Data.repository.Dao;
 import com.icon.agromwinda.R;
-import com.icon.agromwinda.UI.activity.DetailSubscriberActivity;
 import com.icon.agromwinda.UI.activity.ListCommuneActivity;
 import com.icon.agromwinda.UI.activity.ListProvinceActivity;
 import com.icon.agromwinda.UI.activity.ListSecteurActivity;
 import com.icon.agromwinda.UI.activity.ListTerritoireActivity;
 import com.icon.agromwinda.UI.activity.ListVilleActivity;
 import com.icon.agromwinda.UI.activity.ListingActivity;
-import com.icon.agromwinda.UI.activity.ListingActivityPerson;
 import com.icon.agromwinda.UI.dialog.MessageDialog;
 import com.icon.agromwinda.UI.dialog.WaitingDialog;
 import com.icon.agromwinda.Utilities.AppUtility;
@@ -50,7 +47,6 @@ import com.icon.agromwinda.Utilities.ValueDataException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.Date;
 
 public class FormSaveAdresseActivity extends Fragment {
@@ -70,7 +66,7 @@ public class FormSaveAdresseActivity extends Fragment {
     private Secteur secteur;
     private EditText txVillage, txGroupement;
     private TextView spProvinc, spTerritoire, spSecteur;
-    long idDomain=0;
+    static long idDomain = 0;
 
 
     public static FormSaveAdresseActivity newInstance(String json) {
@@ -206,8 +202,8 @@ public class FormSaveAdresseActivity extends Fragment {
 
                 try {
 
-                    if (spchoixA.getSelectedItem().toString().equals("Urbain") == false &&
-                            spchoixA.getSelectedItem().toString().equals("Rural") == false) {
+                    if (!spchoixA.getSelectedItem().toString().equals("Urbain") &&
+                            !spchoixA.getSelectedItem().toString().equals("Rural")) {
                         AppUtility.controlValue("", "Veuillez renseigner le type d'ativite svp");
                     }
                     if (spchoixA.getSelectedItem().toString().equals("Urbain")) {
@@ -228,24 +224,19 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", town.getId());
                         json.put("city_id ", commune.getId());
 
-                        String type_activity=json.getString("type_activity");
+                        String type_activity = json.getString("type_activity");
 
-                        switch (type_activity){
+                        switch (type_activity) {
                             case "Commerce":
-                                new saveTradeInformation().execute();
-                                json.put("trade_information_id",idDomain) ;
+                                new SaveTradeInformation(json).execute();
                                 break;
                             case "Transport":
-                                new saveTransportInformation().execute();
-                                json.put("transport_information_id",idDomain);
+                                new SaveTransportInformation(json).execute();
                                 break;
                             case "Agricole":
-                                new saveAgricoleInformation().execute();
-                                json.put("agricole_information", idDomain);
+                                new SaveAgricoleInformation(json).execute();
                                 break;
                         }
-
-                        new saveActivity(json.toString()).execute();
 
                     } else {
                         AppUtility.controlValue(txVillage.getText().toString(), "Veuillez entrer le quartier svp");
@@ -269,23 +260,20 @@ public class FormSaveAdresseActivity extends Fragment {
                         json.put("town_id", 0);
                         json.put("city_id ", 0);
 
-                        String type_activity=json.getString("type_activity");
+                        String type_activity = json.getString("type_activity");
 
-                        switch (type_activity){
+                        switch (type_activity) {
                             case "Commerce":
-                                new saveTradeInformation().execute();
-                                json.put("trade_information_id",idDomain) ;
+                                new SaveTradeInformation(json).execute();
                                 break;
                             case "Transport":
-                                new saveTransportInformation().execute();
-                                json.put("transport_information_id",idDomain);
+                                new SaveTransportInformation(json).execute();
                                 break;
                             case "Agricole":
-                                new saveAgricoleInformation().execute();
-                                json.put("agricole_information", idDomain);
+                                new SaveAgricoleInformation(json).execute();
                                 break;
                         }
-                        new saveActivity(json.toString()).execute();
+
                     }
                 } catch (ValueDataException e) {
                     MessageDialog.getDialog(getContext()).createDialog(e.getMessage()).show();
@@ -294,6 +282,7 @@ public class FormSaveAdresseActivity extends Fragment {
             }
         });
     }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 7 && resultCode == 77 && data != null) {
@@ -340,46 +329,92 @@ public class FormSaveAdresseActivity extends Fragment {
         }
     }
 
-    public class saveTradeInformation extends AsyncTask<Void, Void, Long> {
+    public class SaveTradeInformation extends AsyncTask<Void, Void, Long> {
+        JSONObject json;
+        long id;
+
+        SaveTradeInformation(JSONObject json) {
+            this.json = json;
+        }
 
         @Override
         protected Long doInBackground(Void... voids) {
-            Dao dao=new Dao(getContext());
-            Trade_information trade_information=new Trade_information();
+            Dao dao = new Dao(getContext());
+            Trade_information trade_information = new Gson().fromJson(json.toString(), new TypeToken<Trade_information>() {
+            }.getType());
 
-           return dao.saveTrade_information(trade_information);
+            return dao.saveTrade_information(trade_information);
         }
+
         @Override
         protected void onPostExecute(Long aLong) {
-          idDomain=aLong;
+
+            Log.d("SUPERID", "id:::" + aLong);
+            try {
+                json.put("trade_information_id", aLong);
+                new saveActivity(json.toString()).execute();
+            } catch (Exception e) {
+
+            }
+
         }
     }
 
-    public class saveTransportInformation extends AsyncTask<Void, Void, Long> {
+    public class SaveTransportInformation extends AsyncTask<Void, Void, Long> {
+        JSONObject json;
+
+        SaveTransportInformation(JSONObject json) {
+            this.json = json;
+        }
+
         @Override
         protected Long doInBackground(Void... voids) {
-            Dao dao=new Dao(getContext());
-            Transport_information transport_information=new Transport_information();
+            Dao dao = new Dao(getContext());
+
+            Transport_information transport_information = new Gson().fromJson(json.toString(), new TypeToken<Transport_information>() {
+            }.getType());
             return dao.saveTransport_infomation(transport_information);
         }
 
         @Override
         protected void onPostExecute(Long aLong) {
-            idDomain=aLong;
+
+            Log.d("SUPERID", "id:::" + aLong);
+            try {
+                json.put("trade_information_id", aLong);
+                new saveActivity(json.toString()).execute();
+            } catch (Exception e) {
+
+            }
         }
     }
 
-    public class saveAgricoleInformation extends AsyncTask<Void, Void, Long> {
+    public class SaveAgricoleInformation extends AsyncTask<Void, Void, Long> {
+
+        JSONObject json;
+
+        SaveAgricoleInformation(JSONObject json) {
+            this.json = json;
+        }
+
         @Override
         protected Long doInBackground(Void... voids) {
-            Dao dao=new Dao(getContext());
-            Agricole_information agricole_information= new Agricole_information();
+            Dao dao = new Dao(getContext());
+            Agricole_information agricole_information = new Gson().fromJson(json.toString(), new TypeToken<Agricole_information>() {
+            }.getType());
             return dao.saveAgricole_infomation(agricole_information);
         }
 
         @Override
         protected void onPostExecute(Long aLong) {
-           idDomain= aLong;
+
+            Log.d("SUPERID", "id:::" + aLong);
+            try {
+                json.put("trade_information_id", aLong);
+                new saveActivity(json.toString()).execute();
+            } catch (Exception e) {
+
+            }
         }
     }
 
@@ -392,16 +427,18 @@ public class FormSaveAdresseActivity extends Fragment {
             this.data = data;
             waitingDialog = new WaitingDialog(getContext());
         }
+
         @Override
         protected void onPreExecute() {
             waitingDialog.show();
         }
+
         @Override
         protected Long doInBackground(Void... voids) {
             Log.d("DATAACTIVITY", data);
             Activity activity = new Gson().fromJson(data, new TypeToken<Activity>() {
             }.getType());
-            activity.setCreated_at(new Date());
+            activity.setCreated_at(new Date().toString());
             Dao dao = new Dao(getContext());
             long rep = dao.saveActivity(activity);
             Log.d("DATAACTIVITY", "" + rep);
@@ -411,7 +448,7 @@ public class FormSaveAdresseActivity extends Fragment {
         @Override
         protected void onPostExecute(Long rep) {
             waitingDialog.hide();
-            if (rep>0) {
+            if (rep > 0) {
                 MessageDialog.getDialog(getContext()).createDialog("Votre Operation est un succès").show();
                 Intent intent = new Intent(getActivity(), ListingActivity.class);
                 getActivity().startActivity(intent);

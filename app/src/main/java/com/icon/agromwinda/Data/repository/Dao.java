@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.icon.agromwinda.Data.model.Activity;
 import com.icon.agromwinda.Data.model.Agricole_information;
 import com.icon.agromwinda.Data.model.Trade_information;
@@ -32,7 +33,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     public static final String DATABASE_NAME = "agraMwinda.db";
     public static final String COLUMN_ID = "id";
     public static final String COLUMN_NAME = "name";
-    public static  final String TAG = "Dao";
+    public static final String TAG = "Dao";
 
     public static final String SUBSCRIBER_COLUMN__ID = "id";
     public static final String SUBSCRIBER_COLUMN__CITY = "city_id";
@@ -108,11 +109,11 @@ public class Dao extends SQLiteOpenHelper implements IDao {
     private Object transport_information;
 
 
-
     public Dao(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
         this.context = context;
     }
+
     @Override
     public void onCreate(SQLiteDatabase db) {
 
@@ -189,13 +190,9 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "   physical_environment varchar(255),\n" +
                 "   secteur_id integer,\n" +
                 "   groupment varchar(255),\n" +
-                "   typeof_sale varchar(255),\n" +
-                "   sourceof_supply varchar(255),\n" +
-                "   economic_capacity varchar(255),\n"+
                 "   trade_information_id integer,\n" +
                 "   agricole_information_id integer,\n" +
                 "   transport_information_id integer,\n" +
-                "   idDomaine_id integer,"+
                 "   village varchar(255))");
         init();
 
@@ -222,19 +219,20 @@ public class Dao extends SQLiteOpenHelper implements IDao {
                 "transport_capacity varchar(255))");
         init();
 
-       // db.execSQL("CREATE TABLE type_activity(" +
-                //"trade_informatiton_id integer,"+
-                //"transport_information_id integer"+
-                //"agricole_information_id integer)");
+        // db.execSQL("CREATE TABLE type_activity(" +
+        //"trade_informatiton_id integer,"+
+        //"transport_information_id integer"+
+        //"agricole_information_id integer)");
 
-        db.execSQL("CREATE TABLE idDomaine("+
-                "id integer PRIMARY KEY AUTOINCREMENT,"+
-                "trade_information_id integer,"+
-                "transport_information_id  integer,"+
+        db.execSQL("CREATE TABLE idDomaine(" +
+                "id integer PRIMARY KEY AUTOINCREMENT," +
+                "trade_information_id integer," +
+                "transport_information_id  integer," +
                 "agricole_informaation_id integer)");
         init();
 
     }
+
     public void init() {
     }
 
@@ -354,6 +352,9 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
     @Override
     public long saveActivity(Activity pp) {
+
+        Log.d("SAVEACTIVITY",new Gson().toJson(pp));
+
         SQLiteDatabase db = this.getReadableDatabase();
 
         ContentValues values = new ContentValues();
@@ -388,18 +389,21 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return 0;
     }
 
-     // bd activity
+    // bd activity
 
-@Override
+    @Override
     public List<Activity> getListActivitys(int subscriber_id) {
+        String sql = "select * from activity where subscriber_id="+subscriber_id;
+        Log.d("SQLACTIVITYDISP", sql);
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor rs = db.rawQuery("select * from activity where id=" + subscriber_id + "", null);
+        Cursor rs = db.rawQuery(sql, null);
         rs.moveToFirst();
 
-        List<Activity> activities=new ArrayList<>();
+        List<Activity> activities = new ArrayList<>();
 
-        while (rs.isAfterLast() == false) {
-            Activity pp  = new Activity();
+        while (rs.isAfterLast()==false) {
+            Log.d("SQLACTIVITYDISP",""+ rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__ID))+"/"+ rs.getInt(rs.getColumnIndex("subscriber_id")));
+            Activity pp = new Activity();
             pp.setId(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__ID)));
             pp.setName(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__NAME)));
             pp.setType_activity(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__TYPE_ACTIVITY)));
@@ -419,7 +423,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         rs.moveToFirst();
         Activity pp = null;
 
-        while (rs.isAfterLast() == false) {
+        while (rs.isAfterLast()==false) {
             pp = new Activity();
             pp.setId(rs.getInt(rs.getColumnIndex(ACTIVITY_COLUMN__ID)));
             pp.setName(rs.getString(rs.getColumnIndex(ACTIVITY_COLUMN__NAME)));
@@ -432,7 +436,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         return pp;
     }
 
-     // bd subscriber
+    // bd subscriber
     @Override
     public long saveSubscriber(Subscriber p) {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -477,7 +481,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         Cursor rs = db.rawQuery("select * from subscriber", null);
         rs.moveToFirst();
 
-        while (rs.isAfterLast() == false) {
+        while (rs.isAfterLast()==false) {
             Subscriber p = new Subscriber();
             p.setId(rs.getInt(rs.getColumnIndex(COLUMN_ID)));
             p.setName(rs.getString(rs.getColumnIndex(COLUMN_NAME)));
@@ -590,6 +594,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
 
         try {
             long a = db.insert("trade_information", null, values);
+            Log.d("REPCOMACT", "id:::" + a);
             return a;
         } catch (Exception e) {
             Log.d("SAVEEXCEPTION", e.getMessage());
@@ -656,6 +661,7 @@ public class Dao extends SQLiteOpenHelper implements IDao {
         }
         return 0;
     }
+
     @Override
     public List<Transport_information> getTransport_informations() {
         List<Transport_information> transport_informations = new ArrayList<>();
